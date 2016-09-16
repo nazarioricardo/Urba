@@ -15,6 +15,15 @@
 		8C6257F51D870B0700737D73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6257F31D870B0700737D73 /* LaunchScreen.storyboard */; };
 		8C6258001D870B0700737D73 /* UrbaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257FF1D870B0700737D73 /* UrbaTests.m */; };
 		8C62580B1D870B0700737D73 /* UrbaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C62580A1D870B0700737D73 /* UrbaUITests.m */; };
+		8C6258191D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
+		8C62581A1D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
+		8C62581B1D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
+		8C67E2FD1D87626D0044C9F3 /* AddHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67E2FC1D87626D0044C9F3 /* AddHomeViewController.m */; };
+		8CA2933B1D87A08900931859 /* FireBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933A1D87A08900931859 /* FireBaseController.m */; };
+		8CA2933E1D87A0A500931859 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933D1D87A0A500931859 /* User.m */; };
+		94D1A61122041418569FB89C /* libPods-Urba.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC50DA3B76C2262B3C721FD5 /* libPods-Urba.a */; };
+		CA1305C4DE7171C77CBFD1AE /* libPods-UrbaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3749C0697F67D8B33E1B8A0 /* libPods-UrbaTests.a */; };
+		CA6733B7C75425B8A0DC1D82 /* libPods-UrbaUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EE4EB488D33C5E002CD035 /* libPods-UrbaUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +44,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1013DEC27E332C8C9A31A6D2 /* Pods-Urba.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urba.release.xcconfig"; path = "Pods/Target Support Files/Pods-Urba/Pods-Urba.release.xcconfig"; sourceTree = "<group>"; };
+		1098E09971F9D5067DCCF534 /* Pods-UrbaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaUITests/Pods-UrbaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1625B4521020F4AF0073C517 /* Pods-UrbaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaUITests/Pods-UrbaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		370F6C240479F3E583EEC236 /* Pods-UrbaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaTests/Pods-UrbaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8B4A0737E2F025A999670504 /* Pods-Urba.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urba.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urba/Pods-Urba.debug.xcconfig"; sourceTree = "<group>"; };
 		8C6257E21D870B0700737D73 /* Urba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C6257E61D870B0700737D73 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8C6257E81D870B0700737D73 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,6 +65,17 @@
 		8C6258061D870B0700737D73 /* UrbaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UrbaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C62580A1D870B0700737D73 /* UrbaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UrbaUITests.m; sourceTree = "<group>"; };
 		8C62580C1D870B0700737D73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C6258181D870BA900737D73 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8C67E2FB1D87626D0044C9F3 /* AddHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHomeViewController.h; sourceTree = "<group>"; };
+		8C67E2FC1D87626D0044C9F3 /* AddHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHomeViewController.m; sourceTree = "<group>"; };
+		8CA293391D87A08900931859 /* FireBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireBaseController.h; sourceTree = "<group>"; };
+		8CA2933A1D87A08900931859 /* FireBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FireBaseController.m; sourceTree = "<group>"; };
+		8CA2933C1D87A0A500931859 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		8CA2933D1D87A0A500931859 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		967308A1FD2897E5F240E193 /* Pods-UrbaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaTests/Pods-UrbaTests.release.xcconfig"; sourceTree = "<group>"; };
+		B6EE4EB488D33C5E002CD035 /* libPods-UrbaUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UrbaUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3749C0697F67D8B33E1B8A0 /* libPods-UrbaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UrbaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC50DA3B76C2262B3C721FD5 /* libPods-Urba.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urba.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94D1A61122041418569FB89C /* libPods-Urba.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA1305C4DE7171C77CBFD1AE /* libPods-UrbaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +99,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA6733B7C75425B8A0DC1D82 /* libPods-UrbaUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24DF47BD83359FECA8A3EC91 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC50DA3B76C2262B3C721FD5 /* libPods-Urba.a */,
+				D3749C0697F67D8B33E1B8A0 /* libPods-UrbaTests.a */,
+				B6EE4EB488D33C5E002CD035 /* libPods-UrbaUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8C6257D91D870B0700737D73 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +123,8 @@
 				8C6257FE1D870B0700737D73 /* UrbaTests */,
 				8C6258091D870B0700737D73 /* UrbaUITests */,
 				8C6257E31D870B0700737D73 /* Products */,
+				A57B709BB8FE134B1CC0A133 /* Pods */,
+				24DF47BD83359FECA8A3EC91 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,10 +145,15 @@
 				8C6257E91D870B0700737D73 /* AppDelegate.m */,
 				8C6257EB1D870B0700737D73 /* ViewController.h */,
 				8C6257EC1D870B0700737D73 /* ViewController.m */,
+				8C67E2FB1D87626D0044C9F3 /* AddHomeViewController.h */,
+				8C67E2FC1D87626D0044C9F3 /* AddHomeViewController.m */,
+				8CA293341D879FF400931859 /* Model */,
+				8CA293381D87A04E00931859 /* Control */,
 				8C6257EE1D870B0700737D73 /* Main.storyboard */,
 				8C6257F11D870B0700737D73 /* Assets.xcassets */,
 				8C6257F31D870B0700737D73 /* LaunchScreen.storyboard */,
 				8C6257F61D870B0700737D73 /* Info.plist */,
+				8C6258181D870BA900737D73 /* GoogleService-Info.plist */,
 				8C6257E51D870B0700737D73 /* Supporting Files */,
 			);
 			path = Urba;
@@ -140,6 +185,37 @@
 			path = UrbaUITests;
 			sourceTree = "<group>";
 		};
+		8CA293341D879FF400931859 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8CA2933C1D87A0A500931859 /* User.h */,
+				8CA2933D1D87A0A500931859 /* User.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8CA293381D87A04E00931859 /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				8CA293391D87A08900931859 /* FireBaseController.h */,
+				8CA2933A1D87A08900931859 /* FireBaseController.m */,
+			);
+			name = Control;
+			sourceTree = "<group>";
+		};
+		A57B709BB8FE134B1CC0A133 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B4A0737E2F025A999670504 /* Pods-Urba.debug.xcconfig */,
+				1013DEC27E332C8C9A31A6D2 /* Pods-Urba.release.xcconfig */,
+				370F6C240479F3E583EEC236 /* Pods-UrbaTests.debug.xcconfig */,
+				967308A1FD2897E5F240E193 /* Pods-UrbaTests.release.xcconfig */,
+				1098E09971F9D5067DCCF534 /* Pods-UrbaUITests.debug.xcconfig */,
+				1625B4521020F4AF0073C517 /* Pods-UrbaUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +223,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C62580F1D870B0700737D73 /* Build configuration list for PBXNativeTarget "Urba" */;
 			buildPhases = (
+				542B6F27ED486B4E6F5A55D0 /* 📦 Check Pods Manifest.lock */,
 				8C6257DE1D870B0700737D73 /* Sources */,
 				8C6257DF1D870B0700737D73 /* Frameworks */,
 				8C6257E01D870B0700737D73 /* Resources */,
+				5270F78C1FF24A5512D56E85 /* 📦 Embed Pods Frameworks */,
+				70D1FA2AE1617F9A2905EA5A /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -164,9 +243,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C6258121D870B0700737D73 /* Build configuration list for PBXNativeTarget "UrbaTests" */;
 			buildPhases = (
+				B96BA7CF9B0508AD988D8A41 /* 📦 Check Pods Manifest.lock */,
 				8C6257F71D870B0700737D73 /* Sources */,
 				8C6257F81D870B0700737D73 /* Frameworks */,
 				8C6257F91D870B0700737D73 /* Resources */,
+				75A7CB5C94A445D01C950831 /* 📦 Embed Pods Frameworks */,
+				1FA3D25C26ADDC79AD52EDF7 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -182,9 +264,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C6258151D870B0700737D73 /* Build configuration list for PBXNativeTarget "UrbaUITests" */;
 			buildPhases = (
+				845C1DFCCA45FD14C8069B3F /* 📦 Check Pods Manifest.lock */,
 				8C6258021D870B0700737D73 /* Sources */,
 				8C6258031D870B0700737D73 /* Frameworks */,
 				8C6258041D870B0700737D73 /* Resources */,
+				E81065F72CD42EB2E065A6D3 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C6257F51D870B0700737D73 /* LaunchScreen.storyboard in Resources */,
+				8C6258191D870BAA00737D73 /* GoogleService-Info.plist in Resources */,
 				8C6257F21D870B0700737D73 /* Assets.xcassets in Resources */,
 				8C6257F01D870B0700737D73 /* Main.storyboard in Resources */,
 			);
@@ -253,6 +338,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C62581A1D870BAA00737D73 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,19 +346,146 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C62581B1D870BAA00737D73 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1FA3D25C26ADDC79AD52EDF7 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UrbaTests/Pods-UrbaTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5270F78C1FF24A5512D56E85 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Urba/Pods-Urba-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		542B6F27ED486B4E6F5A55D0 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		70D1FA2AE1617F9A2905EA5A /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Urba/Pods-Urba-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75A7CB5C94A445D01C950831 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UrbaTests/Pods-UrbaTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		845C1DFCCA45FD14C8069B3F /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B96BA7CF9B0508AD988D8A41 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E81065F72CD42EB2E065A6D3 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UrbaUITests/Pods-UrbaUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8C6257DE1D870B0700737D73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA2933B1D87A08900931859 /* FireBaseController.m in Sources */,
 				8C6257ED1D870B0700737D73 /* ViewController.m in Sources */,
+				8CA2933E1D87A0A500931859 /* User.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
+				8C67E2FD1D87626D0044C9F3 /* AddHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +626,7 @@
 		};
 		8C6258101D870B0700737D73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B4A0737E2F025A999670504 /* Pods-Urba.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Urba/Info.plist;
@@ -424,6 +638,7 @@
 		};
 		8C6258111D870B0700737D73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1013DEC27E332C8C9A31A6D2 /* Pods-Urba.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Urba/Info.plist;
@@ -435,6 +650,7 @@
 		};
 		8C6258131D870B0700737D73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 370F6C240479F3E583EEC236 /* Pods-UrbaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = UrbaTests/Info.plist;
@@ -447,6 +663,7 @@
 		};
 		8C6258141D870B0700737D73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967308A1FD2897E5F240E193 /* Pods-UrbaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = UrbaTests/Info.plist;
@@ -459,6 +676,7 @@
 		};
 		8C6258161D870B0700737D73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1098E09971F9D5067DCCF534 /* Pods-UrbaUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = UrbaUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -470,6 +688,7 @@
 		};
 		8C6258171D870B0700737D73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1625B4521020F4AF0073C517 /* Pods-UrbaUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = UrbaUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -498,6 +717,7 @@
 				8C6258111D870B0700737D73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C6258121D870B0700737D73 /* Build configuration list for PBXNativeTarget "UrbaTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +726,7 @@
 				8C6258141D870B0700737D73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C6258151D870B0700737D73 /* Build configuration list for PBXNativeTarget "UrbaUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +735,7 @@
 				8C6258171D870B0700737D73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
