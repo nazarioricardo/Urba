@@ -7,12 +7,70 @@
 //
 
 #import "UBFindCommunityViewController.h"
+#import "UBFirebaseManager.h"
 
-@interface UBFindCommunityViewController ()
+@interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate> {
+    FIRDatabaseHandle _refHandle;
+}
+
+@property (weak, nonatomic) IBOutlet UITableView *communityTable;
+
+@property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+
+@property (weak, nonatomic) NSString *communityKey;
+@property (weak, nonatomic) NSString *communityName;
 
 @end
 
 @implementation UBFindCommunityViewController
+
+- (void)getCommunities {
+    
+//    [self shouldAnimateIndicator:YES];
+    
+    _ref = [[FIRDatabase database] reference];
+    _ref = [_ref child:@"communities"];
+    
+    _results = nil;
+    _results = [[NSMutableArray alloc] init];
+    
+    _refHandle = [_ref observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+        [_results addObject:snapshot];
+        [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]]
+                               withRowAnimation: UITableViewRowAnimationLeft];
+//        [self shouldAnimateIndicator:NO];
+    }];
+}
+
+#pragma mark - Table View Delegate
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [_communityTable dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    // Unpack community from Firebase DataSnapshot
+    FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
+    NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
+    NSString *name = snapshotDict[@"name"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
+    
+    return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_results count];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+#pragma mark - Life Cycle
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self getCommunities];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */; };
 		8C27009B1D9C319E00BACCDE /* UBFindHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C27009A1D9C319E00BACCDE /* UBFindHomeViewController.m */; };
+		8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */; };
+		8C4956941DBAB0B500CAD822 /* UBFindSuperUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956931DBAB0B500CAD822 /* UBFindSuperUnitViewController.m */; };
+		8C4956971DBAB0C500CAD822 /* UBFindUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956961DBAB0C500CAD822 /* UBFindUnitViewController.m */; };
 		8C6257E71D870B0700737D73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E61D870B0700737D73 /* main.m */; };
 		8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E91D870B0700737D73 /* AppDelegate.m */; };
 		8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257EC1D870B0700737D73 /* UBWelcomeViewController.m */; };
@@ -55,6 +58,12 @@
 		8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		8C2700991D9C319E00BACCDE /* UBFindHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindHomeViewController.h; sourceTree = "<group>"; };
 		8C27009A1D9C319E00BACCDE /* UBFindHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindHomeViewController.m; sourceTree = "<group>"; };
+		8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindCommunityViewController.h; sourceTree = "<group>"; };
+		8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindCommunityViewController.m; sourceTree = "<group>"; };
+		8C4956921DBAB0B500CAD822 /* UBFindSuperUnitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindSuperUnitViewController.h; sourceTree = "<group>"; };
+		8C4956931DBAB0B500CAD822 /* UBFindSuperUnitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindSuperUnitViewController.m; sourceTree = "<group>"; };
+		8C4956951DBAB0C500CAD822 /* UBFindUnitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindUnitViewController.h; sourceTree = "<group>"; };
+		8C4956961DBAB0C500CAD822 /* UBFindUnitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindUnitViewController.m; sourceTree = "<group>"; };
 		8C6257E21D870B0700737D73 /* Urba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C6257E61D870B0700737D73 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8C6257E81D870B0700737D73 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -142,8 +151,22 @@
 				8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */,
 				8C2700991D9C319E00BACCDE /* UBFindHomeViewController.h */,
 				8C27009A1D9C319E00BACCDE /* UBFindHomeViewController.m */,
+				8C4956981DBAB0CC00CAD822 /* Find Home */,
 			);
 			name = "Main Views";
+			sourceTree = "<group>";
+		};
+		8C4956981DBAB0CC00CAD822 /* Find Home */ = {
+			isa = PBXGroup;
+			children = (
+				8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */,
+				8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */,
+				8C4956921DBAB0B500CAD822 /* UBFindSuperUnitViewController.h */,
+				8C4956931DBAB0B500CAD822 /* UBFindSuperUnitViewController.m */,
+				8C4956951DBAB0C500CAD822 /* UBFindUnitViewController.h */,
+				8C4956961DBAB0C500CAD822 /* UBFindUnitViewController.m */,
+			);
+			name = "Find Home";
 			sourceTree = "<group>";
 		};
 		8C6257D91D870B0700737D73 = {
@@ -514,8 +537,11 @@
 				8CEBF7981D9C5B5D00DAE919 /* UBHomeViewController.m in Sources */,
 				8CA82DFB1DA1CECA00C875E2 /* UBFirebaseManager.m in Sources */,
 				8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */,
+				8C4956971DBAB0C500CAD822 /* UBFindUnitViewController.m in Sources */,
 				8C27009B1D9C319E00BACCDE /* UBFindHomeViewController.m in Sources */,
+				8C4956941DBAB0B500CAD822 /* UBFindSuperUnitViewController.m in Sources */,
 				8CA2933E1D87A0A500931859 /* User.m in Sources */,
+				8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
 				8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */,
