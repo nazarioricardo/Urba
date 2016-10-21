@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */; };
+		8C27009B1D9C319E00BACCDE /* UBFindHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C27009A1D9C319E00BACCDE /* UBFindHomeViewController.m */; };
 		8C6257E71D870B0700737D73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E61D870B0700737D73 /* main.m */; };
 		8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E91D870B0700737D73 /* AppDelegate.m */; };
-		8C6257ED1D870B0700737D73 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257EC1D870B0700737D73 /* ViewController.m */; };
+		8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257EC1D870B0700737D73 /* UBWelcomeViewController.m */; };
 		8C6257F01D870B0700737D73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6257EE1D870B0700737D73 /* Main.storyboard */; };
 		8C6257F21D870B0700737D73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C6257F11D870B0700737D73 /* Assets.xcassets */; };
 		8C6257F51D870B0700737D73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6257F31D870B0700737D73 /* LaunchScreen.storyboard */; };
@@ -18,9 +20,10 @@
 		8C6258191D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
 		8C62581A1D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
 		8C62581B1D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
-		8C67E2FD1D87626D0044C9F3 /* AddHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67E2FC1D87626D0044C9F3 /* AddHomeViewController.m */; };
-		8CA2933B1D87A08900931859 /* FireBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933A1D87A08900931859 /* FireBaseController.m */; };
+		8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */; };
 		8CA2933E1D87A0A500931859 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933D1D87A0A500931859 /* User.m */; };
+		8CA82DFB1DA1CECA00C875E2 /* UBFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA82DFA1DA1CECA00C875E2 /* UBFirebaseManager.m */; };
+		8CEBF7981D9C5B5D00DAE919 /* UBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */; };
 		94D1A61122041418569FB89C /* libPods-Urba.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC50DA3B76C2262B3C721FD5 /* libPods-Urba.a */; };
 		CA1305C4DE7171C77CBFD1AE /* libPods-UrbaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3749C0697F67D8B33E1B8A0 /* libPods-UrbaTests.a */; };
 		CA6733B7C75425B8A0DC1D82 /* libPods-UrbaUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EE4EB488D33C5E002CD035 /* libPods-UrbaUITests.a */; };
@@ -49,12 +52,15 @@
 		1625B4521020F4AF0073C517 /* Pods-UrbaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaUITests/Pods-UrbaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		370F6C240479F3E583EEC236 /* Pods-UrbaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaTests/Pods-UrbaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B4A0737E2F025A999670504 /* Pods-Urba.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urba.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urba/Pods-Urba.debug.xcconfig"; sourceTree = "<group>"; };
+		8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		8C2700991D9C319E00BACCDE /* UBFindHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindHomeViewController.h; sourceTree = "<group>"; };
+		8C27009A1D9C319E00BACCDE /* UBFindHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindHomeViewController.m; sourceTree = "<group>"; };
 		8C6257E21D870B0700737D73 /* Urba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C6257E61D870B0700737D73 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8C6257E81D870B0700737D73 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8C6257E91D870B0700737D73 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8C6257EB1D870B0700737D73 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8C6257EC1D870B0700737D73 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8C6257EB1D870B0700737D73 /* UBWelcomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UBWelcomeViewController.h; sourceTree = "<group>"; };
+		8C6257EC1D870B0700737D73 /* UBWelcomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UBWelcomeViewController.m; sourceTree = "<group>"; };
 		8C6257EF1D870B0700737D73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C6257F11D870B0700737D73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C6257F41D870B0700737D73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,12 +72,14 @@
 		8C62580A1D870B0700737D73 /* UrbaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UrbaUITests.m; sourceTree = "<group>"; };
 		8C62580C1D870B0700737D73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C6258181D870BA900737D73 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8C67E2FB1D87626D0044C9F3 /* AddHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHomeViewController.h; sourceTree = "<group>"; };
-		8C67E2FC1D87626D0044C9F3 /* AddHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHomeViewController.m; sourceTree = "<group>"; };
-		8CA293391D87A08900931859 /* FireBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireBaseController.h; sourceTree = "<group>"; };
-		8CA2933A1D87A08900931859 /* FireBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FireBaseController.m; sourceTree = "<group>"; };
+		8C67E2FB1D87626D0044C9F3 /* UBCreateUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBCreateUserViewController.h; sourceTree = "<group>"; };
+		8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCreateUserViewController.m; sourceTree = "<group>"; };
 		8CA2933C1D87A0A500931859 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		8CA2933D1D87A0A500931859 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		8CA82DF91DA1CECA00C875E2 /* UBFirebaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFirebaseManager.h; sourceTree = "<group>"; };
+		8CA82DFA1DA1CECA00C875E2 /* UBFirebaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFirebaseManager.m; sourceTree = "<group>"; };
+		8CEBF7961D9C5B5D00DAE919 /* UBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBHomeViewController.h; sourceTree = "<group>"; };
+		8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBHomeViewController.m; sourceTree = "<group>"; };
 		967308A1FD2897E5F240E193 /* Pods-UrbaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaTests/Pods-UrbaTests.release.xcconfig"; sourceTree = "<group>"; };
 		B6EE4EB488D33C5E002CD035 /* libPods-UrbaUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UrbaUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3749C0697F67D8B33E1B8A0 /* libPods-UrbaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UrbaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +124,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8C2700971D9C30EC00BACCDE /* Welcome Views */ = {
+			isa = PBXGroup;
+			children = (
+				8C6257EB1D870B0700737D73 /* UBWelcomeViewController.h */,
+				8C6257EC1D870B0700737D73 /* UBWelcomeViewController.m */,
+				8C67E2FB1D87626D0044C9F3 /* UBCreateUserViewController.h */,
+				8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */,
+			);
+			name = "Welcome Views";
+			sourceTree = "<group>";
+		};
+		8C2700981D9C317700BACCDE /* Main Views */ = {
+			isa = PBXGroup;
+			children = (
+				8CEBF7961D9C5B5D00DAE919 /* UBHomeViewController.h */,
+				8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */,
+				8C2700991D9C319E00BACCDE /* UBFindHomeViewController.h */,
+				8C27009A1D9C319E00BACCDE /* UBFindHomeViewController.m */,
+			);
+			name = "Main Views";
+			sourceTree = "<group>";
+		};
 		8C6257D91D870B0700737D73 = {
 			isa = PBXGroup;
 			children = (
@@ -143,10 +173,9 @@
 			children = (
 				8C6257E81D870B0700737D73 /* AppDelegate.h */,
 				8C6257E91D870B0700737D73 /* AppDelegate.m */,
-				8C6257EB1D870B0700737D73 /* ViewController.h */,
-				8C6257EC1D870B0700737D73 /* ViewController.m */,
-				8C67E2FB1D87626D0044C9F3 /* AddHomeViewController.h */,
-				8C67E2FC1D87626D0044C9F3 /* AddHomeViewController.m */,
+				8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */,
+				8C2700971D9C30EC00BACCDE /* Welcome Views */,
+				8C2700981D9C317700BACCDE /* Main Views */,
 				8CA293341D879FF400931859 /* Model */,
 				8CA293381D87A04E00931859 /* Control */,
 				8C6257EE1D870B0700737D73 /* Main.storyboard */,
@@ -197,8 +226,8 @@
 		8CA293381D87A04E00931859 /* Control */ = {
 			isa = PBXGroup;
 			children = (
-				8CA293391D87A08900931859 /* FireBaseController.h */,
-				8CA2933A1D87A08900931859 /* FireBaseController.m */,
+				8CA82DF91DA1CECA00C875E2 /* UBFirebaseManager.h */,
+				8CA82DFA1DA1CECA00C875E2 /* UBFirebaseManager.m */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -286,11 +315,12 @@
 		8C6257DA1D870B0700737D73 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ricardo Nazario";
 				TargetAttributes = {
 					8C6257E11D870B0700737D73 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = SGRW3864BW;
 					};
 					8C6257FA1D870B0700737D73 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -328,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C6257F51D870B0700737D73 /* LaunchScreen.storyboard in Resources */,
+				8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */,
 				8C6258191D870BAA00737D73 /* GoogleService-Info.plist in Resources */,
 				8C6257F21D870B0700737D73 /* Assets.xcassets in Resources */,
 				8C6257F01D870B0700737D73 /* Main.storyboard in Resources */,
@@ -480,12 +511,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CA2933B1D87A08900931859 /* FireBaseController.m in Sources */,
-				8C6257ED1D870B0700737D73 /* ViewController.m in Sources */,
+				8CEBF7981D9C5B5D00DAE919 /* UBHomeViewController.m in Sources */,
+				8CA82DFB1DA1CECA00C875E2 /* UBFirebaseManager.m in Sources */,
+				8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */,
+				8C27009B1D9C319E00BACCDE /* UBFindHomeViewController.m in Sources */,
 				8CA2933E1D87A0A500931859 /* User.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
-				8C67E2FD1D87626D0044C9F3 /* AddHomeViewController.m in Sources */,
+				8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,8 +587,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -599,8 +634,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -629,6 +666,7 @@
 			baseConfigurationReference = 8B4A0737E2F025A999670504 /* Pods-Urba.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SGRW3864BW;
 				INFOPLIST_FILE = Urba/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.RicardoNazario.Urba;
@@ -641,6 +679,7 @@
 			baseConfigurationReference = 1013DEC27E332C8C9A31A6D2 /* Pods-Urba.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SGRW3864BW;
 				INFOPLIST_FILE = Urba/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.RicardoNazario.Urba;
