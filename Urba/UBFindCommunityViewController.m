@@ -78,14 +78,15 @@
     NSString *currentSnapKey = currentSnapshot.key;
     NSString *selection = [NSString stringWithFormat:@"%@", selectedCell.textLabel.text];
     //    NSString *selection = selectedCell.textLabel.text;
-    _results = nil;
+//    _results = nil;
     
-    [_communityTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _communityTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationRight];
-    [_communityTable reloadData];
-    
-    NSLog(@"The selection is %@", selection);
+//    [_communityTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _communityTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationRight];
+//    [_communityTable reloadData];
     
     _selectedCommunity = [NSString stringWithFormat:@"%@-%@", selection, currentSnapKey];
+    
+    NSLog(@"The selection is %@", _selectedCommunity);
+    
     [self performSegueWithIdentifier:@"superUnitSegue" sender:self];
 }
 

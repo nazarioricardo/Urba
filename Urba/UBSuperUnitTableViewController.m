@@ -36,7 +36,7 @@
     _results = nil;
     _results = [[NSMutableArray alloc] init];
 
-    query = [[_ref queryOrderedByChild:@"community"] queryEqualToValue:_communityKey];
+    query = [[_ref queryOrderedByChild:@"community"] queryEqualToValue:_community];
     
     _refHandle = [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
         [_results addObject:snapshot];
@@ -48,17 +48,19 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    NSLog(@"The community: %@", _community);
+    
     NSArray *array = [_community componentsSeparatedByString:@"-"];
     
     _communityKey = [array objectAtIndex:1];
     _communityName = [array objectAtIndex:0];
     
     NSLog(@"The key: %@", _communityKey);
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -97,7 +99,6 @@
     
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.
