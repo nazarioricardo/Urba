@@ -7,7 +7,8 @@
 //
 
 #import "UBFindCommunityViewController.h"
-#import "UBFirebaseManager.h"
+
+@import Firebase;
 
 @interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate> {
     FIRDatabaseHandle _refHandle;
@@ -18,8 +19,7 @@
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
-@property (weak, nonatomic) NSString *communityKey;
-@property (weak, nonatomic) NSString *communityName;
+@property (weak, nonatomic) NSString *selectedCommunity;
 
 @end
 
@@ -68,6 +68,10 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 }
 
 #pragma mark - Life Cycle

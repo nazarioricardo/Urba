@@ -10,4 +10,8 @@
 
 @interface UBFindSuperUnitViewController : UIViewController
 
+@property (weak, nonatomic) NSString *communityKey;
+
+
+
 @end

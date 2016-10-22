@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */; };
+		8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */; };
 		8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */; };
 		8C4956941DBAB0B500CAD822 /* UBFindSuperUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956931DBAB0B500CAD822 /* UBFindSuperUnitViewController.m */; };
 		8C4956971DBAB0C500CAD822 /* UBFindUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956961DBAB0C500CAD822 /* UBFindUnitViewController.m */; };
@@ -55,6 +56,8 @@
 		370F6C240479F3E583EEC236 /* Pods-UrbaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaTests/Pods-UrbaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B4A0737E2F025A999670504 /* Pods-Urba.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Urba.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Urba/Pods-Urba.debug.xcconfig"; sourceTree = "<group>"; };
 		8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		8C19DF091DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBSuperUnitTableViewController.h; sourceTree = "<group>"; };
+		8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSuperUnitTableViewController.m; sourceTree = "<group>"; };
 		8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindCommunityViewController.h; sourceTree = "<group>"; };
 		8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindCommunityViewController.m; sourceTree = "<group>"; };
 		8C4956921DBAB0B500CAD822 /* UBFindSuperUnitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindSuperUnitViewController.h; sourceTree = "<group>"; };
@@ -156,6 +159,8 @@
 			children = (
 				8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */,
 				8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */,
+				8C19DF091DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.h */,
+				8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */,
 				8C4956921DBAB0B500CAD822 /* UBFindSuperUnitViewController.h */,
 				8C4956931DBAB0B500CAD822 /* UBFindSuperUnitViewController.m */,
 				8C4956951DBAB0C500CAD822 /* UBFindUnitViewController.h */,
@@ -536,6 +541,7 @@
 				8C4956941DBAB0B500CAD822 /* UBFindSuperUnitViewController.m in Sources */,
 				8CA2933E1D87A0A500931859 /* User.m in Sources */,
 				8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */,
+				8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
 				8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */,
