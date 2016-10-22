@@ -7,6 +7,7 @@
 //
 
 #import "UBFindCommunityViewController.h"
+#import "UBSuperUnitTableViewController.h"
 
 @import Firebase;
 
@@ -72,6 +73,20 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
+    NSString *currentSnapKey = currentSnapshot.key;
+    NSString *selection = [NSString stringWithFormat:@"%@", selectedCell.textLabel.text];
+    //    NSString *selection = selectedCell.textLabel.text;
+    _results = nil;
+    
+    [_communityTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _communityTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationRight];
+    [_communityTable reloadData];
+    
+    NSLog(@"The selection is %@", selection);
+    
+    _selectedCommunity = [NSString stringWithFormat:@"%@-%@", selection, currentSnapKey];
+    [self performSegueWithIdentifier:@"superUnitSegue" sender:self];
 }
 
 #pragma mark - Life Cycle
@@ -90,14 +105,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
+    UBSuperUnitTableViewController *suvc = [segue destinationViewController];
+    
     // Pass the selected object to the new view controller.
+    
+    suvc.community = _selectedCommunity;
 }
-*/
+
 
 @end

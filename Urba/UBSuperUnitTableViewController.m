@@ -17,6 +17,9 @@
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
+@property (weak, nonatomic) NSString *communityName;
+@property (weak, nonatomic) NSString *communityKey;
+
 @end
 
 @implementation UBSuperUnitTableViewController
@@ -45,6 +48,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSArray *array = [_community componentsSeparatedByString:@"-"];
+    
+    _communityKey = [array objectAtIndex:1];
+    _communityName = [array objectAtIndex:0];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
