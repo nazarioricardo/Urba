@@ -177,7 +177,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Find Your Community" id="4bF-yr-siV">
-                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="Wbe-h0-SIq"/>
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="Wbe-h0-SIq">
+                            <connections>
+                                <action selector="cancelPressed:" destination="ZvP-kC-OQf" id="VJR-9C-W3p"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="communityTable" destination="iIU-y5-7yV" id="OjC-L4-LyT"/>
