@@ -46,13 +46,20 @@
     }];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+-(void)viewWillAppear:(BOOL)animated {
     
     NSArray *array = [_community componentsSeparatedByString:@"-"];
     
     _communityKey = [array objectAtIndex:1];
     _communityName = [array objectAtIndex:0];
+    
+    NSLog(@"The key: %@", _communityKey);
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -76,15 +83,21 @@
     return [_results count];;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"superCell" forIndexPath:indexPath];
     
     // Configure the cell...
     
+    // Unpack community from Firebase DataSnapshot
+    FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
+    NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
+    NSString *name = snapshotDict[@"name"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
+    
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

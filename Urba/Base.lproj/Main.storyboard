@@ -142,7 +142,7 @@
             </objects>
             <point key="canvasLocation" x="1969" y="16"/>
         </scene>
-        <!--Find Your Community-->
+        <!--Ur Community-->
         <scene sceneID="Sb2-j8-EUb">
             <objects>
                 <viewController id="ZvP-kC-OQf" customClass="UBFindCommunityViewController" sceneMemberID="viewController">
@@ -159,7 +159,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="e8f-k0-9U0">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="communityCell" id="e8f-k0-9U0">
                                         <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e8f-k0-9U0" id="43x-MP-KjD">
@@ -176,7 +176,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Find Your Community" id="4bF-yr-siV">
+                    <navigationItem key="navigationItem" title="Ur Community" id="4bF-yr-siV">
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="Wbe-h0-SIq">
                             <connections>
                                 <action selector="cancelPressed:" destination="ZvP-kC-OQf" id="VJR-9C-W3p"/>
@@ -192,16 +192,16 @@
             </objects>
             <point key="canvasLocation" x="3444" y="16"/>
         </scene>
-        <!--Super Unit-->
+        <!--Ur Street-->
         <scene sceneID="O5e-P9-gLF">
             <objects>
-                <tableViewController title="Super Unit" id="S5Z-Ds-Zga" customClass="UBSuperUnitTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Ur Street" id="S5Z-Ds-Zga" customClass="UBSuperUnitTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yvZ-0h-oNL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="2M5-O3-Jrd">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="superCell" id="2M5-O3-Jrd">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2M5-O3-Jrd" id="gRo-3r-glM">
@@ -223,10 +223,10 @@
             </objects>
             <point key="canvasLocation" x="4164" y="16"/>
         </scene>
-        <!--Unit-->
+        <!--Ur Unit-->
         <scene sceneID="GMy-rO-3zx">
             <objects>
-                <tableViewController title="Unit" id="2uZ-8f-HpU" sceneMemberID="viewController">
+                <tableViewController title="Ur Unit" id="2uZ-8f-HpU" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="JMZ-WC-30T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

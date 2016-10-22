@@ -9,6 +9,7 @@
 #import "UBHomeViewController.h"
 
 @interface UBHomeViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *unitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *superLabel;
 @property (weak, nonatomic) IBOutlet UILabel *communityLabel;
@@ -29,9 +30,6 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     NSLog(@"View did appear");
-    NSLog(@"%@", _unitName);
-    NSLog(@"%@", _superUnitName);
-    NSLog(@"%@", _communityName);
 }
 
 - (void)viewDidLoad {

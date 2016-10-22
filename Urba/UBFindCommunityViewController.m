@@ -52,7 +52,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [_communityTable dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [_communityTable dequeueReusableCellWithIdentifier:@"communityCell" forIndexPath:indexPath];
     
     // Unpack community from Firebase DataSnapshot
     FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
@@ -115,7 +115,7 @@
     
     // Pass the selected object to the new view controller.
     
-    suvc.community = _selectedCommunity;
+    [suvc setCommunity:_selectedCommunity];
 }
 
 
