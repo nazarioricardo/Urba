@@ -17,14 +17,13 @@
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
-@property (weak, nonatomic) NSString *communityName;
-@property (weak, nonatomic) NSString *communityKey;
+@property (weak, nonatomic) NSString *communityId;
 
 @end
 
 @implementation UBSuperUnitTableViewController
 
-- (void)configureDatabase:(NSString *)filter withValue:(NSString *)value {
+- (void)getSuperUnits {
     
     //    [self shouldAnimateIndicator:YES];
     
@@ -36,7 +35,7 @@
     _results = nil;
     _results = [[NSMutableArray alloc] init];
 
-    query = [[_ref queryOrderedByChild:@"community"] queryEqualToValue:_community];
+    query = [[_ref queryOrderedByChild:@"community"] queryEqualToValue:_communityId];
     
     _refHandle = [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
         [_results addObject:snapshot];
@@ -46,28 +45,22 @@
     }];
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"The community: %@", _community);
-    
-    NSArray *array = [_community componentsSeparatedByString:@"-"];
-    
-    _communityKey = [array objectAtIndex:1];
-    _communityName = [array objectAtIndex:0];
-    
-    NSLog(@"The key: %@", _communityKey);
-    
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    NSLog(@"The community: %@", _communityName);
+    NSLog(@"The key: %@", _communityKey);
+    _communityId = [NSString stringWithFormat:@"%@-%@", _communityName, _communityKey];
+    [self getSuperUnits];
 }
 
 - (void)didReceiveMemoryWarning {

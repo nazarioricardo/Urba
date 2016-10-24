@@ -10,6 +10,7 @@
 
 @interface UBSuperUnitTableViewController : UITableViewController
 
-@property (weak, nonatomic) NSString *community;
+@property (weak, nonatomic) NSString *communityName;
+@property (weak, nonatomic) NSString *communityKey;
 
 @end

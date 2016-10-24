@@ -39,8 +39,8 @@
 
 - (void)logIn {
     
-    [[FIRAuth auth] signInWithEmail:_emailTextField.text
-                           password:_passwordTextfield.text
+    [[FIRAuth auth] signInWithEmail:@"nazarioricardo@gmail.com"
+                           password:@"iamricky"
                          completion:^(FIRUser *user, NSError *error) {
                              
                              if (error) {
@@ -62,6 +62,7 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self logIn];
 }
 
 - (void)didReceiveMemoryWarning {

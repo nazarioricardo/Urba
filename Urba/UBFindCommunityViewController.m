@@ -75,6 +75,7 @@
     
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
+    
     NSString *currentSnapKey = currentSnapshot.key;
     NSString *selection = [NSString stringWithFormat:@"%@", selectedCell.textLabel.text];
     //    NSString *selection = selectedCell.textLabel.text;
@@ -92,13 +93,10 @@
 
 #pragma mark - Life Cycle
 
--(void)viewWillAppear:(BOOL)animated {
-    [self getCommunities];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self getCommunities];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,11 +110,27 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
-    UBSuperUnitTableViewController *suvc = [segue destinationViewController];
     
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"superUnitSegue"]) {
+        
+        UBSuperUnitTableViewController *suvc = [segue destinationViewController];
+        
+        NSIndexPath *path = [_communityTable indexPathForSelectedRow];
+        
+        FIRDataSnapshot *currentSnapshot = _results[path.row];
+        NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
+        
+        NSString *name = snapshotDict[@"name"];
+        NSString *key = currentSnapshot.key;
+        
+        NSLog(@"The community name: %@", name);
+        
+        // Pass the selected object to the new view controller.
+        
+        [suvc setCommunityName:name];
+        [suvc setCommunityKey:key];
+    }
     
-    [suvc setCommunity:_selectedCommunity];
 }
 
 
