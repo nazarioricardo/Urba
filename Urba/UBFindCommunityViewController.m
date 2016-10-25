@@ -130,7 +130,6 @@
         [suvc setCommunityName:name];
         [suvc setCommunityKey:key];
     }
-    
 }
 
 

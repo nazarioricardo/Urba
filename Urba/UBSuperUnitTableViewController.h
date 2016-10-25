@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UBFindUnitTableViewController.h"
 
 @interface UBSuperUnitTableViewController : UITableViewController
 

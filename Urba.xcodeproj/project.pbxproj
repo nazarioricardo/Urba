@@ -10,7 +10,6 @@
 		8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */; };
 		8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */; };
 		8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */; };
-		8C4956971DBAB0C500CAD822 /* UBFindUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956961DBAB0C500CAD822 /* UBFindUnitViewController.m */; };
 		8C6257E71D870B0700737D73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E61D870B0700737D73 /* main.m */; };
 		8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E91D870B0700737D73 /* AppDelegate.m */; };
 		8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257EC1D870B0700737D73 /* UBWelcomeViewController.m */; };
@@ -25,6 +24,7 @@
 		8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */; };
 		8CA2933E1D87A0A500931859 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933D1D87A0A500931859 /* User.m */; };
 		8CA82DFB1DA1CECA00C875E2 /* UBFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA82DFA1DA1CECA00C875E2 /* UBFirebaseManager.m */; };
+		8CB6EC061DC0131600B36FE9 /* UBFindUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */; };
 		8CEBF7981D9C5B5D00DAE919 /* UBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */; };
 		94D1A61122041418569FB89C /* libPods-Urba.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC50DA3B76C2262B3C721FD5 /* libPods-Urba.a */; };
 		CA1305C4DE7171C77CBFD1AE /* libPods-UrbaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3749C0697F67D8B33E1B8A0 /* libPods-UrbaTests.a */; };
@@ -59,8 +59,6 @@
 		8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSuperUnitTableViewController.m; sourceTree = "<group>"; };
 		8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindCommunityViewController.h; sourceTree = "<group>"; };
 		8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindCommunityViewController.m; sourceTree = "<group>"; };
-		8C4956951DBAB0C500CAD822 /* UBFindUnitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindUnitViewController.h; sourceTree = "<group>"; };
-		8C4956961DBAB0C500CAD822 /* UBFindUnitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindUnitViewController.m; sourceTree = "<group>"; };
 		8C6257E21D870B0700737D73 /* Urba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C6257E61D870B0700737D73 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8C6257E81D870B0700737D73 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,6 +82,8 @@
 		8CA2933D1D87A0A500931859 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		8CA82DF91DA1CECA00C875E2 /* UBFirebaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFirebaseManager.h; sourceTree = "<group>"; };
 		8CA82DFA1DA1CECA00C875E2 /* UBFirebaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFirebaseManager.m; sourceTree = "<group>"; };
+		8CB6EC041DC0131600B36FE9 /* UBFindUnitTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindUnitTableViewController.h; sourceTree = "<group>"; };
+		8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindUnitTableViewController.m; sourceTree = "<group>"; };
 		8CEBF7961D9C5B5D00DAE919 /* UBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBHomeViewController.h; sourceTree = "<group>"; };
 		8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBHomeViewController.m; sourceTree = "<group>"; };
 		967308A1FD2897E5F240E193 /* Pods-UrbaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaTests/Pods-UrbaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,8 +158,8 @@
 				8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */,
 				8C19DF091DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.h */,
 				8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */,
-				8C4956951DBAB0C500CAD822 /* UBFindUnitViewController.h */,
-				8C4956961DBAB0C500CAD822 /* UBFindUnitViewController.m */,
+				8CB6EC041DC0131600B36FE9 /* UBFindUnitTableViewController.h */,
+				8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */,
 			);
 			name = "Find Home";
 			sourceTree = "<group>";
@@ -532,9 +532,9 @@
 				8CEBF7981D9C5B5D00DAE919 /* UBHomeViewController.m in Sources */,
 				8CA82DFB1DA1CECA00C875E2 /* UBFirebaseManager.m in Sources */,
 				8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */,
-				8C4956971DBAB0C500CAD822 /* UBFindUnitViewController.m in Sources */,
 				8CA2933E1D87A0A500931859 /* User.m in Sources */,
 				8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */,
+				8CB6EC061DC0131600B36FE9 /* UBFindUnitTableViewController.m in Sources */,
 				8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
