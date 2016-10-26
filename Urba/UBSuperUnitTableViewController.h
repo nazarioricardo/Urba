@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "UBFindUnitTableViewController.h"
 
+@class UBHomeViewController;
+
 @interface UBSuperUnitTableViewController : UITableViewController
+
+@property (nonatomic, weak) UBHomeViewController *homeViewController;
 
 @property (weak, nonatomic) NSString *communityName;
 @property (weak, nonatomic) NSString *communityKey;

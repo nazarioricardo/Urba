@@ -134,7 +134,7 @@
                     <connections>
                         <outlet property="communityLabel" destination="rNv-IS-u9p" id="Odr-ia-oUB"/>
                         <outlet property="superLabel" destination="I5n-IT-bpR" id="p6c-vg-wmb"/>
-                        <outlet property="unitLabel" destination="rE5-gX-2BP" id="Y3t-q0-UPK"/>
+                        <outlet property="unitLabel" destination="rE5-gX-2BP" id="vop-3F-kHw"/>
                         <segue destination="MAv-S1-ddc" kind="presentation" identifier="FindHomeSegue" id="EoG-ag-8Lb"/>
                     </connections>
                 </viewController>
@@ -185,7 +185,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="communityTable" destination="iIU-y5-7yV" id="OjC-L4-LyT"/>
-                        <segue destination="S5Z-Ds-Zga" kind="show" identifier="superUnitSegue" id="jdr-NR-g9q"/>
+                        <segue destination="S5Z-Ds-Zga" kind="show" identifier="SuperUnitSegue" id="jdr-NR-g9q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c14-nC-zGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -216,7 +216,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="2uZ-8f-HpU" kind="show" identifier="unitSegue" id="aop-Wa-pbl"/>
+                        <segue destination="2uZ-8f-HpU" kind="show" identifier="UnitSegue" id="aop-Wa-pbl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bhf-XQ-fj4" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,7 +7,9 @@
 //
 
 #import "UBFindCommunityViewController.h"
-#import "UBSuperUnitTableViewController.h"
+#import "UBHomeViewController.h"
+
+NSString *const superUnitSegue = @"SuperUnitSegue";
 
 @import Firebase;
 
@@ -21,6 +23,7 @@
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
 @property (weak, nonatomic) NSString *selectedCommunity;
+
 
 @end
 
@@ -83,12 +86,14 @@
     
 //    [_communityTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _communityTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationRight];
 //    [_communityTable reloadData];
-    
+
     _selectedCommunity = [NSString stringWithFormat:@"%@-%@", selection, currentSnapKey];
     
     NSLog(@"The selection is %@", _selectedCommunity);
     
-    [self performSegueWithIdentifier:@"superUnitSegue" sender:self];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self performSegueWithIdentifier:superUnitSegue sender:self];
 }
 
 #pragma mark - Life Cycle
@@ -111,7 +116,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     
-    if ([segue.identifier isEqualToString:@"superUnitSegue"]) {
+    if ([segue.identifier isEqualToString:superUnitSegue]) {
         
         UBSuperUnitTableViewController *suvc = [segue destinationViewController];
         
@@ -127,6 +132,7 @@
         
         // Pass the selected object to the new view controller.
         
+        [suvc setHomeViewController:_homeViewController];
         [suvc setCommunityName:name];
         [suvc setCommunityKey:key];
     }

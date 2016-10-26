@@ -7,6 +7,7 @@
 //
 
 #import "UBFindUnitTableViewController.h"
+#import "UBHomeViewController.h"
 
 @import Firebase;
 
@@ -88,6 +89,25 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
+    NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
+    
+    NSString *key = currentSnapshot.key;
+    
+    NSString *name = snapshotDict[@"name"];
+    
+    [_homeViewController setUnitName:name];
+    [_homeViewController setUnitKey:key];
+    [_homeViewController setSuperUnitName:_superUnitName];
+    [_homeViewController setSuperUnitKey:_superUnitKey];
+    [_homeViewController setCommunityName:_communityName];
+    [_homeViewController setCommunityKey:_communityKey];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

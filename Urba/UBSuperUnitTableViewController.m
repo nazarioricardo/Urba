@@ -7,6 +7,9 @@
 //
 
 #import "UBSuperUnitTableViewController.h"
+#import "UBHomeViewController.h"
+
+NSString *const unitSegue = @"UnitSegue";
 
 @import Firebase;
 
@@ -92,7 +95,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
  
-    [self performSegueWithIdentifier:@"unitSegue" sender:self];
+    [self performSegueWithIdentifier:unitSegue sender:self];
 }
 
 /*
@@ -136,7 +139,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     
-    if ([segue.identifier isEqualToString:@"unitSegue"]) {
+    if ([segue.identifier isEqualToString:unitSegue]) {
         
         UBFindUnitTableViewController *uvc = [segue destinationViewController];
         
@@ -152,6 +155,9 @@
         
         // Pass the selected object to the new view controller.
         
+        [uvc setHomeViewController:_homeViewController];
+        [uvc setCommunityName:_communityName];
+        [uvc setCommunityKey:_communityKey];
         [uvc setSuperUnitName:name];
         [uvc setSuperUnitKey:key];
     }

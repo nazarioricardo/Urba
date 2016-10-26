@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UBSuperUnitTableViewController.h"
+
+@class UBHomeViewController;
 
 @interface UBFindCommunityViewController : UIViewController
+
+@property (nonatomic, weak) UBHomeViewController *homeViewController;
 
 @end
