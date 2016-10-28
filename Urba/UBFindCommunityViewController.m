@@ -42,6 +42,7 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
     
     _results = nil;
     _results = [[NSMutableArray alloc] init];
+
     
     _refHandle = [_ref observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
         [_results addObject:snapshot];

@@ -16,6 +16,8 @@ NSString *const findHomeSegue = @"FindHomeSegue";
 @property (weak, nonatomic) IBOutlet UILabel *superLabel;
 @property (weak, nonatomic) IBOutlet UILabel *communityLabel;
 
+@property (strong, nonatomic) NSMutableArray *userUnitsArray;
+
 @end
 
 @implementation UBHomeViewController
@@ -33,11 +35,20 @@ NSString *const findHomeSegue = @"FindHomeSegue";
         NSString *superUnit = [NSString stringWithFormat:@"%@", _superUnitName];
         NSString *community = [NSString stringWithFormat:@"%@", _communityName];
         
+        NSDictionary<NSString *, NSString *> *unitDict = [[NSDictionary alloc] initWithObjectsAndKeys:_unitKey, _unitName, nil];
+        NSDictionary<NSString *, NSString *> *superUnitDict = [[NSDictionary alloc] initWithObjectsAndKeys:_superUnitKey, _superUnitName, nil];
+        NSDictionary<NSString *, NSString *> *communityDict = [[NSDictionary alloc] initWithObjectsAndKeys:_communityKey, _communityName, nil];
+        
+        NSArray *unitArray = [[NSArray alloc] initWithObjects:unitDict, superUnitDict, communityDict, nil];
+        
+        [_userUnitsArray addObject:unitArray];
+        
+        NSLog(@"The array: %@", _userUnitsArray);
+        
         [_unitLabel setText:unit];
         [_superLabel setText:superUnit];
         [_communityLabel setText:community];
     }
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -45,9 +56,9 @@ NSString *const findHomeSegue = @"FindHomeSegue";
 }
 
 - (void)viewDidLoad {
+    _userUnitsArray = [[NSMutableArray alloc] init];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     
 }
 

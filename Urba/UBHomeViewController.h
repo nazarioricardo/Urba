@@ -11,8 +11,6 @@
 
 @interface UBHomeViewController : UIViewController
 
-@property (weak, nonatomic) NSMutableArray *unitArray;
-
 @property (nonatomic) NSString *communityName;
 @property (nonatomic) NSString *communityKey;
 @property (nonatomic) NSString *superUnitName;
