@@ -7,6 +7,7 @@
 //
 
 #import "UBCreateUserViewController.h"
+#import "ActivityView.h"
 
 @interface UBCreateUserViewController ()
 

@@ -8,6 +8,7 @@
 
 #import "UBFindCommunityViewController.h"
 #import "UBHomeViewController.h"
+#import "ActivityView.h"
 
 NSString *const superUnitSegue = @"SuperUnitSegue";
 
@@ -35,7 +36,7 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 
 - (void)getCommunities {
     
-//    [self shouldAnimateIndicator:YES];
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
     _ref = [[FIRDatabase database] reference];
     _ref = [_ref child:@"communities"];
@@ -45,10 +46,19 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 
     
     _refHandle = [_ref observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+        
         [_results addObject:snapshot];
         [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]]
                                withRowAnimation: UITableViewRowAnimationLeft];
-//        [self shouldAnimateIndicator:NO];
+        
+        [spinner removeSpinner];
+
+    } withCancelBlock:^(NSError *error) {
+        
+        [spinner removeSpinner];
+        NSLog(@"%@", error.description);
+        
+        // TODO: SHOW ERROR ALERT
     }];
 }
 

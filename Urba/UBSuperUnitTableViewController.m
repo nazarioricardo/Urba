@@ -8,6 +8,7 @@
 
 #import "UBSuperUnitTableViewController.h"
 #import "UBHomeViewController.h"
+#import "ActivityView.h"
 
 NSString *const unitSegue = @"UnitSegue";
 
@@ -28,7 +29,7 @@ NSString *const unitSegue = @"UnitSegue";
 
 - (void)getSuperUnits {
     
-    //    [self shouldAnimateIndicator:YES];
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
     FIRDatabaseQuery *query;
     
@@ -41,10 +42,15 @@ NSString *const unitSegue = @"UnitSegue";
     query = [[_ref queryOrderedByChild:@"community"] queryEqualToValue:_communityId];
     
     _refHandle = [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+        
         [_results addObject:snapshot];
         [[self tableView] insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]]
                                withRowAnimation: UITableViewRowAnimationLeft];
-        //        [self shouldAnimateIndicator:NO];
+        [spinner removeSpinner];
+    } withCancelBlock:^(NSError *error) {
+        
+        [spinner removeSpinner];
+        NSLog(@"%@", error.description);
     }];
 }
 

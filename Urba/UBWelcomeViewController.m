@@ -9,8 +9,6 @@
 #import "UBWelcomeViewController.h"
 #import "ActivityView.h"
 
-NSString *const activityView = @"ActivityView";
-
 @import Firebase;
 
 @interface UBWelcomeViewController ()
@@ -53,10 +51,11 @@ NSString *const activityView = @"ActivityView";
                              
                              if (error) {
                                  
+                                 [spinner removeSpinner];
                                  NSLog(@"There has been an error!\n %@", error.description);
                                  
+                                 // TODO : SHOW ERROR ALERT
                              } else {
-                                 [spinner removeSpinner];
                                  NSLog(@"Logged in as %@", user.email);
                                  [self performSegueWithIdentifier:@"LogInSegue" sender:self];
                              }

@@ -8,7 +8,7 @@
 
 #import "ActivityView.h"
 
-@implementation ActivityView : UIView
+@implementation ActivityView
 
 + (ActivityView *)loadSpinnerIntoView:(UIView *)superView {
     

@@ -8,6 +8,7 @@
 
 #import "UBFindUnitTableViewController.h"
 #import "UBHomeViewController.h"
+#import "ActivityView.h"
 
 @import Firebase;
 
@@ -26,7 +27,7 @@
 
 - (void)getUnits {
     
-    //    [self shouldAnimateIndicator:YES];
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
     FIRDatabaseQuery *query;
     
@@ -42,7 +43,13 @@
         [_results addObject:snapshot];
         [[self tableView] insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]]
                                 withRowAnimation: UITableViewRowAnimationLeft];
-        //        [self shouldAnimateIndicator:NO];
+
+        [spinner removeSpinner];
+        
+    } withCancelBlock:^(NSError *error) {
+        
+        [spinner removeSpinner];
+        NSLog(@"%@", error.description);
     }];
 }
 

@@ -10,7 +10,6 @@
 		8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */; };
 		8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */; };
 		8C2650531DC3C9CB00AE3973 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2650521DC3C9CB00AE3973 /* ActivityView.m */; };
-		8C2A38581DC10C840090E52B /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A38571DC10C840090E52B /* Constants.m */; };
 		8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */; };
 		8C6257E71D870B0700737D73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E61D870B0700737D73 /* main.m */; };
 		8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E91D870B0700737D73 /* AppDelegate.m */; };
@@ -61,8 +60,6 @@
 		8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSuperUnitTableViewController.m; sourceTree = "<group>"; };
 		8C2650511DC3C9CB00AE3973 /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
 		8C2650521DC3C9CB00AE3973 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
-		8C2A38561DC10C840090E52B /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		8C2A38571DC10C840090E52B /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindCommunityViewController.h; sourceTree = "<group>"; };
 		8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindCommunityViewController.m; sourceTree = "<group>"; };
 		8C6257E21D870B0700737D73 /* Urba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urba.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,8 +140,6 @@
 				8C6257EC1D870B0700737D73 /* UBWelcomeViewController.m */,
 				8C67E2FB1D87626D0044C9F3 /* UBCreateUserViewController.h */,
 				8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */,
-				8C2650511DC3C9CB00AE3973 /* ActivityView.h */,
-				8C2650521DC3C9CB00AE3973 /* ActivityView.m */,
 			);
 			name = "Welcome Views";
 			sourceTree = "<group>";
@@ -199,11 +194,11 @@
 			children = (
 				8C6257E81D870B0700737D73 /* AppDelegate.h */,
 				8C6257E91D870B0700737D73 /* AppDelegate.m */,
-				8C2A38561DC10C840090E52B /* Constants.h */,
-				8C2A38571DC10C840090E52B /* Constants.m */,
 				8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */,
 				8C2700971D9C30EC00BACCDE /* Welcome Views */,
 				8C2700981D9C317700BACCDE /* Main Views */,
+				8C2650511DC3C9CB00AE3973 /* ActivityView.h */,
+				8C2650521DC3C9CB00AE3973 /* ActivityView.m */,
 				8CA293341D879FF400931859 /* Model */,
 				8CA293381D87A04E00931859 /* Control */,
 				8C6257EE1D870B0700737D73 /* Main.storyboard */,
@@ -539,7 +534,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C2A38581DC10C840090E52B /* Constants.m in Sources */,
 				8CEBF7981D9C5B5D00DAE919 /* UBHomeViewController.m in Sources */,
 				8CA82DFB1DA1CECA00C875E2 /* UBFirebaseManager.m in Sources */,
 				8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */,
