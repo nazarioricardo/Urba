@@ -269,6 +269,34 @@
             </objects>
             <point key="canvasLocation" x="1188" y="351"/>
         </scene>
+        <!--Activity View-->
+        <scene sceneID="0nB-mt-vDN">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NhC-yK-hs6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="ActivityView" title="Activity View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a3r-Xf-9Ia" customClass="UBActivityViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="k9B-1Y-STY"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZuE-Si-goS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ynv-hc-saV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Geq-kV-Otp"/>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.39511190878378377" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Geq-kV-Otp" firstAttribute="centerX" secondItem="ynv-hc-saV" secondAttribute="centerX" id="gZG-AQ-ZQN"/>
+                            <constraint firstItem="Geq-kV-Otp" firstAttribute="centerY" secondItem="ynv-hc-saV" secondAttribute="centerY" id="qkY-Ah-bma"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityView" destination="ynv-hc-saV" id="sgN-gP-D79"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="305" y="1141"/>
+        </scene>
         <!--Guard-->
         <scene sceneID="i8n-S7-KIg">
             <objects>
