@@ -14,7 +14,7 @@
 @interface UBWelcomeViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 //@property (weak, nonatomic) UBActivityViewController *activityView;
 
@@ -33,7 +33,7 @@
     
     if (textField == _emailTextField) {
         [textField resignFirstResponder];
-        [_passwordTextfield becomeFirstResponder];
+        [_passwordTextField becomeFirstResponder];
     } else {
         [self logIn];
     }

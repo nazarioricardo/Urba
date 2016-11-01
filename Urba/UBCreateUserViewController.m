@@ -9,19 +9,22 @@
 #import "UBCreateUserViewController.h"
 #import "ActivityView.h"
 
+@import Firebase;
+
 @interface UBCreateUserViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 
--(void)uploadUser;
+-(void)createUser;
 
 @end
 
 @implementation UBCreateUserViewController
 
 - (IBAction)donePressed:(id)sender {
+    [self createUser];
 }
 
 - (IBAction)cancelPressed:(id)sender {
@@ -31,20 +34,52 @@
 
 #pragma mark - Private
 
-- (void)uploadUser {
+- (void)createUser {
     
-    if ([_emailTextField.text  isEqual: @""] && [_passwordTextField.text  isEqual: @""] && [_confirmPasswordTextField.text  isEqual: @""]) {
+    if ([_emailTextField.text  isEqual: @""] || [_passwordTextField.text  isEqual: @""] || [_confirmPasswordTextField.text  isEqual: @""]) {
         
-        NSLog(@"Please fill all blank fields");
+        NSLog(@"Please fill all fields");
         
     } else if (_passwordTextField.text != _confirmPasswordTextField.text) {
         
         // ERROR Password mismatch
         NSLog(@"Passwords didn't match! Please try again!");
     } else {
-     
-        NSLog(@"User created");
+        
+        ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+        
+        [[FIRAuth auth] createUserWithEmail:_emailTextField.text
+                                   password:_passwordTextField.text
+                                 completion:^(FIRUser *user, NSError *error) {
+                                     
+                                     if (error) {
+                                         
+                                         [spinner removeSpinner];
+                                         NSLog(@"%@", error.description);
+                                     } else {
+                                         
+                                         NSLog(@"Successfuly created user.");
+                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                     }
+        }];
     }
+}
+
+#pragma mark - TextField Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (textField == _emailTextField) {
+        [textField resignFirstResponder];
+        [_passwordTextField becomeFirstResponder];
+    } else if (textField == _passwordTextField) {
+        [textField resignFirstResponder];
+        [_confirmPasswordTextField becomeFirstResponder];
+    } else {
+        [self createUser];
+    }
+    
+    return YES;
 }
 
 #pragma mark - Life Cycle
