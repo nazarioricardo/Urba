@@ -32,6 +32,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if (textField == _emailTextField) {
+        
         [textField resignFirstResponder];
         [_passwordTextfield becomeFirstResponder];
     } else {
@@ -62,20 +63,7 @@
                          }];
 }
 
-//- (void)presentActivityView {
-//    
-//    self.activityView = [self.storyboard instantiateViewControllerWithIdentifier:activityView];
-//    
-//    // Change the size of page view controller
-//    self.activityView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-//    
-//    [self addChildViewController:_activityView];
-//    [self.view addSubview:_activityView.view];
-//    [self.activityView didMoveToParentViewController:self];
-//    
-//}
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 

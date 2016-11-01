@@ -9,19 +9,34 @@
 #import "UBCreateUserViewController.h"
 #import "ActivityView.h"
 
+@import Firebase;
+
 @interface UBCreateUserViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextfield;
 
--(void)uploadUser;
+-(void)createUser;
 
 @end
 
 @implementation UBCreateUserViewController
 
 - (IBAction)donePressed:(id)sender {
+    
+    if ([_emailTextfield.text  isEqual: @""] && [_passwordTextfield.text  isEqual: @""] && [_confirmPasswordTextfield.text  isEqual: @""]) {
+        
+        NSLog(@"Please fill all blank fields");
+    
+    } else if (_passwordTextfield.text != _confirmPasswordTextfield.text) {
+        
+        // ERROR Password mismatch
+        NSLog(@"Passwords didn't match! Please try again!");
+    } else {
+
+        [self createUser];
+    }
 }
 
 - (IBAction)cancelPressed:(id)sender {
@@ -29,22 +44,47 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (textField == _emailTextfield) {
+        
+        [textField resignFirstResponder];
+        [_passwordTextfield becomeFirstResponder];
+    } else if (textField == _passwordTextfield) {
+        
+        [textField resignFirstResponder];
+        [_confirmPasswordTextfield becomeFirstResponder];
+
+    } else {
+        [self createUser];
+    }
+    
+    return YES;
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - Private
 
-- (void)uploadUser {
+- (void)createUser {
     
-    if ([_emailTextField.text  isEqual: @""] && [_passwordTextField.text  isEqual: @""] && [_confirmPasswordTextField.text  isEqual: @""]) {
-        
-        NSLog(@"Please fill all blank fields");
-        
-    } else if (_passwordTextField.text != _confirmPasswordTextField.text) {
-        
-        // ERROR Password mismatch
-        NSLog(@"Passwords didn't match! Please try again!");
-    } else {
-     
-        NSLog(@"User created");
-    }
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+    
+    [[FIRAuth auth] createUserWithEmail:_emailTextfield.text
+                               password:_passwordTextfield.text
+                             completion:^(FIRUser *user, NSError *error) {
+    
+                                 if (error) {
+                                     [spinner removeSpinner];
+                                     NSLog(@"%@", error.description);
+                                 } else {
+                                     NSLog(@"User created!");
+                                     [self dismissViewControllerAnimated:YES completion:nil];
+                                 }
+    }];
+    
 }
 
 #pragma mark - Life Cycle

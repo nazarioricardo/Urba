@@ -8,23 +8,20 @@
 
 #import "UBFindCommunityViewController.h"
 #import "UBHomeViewController.h"
+#import "UBFIRDatabaseManager.h"
 #import "ActivityView.h"
 
 NSString *const superUnitSegue = @"SuperUnitSegue";
+NSString *const node = @"communities";
 
-@import Firebase;
-
-@interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate> {
-    FIRDatabaseHandle _refHandle;
-}
+@interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *communityTable;
 
-@property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) NSMutableArray *results;
+//@property (strong, nonatomic) FIRDatabaseReference *ref;
 
 @property (weak, nonatomic) NSString *selectedCommunity;
-
 
 @end
 
@@ -34,33 +31,7 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)getCommunities {
-    
-    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
-    
-    _ref = [[FIRDatabase database] reference];
-    _ref = [_ref child:@"communities"];
-    
-    _results = nil;
-    _results = [[NSMutableArray alloc] init];
 
-    
-    _refHandle = [_ref observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
-        
-        [_results addObject:snapshot];
-        [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]]
-                               withRowAnimation: UITableViewRowAnimationLeft];
-        
-        [spinner removeSpinner];
-
-    } withCancelBlock:^(NSError *error) {
-        
-        [spinner removeSpinner];
-        NSLog(@"%@", error.description);
-        
-        // TODO: SHOW ERROR ALERT
-    }];
-}
 
 #pragma mark - Table View Delegate
 
@@ -69,8 +40,7 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
     UITableViewCell *cell = [_communityTable dequeueReusableCellWithIdentifier:@"communityCell" forIndexPath:indexPath];
     
     // Unpack community from Firebase DataSnapshot
-    FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
-    NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
+    NSDictionary<NSString *, NSString *> *snapshotDict = _results[indexPath.row];
     NSString *name = snapshotDict[@"name"];
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
     
@@ -87,18 +57,18 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
-    
-    NSString *currentSnapKey = currentSnapshot.key;
-    NSString *selection = [NSString stringWithFormat:@"%@", selectedCell.textLabel.text];
+//    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+//    NSDictionary *currentSnapshot = _results[indexPath.row];
+//    
+//    NSString *currentSnapKey = currentSnapshot[@"name"];
+//    NSString *selection = [NSString stringWithFormat:@"%@", selectedCell.textLabel.text];
     //    NSString *selection = selectedCell.textLabel.text;
 //    _results = nil;
     
 //    [_communityTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _communityTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationRight];
 //    [_communityTable reloadData];
 
-    _selectedCommunity = [NSString stringWithFormat:@"%@-%@", selection, currentSnapKey];
+//    _selectedCommunity = [NSString stringWithFormat:@"%@-%@", selection, currentSnapKey];
     
     NSLog(@"The selection is %@", _selectedCommunity);
     
@@ -112,7 +82,19 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self getCommunities];
+//    [self getCommunities];
+    [UBFIRDatabaseManager getAllValuesFromNode:node
+                            withSuccessHandler:^(NSArray *results) {
+                                
+                                _results = [NSMutableArray arrayWithArray:results];
+                                
+                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]]
+                                                       withRowAnimation: UITableViewRowAnimationLeft];
+                                
+                            }
+                                orErrorHandler:^(NSError *error) {
+                                    
+                                }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,26 +109,26 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     
-    if ([segue.identifier isEqualToString:superUnitSegue]) {
-        
-        UBSuperUnitTableViewController *suvc = [segue destinationViewController];
-        
-        NSIndexPath *path = [_communityTable indexPathForSelectedRow];
-        
-        FIRDataSnapshot *currentSnapshot = _results[path.row];
-        NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
-        
-        NSString *name = snapshotDict[@"name"];
-        NSString *key = currentSnapshot.key;
-        
-        NSLog(@"The community name: %@", name);
-        
-        // Pass the selected object to the new view controller.
-        
-        [suvc setHomeViewController:_homeViewController];
-        [suvc setCommunityName:name];
-        [suvc setCommunityKey:key];
-    }
+//    if ([segue.identifier isEqualToString:superUnitSegue]) {
+//        
+//        UBSuperUnitTableViewController *suvc = [segue destinationViewController];
+//        
+//        NSIndexPath *path = [_communityTable indexPathForSelectedRow];
+//        
+//        FIRDataSnapshot *currentSnapshot = _results[path.row];
+//        NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
+//        
+//        NSString *name = snapshotDict[@"name"];
+//        NSString *key = currentSnapshot.key;
+//        
+//        NSLog(@"The community name: %@", name);
+//        
+//        // Pass the selected object to the new view controller.
+//        
+//        [suvc setHomeViewController:_homeViewController];
+//        [suvc setCommunityName:name];
+//        [suvc setCommunityKey:key];
+//    }
 }
 
 

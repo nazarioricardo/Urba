@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UBCreateUserViewController : UIViewController
+@interface UBCreateUserViewController : UIViewController <UITextViewDelegate>
 
 @end

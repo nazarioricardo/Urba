@@ -10,6 +10,8 @@
 #import "UBHomeViewController.h"
 #import "ActivityView.h"
 
+NSString *const node = @"units";
+
 @import Firebase;
 
 @interface UBFindUnitTableViewController () {
@@ -32,7 +34,7 @@
     FIRDatabaseQuery *query;
     
     _ref = [[FIRDatabase database] reference];
-    _ref = [_ref child:@"units"];
+    _ref = [_ref child:node];
     
     _results = nil;
     _results = [[NSMutableArray alloc] init];
@@ -107,12 +109,17 @@
     
     NSString *name = snapshotDict[@"name"];
     
+    NSString *user = [FIRAuth auth].currentUser.email;
+
+    
     [_homeViewController setUnitName:name];
     [_homeViewController setUnitKey:key];
     [_homeViewController setSuperUnitName:_superUnitName];
     [_homeViewController setSuperUnitKey:_superUnitKey];
     [_homeViewController setCommunityName:_communityName];
     [_homeViewController setCommunityKey:_communityKey];
+    
+    [[[_ref child: key] child:@"user"] setValue:user];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
