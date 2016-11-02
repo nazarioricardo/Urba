@@ -10,8 +10,6 @@
 #import "UBHomeViewController.h"
 #import "ActivityView.h"
 
-NSString *const node = @"units";
-
 @import Firebase;
 
 @interface UBFindUnitTableViewController () {
@@ -34,7 +32,7 @@ NSString *const node = @"units";
     FIRDatabaseQuery *query;
     
     _ref = [[FIRDatabase database] reference];
-    _ref = [_ref child:node];
+    _ref = [_ref child:@"units"];
     
     _results = nil;
     _results = [[NSMutableArray alloc] init];

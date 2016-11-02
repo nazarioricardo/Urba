@@ -11,8 +11,6 @@
 #import "ActivityView.h"
 
 NSString *const unitSegue = @"UnitSegue";
-NSString *const node = @"super-units";
-
 
 @import Firebase;
 
@@ -36,7 +34,7 @@ NSString *const node = @"super-units";
     FIRDatabaseQuery *query;
     
     _ref = [[FIRDatabase database] reference];
-    _ref = [_ref child:node];
+    _ref = [_ref child:@"super-units"];
     
     _results = nil;
     _results = [[NSMutableArray alloc] init];

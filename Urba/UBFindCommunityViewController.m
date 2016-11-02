@@ -12,7 +12,6 @@
 #import "ActivityView.h"
 
 NSString *const superUnitSegue = @"SuperUnitSegue";
-NSString *const node = @"communities";
 
 @interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -38,8 +37,8 @@ NSString *const node = @"communities";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [_communityTable dequeueReusableCellWithIdentifier:@"communityCell" forIndexPath:indexPath];
-    
-    // Unpack community from Firebase DataSnapshot
+//    
+//    // Unpack community from Firebase DataSnapshot
     NSDictionary<NSString *, NSString *> *snapshotDict = _results[indexPath.row];
     NSString *name = snapshotDict[@"name"];
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
@@ -83,7 +82,7 @@ NSString *const node = @"communities";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    [self getCommunities];
-    [UBFIRDatabaseManager getAllValuesFromNode:node
+    [UBFIRDatabaseManager getAllValuesFromNode:@"communities"
                             withSuccessHandler:^(NSArray *results) {
                                 
                                 _results = [NSMutableArray arrayWithArray:results];

@@ -33,6 +33,8 @@
         
         [results addObject:snapshot];
         
+        NSLog(@"%@", snapshot.value);
+        
         if (successHandler) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 successHandler ([self mapResults:results]);

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UBSuperUnitTableViewController.h"
 
+
 @class UBHomeViewController;
 
 @interface UBFindCommunityViewController : UIViewController
