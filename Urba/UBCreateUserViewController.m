@@ -40,7 +40,7 @@
         
         NSLog(@"Please fill all fields");
         
-    } else if (_passwordTextField.text != _confirmPasswordTextField.text) {
+    } else if (![_passwordTextField.text isEqualToString:_confirmPasswordTextField.text]) {
         
         // ERROR Password mismatch
         NSLog(@"Passwords didn't match! Please try again!");

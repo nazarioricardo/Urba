@@ -81,7 +81,7 @@
             </objects>
             <point key="canvasLocation" x="305" y="387"/>
         </scene>
-        <!--Home-->
+        <!--Home View Controller-->
         <scene sceneID="Wpy-6b-1CX">
             <objects>
                 <viewController id="woN-Po-N7u" customClass="UBHomeViewController" sceneMemberID="viewController">
@@ -93,12 +93,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yr6-a6-Ga0">
-                                <state key="normal" title="Add Home"/>
-                                <connections>
-                                    <action selector="addHomePressed:" destination="woN-Po-N7u" eventType="touchUpInside" id="mjb-G2-4ux"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rE5-gX-2BP">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -117,7 +111,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Yr6-a6-Ga0" firstAttribute="centerX" secondItem="x3Y-MP-V6H" secondAttribute="centerX" id="7q1-ZK-jJE"/>
                             <constraint firstItem="rNv-IS-u9p" firstAttribute="leading" secondItem="x3Y-MP-V6H" secondAttribute="leadingMargin" id="Edn-GS-O90"/>
                             <constraint firstItem="rE5-gX-2BP" firstAttribute="trailing" secondItem="x3Y-MP-V6H" secondAttribute="trailingMargin" id="HkB-2u-ed9"/>
                             <constraint firstItem="rE5-gX-2BP" firstAttribute="leading" secondItem="x3Y-MP-V6H" secondAttribute="leadingMargin" id="NHm-vW-YDL"/>
@@ -125,12 +118,18 @@
                             <constraint firstItem="rE5-gX-2BP" firstAttribute="top" secondItem="Txh-O3-aDG" secondAttribute="bottom" constant="8" id="U3k-ZS-sXs"/>
                             <constraint firstItem="rNv-IS-u9p" firstAttribute="top" secondItem="I5n-IT-bpR" secondAttribute="bottom" constant="8" id="dcN-xT-McK"/>
                             <constraint firstItem="I5n-IT-bpR" firstAttribute="trailing" secondItem="x3Y-MP-V6H" secondAttribute="trailingMargin" id="edy-TI-GEI"/>
-                            <constraint firstItem="eEI-mv-E3f" firstAttribute="top" secondItem="Yr6-a6-Ga0" secondAttribute="bottom" constant="8" id="kbY-mX-Nge"/>
                             <constraint firstItem="I5n-IT-bpR" firstAttribute="top" secondItem="rE5-gX-2BP" secondAttribute="bottom" constant="8" id="nZJ-FH-42D"/>
                             <constraint firstItem="rNv-IS-u9p" firstAttribute="trailing" secondItem="x3Y-MP-V6H" secondAttribute="trailingMargin" id="xsl-n1-k2n"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="Hsm-rW-X7i"/>
+                    <navigationItem key="navigationItem" id="sNf-7e-ndc">
+                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="xJK-Px-O2i"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="Pwq-L2-KBG">
+                            <connections>
+                                <action selector="addHomePressed:" destination="woN-Po-N7u" id="KIq-uG-pUj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="communityLabel" destination="rNv-IS-u9p" id="Odr-ia-oUB"/>
                         <outlet property="superLabel" destination="I5n-IT-bpR" id="p6c-vg-wmb"/>
@@ -140,7 +139,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qhv-Tb-D8d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1969" y="16"/>
+            <point key="canvasLocation" x="2985" y="10"/>
         </scene>
         <!--Ur Community-->
         <scene sceneID="Sb2-j8-EUb">
@@ -190,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c14-nC-zGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3444" y="16"/>
+            <point key="canvasLocation" x="4460" y="-651"/>
         </scene>
         <!--Ur Street-->
         <scene sceneID="O5e-P9-gLF">
@@ -221,7 +220,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bhf-XQ-fj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4164" y="16"/>
+            <point key="canvasLocation" x="5180" y="-651"/>
         </scene>
         <!--Ur Unit-->
         <scene sceneID="GMy-rO-3zx">
@@ -249,7 +248,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hRB-uX-pjb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4855" y="16"/>
+            <point key="canvasLocation" x="5870" y="-651"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rwg-MK-1ch">
@@ -261,7 +260,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="woN-Po-N7u" kind="relationship" relationship="viewControllers" id="jC5-SW-wB3"/>
+                        <segue destination="Nik-CU-tq8" kind="relationship" relationship="viewControllers" id="jC5-SW-wB3"/>
                         <segue destination="mDb-at-ZGI" kind="relationship" relationship="viewControllers" id="1nE-Qn-WCI"/>
                     </connections>
                 </tabBarController>
@@ -407,6 +406,65 @@
             </objects>
             <point key="canvasLocation" x="304.80000000000001" y="-321.58920539730138"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="EFC-cw-W6C">
+            <objects>
+                <viewController id="qXV-Yd-k8G" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nre-Ef-cHM"/>
+                        <viewControllerLayoutGuide type="bottom" id="s7r-pj-1lz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ClA-UX-BHK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hue-KN-2Yq">
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BYg-oP-nwj">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It seems you haven't added any households." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Mo-vA-hSE">
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NZT-dL-sgz">
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Tap here to get started!"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yFi-oR-n5Q">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you're a community administrator," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwB-MT-ezl">
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IjH-zA-Vcg">
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Tap here to register your community."/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="172" id="WtJ-43-dVP"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="hue-KN-2Yq" secondAttribute="trailing" constant="2" id="0EH-3V-qkO"/>
+                            <constraint firstItem="hue-KN-2Yq" firstAttribute="centerY" secondItem="ClA-UX-BHK" secondAttribute="centerY" id="GCP-A0-Mzv"/>
+                            <constraint firstItem="hue-KN-2Yq" firstAttribute="leading" secondItem="ClA-UX-BHK" secondAttribute="leadingMargin" constant="2" id="cZG-gM-ff3"/>
+                            <constraint firstItem="hue-KN-2Yq" firstAttribute="centerX" secondItem="ClA-UX-BHK" secondAttribute="centerX" id="m8p-1s-ISu"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FBp-wl-hVu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2984.8000000000002" y="-658.92053973013503"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="U3k-hn-faF">
             <objects>
@@ -423,7 +481,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZh-Xo-dy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2730" y="16"/>
+            <point key="canvasLocation" x="3745" y="-651"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="KlL-rG-4kc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nik-CU-tq8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" id="Hsm-rW-X7i"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uuT-8i-wzQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="woN-Po-N7u" kind="relationship" relationship="rootViewController" id="y4N-3h-GZD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nUh-iA-FFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2204" y="10"/>
         </scene>
     </scenes>
 </document>
