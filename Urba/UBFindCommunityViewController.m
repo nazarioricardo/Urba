@@ -18,35 +18,62 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 @property (weak, nonatomic) IBOutlet UITableView *communityTable;
 
 @property (strong, nonatomic) NSMutableArray *results;
-//@property (strong, nonatomic) FIRDatabaseReference *ref;
-
 @property (weak, nonatomic) NSString *selectedCommunity;
+@property (weak, nonatomic) NSString *selectedName;
+@property (weak, nonatomic) NSString *selectedKey;
 
 @end
 
 @implementation UBFindCommunityViewController
 
+#pragma mark - IBActions
+
 - (IBAction)cancelPressed:(id)sender {
+    
+    [_results removeAllObjects];
+    _results = nil;
+    [_communityTable reloadData];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Private
 
+- (void) getCommunities {
+    
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+    
+    [_results removeAllObjects];
+    [_communityTable reloadData];
+    
+    [UBFIRDatabaseManager getAllValuesFromNode:@"communities"
+                            withSuccessHandler:^(NSArray *results) {
+                                
+                                _results = [NSMutableArray arrayWithArray:results];
+                                
+//                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
+                                [_communityTable reloadData];
+
+                                [spinner removeSpinner];
+                            }
+                                orErrorHandler:^(NSError *error) {
+                                    
+                                    [spinner removeSpinner];
+                                    NSLog(@"Error: %@", error.description);
+                                }];
+}
 
 #pragma mark - Table View Delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [_communityTable dequeueReusableCellWithIdentifier:@"communityCell" forIndexPath:indexPath];
-//    
-//    // Unpack community from Firebase DataSnapshot
+    
+    // Unpack community from results array
     NSDictionary<NSString *, NSString *> *snapshotDict = _results[indexPath.row];
     NSString *name = [snapshotDict objectForKey:@"name"];
     
     NSLog(@"Dictionary: %@\nName: %@", snapshotDict, name);
-    
-    NSDictionary *testDict = [NSDictionary dictionaryWithObjectsAndKeys:@"name", @"ricky", nil];
-    
-    NSLog(@"Test dict: %@", testDict);
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
     
@@ -63,22 +90,15 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-//    NSDictionary *currentSnapshot = _results[indexPath.row];
-//    
-//    NSString *currentSnapKey = currentSnapshot[@"name"];
-//    NSString *selection = [NSString stringWithFormat:@"%@", selectedCell.textLabel.text];
-    //    NSString *selection = selectedCell.textLabel.text;
-//    _results = nil;
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    NSDictionary *currentSnapshot = _results[indexPath.row];
     
-//    [_communityTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _communityTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationRight];
-//    [_communityTable reloadData];
+    _selectedKey = currentSnapshot[@"key"];
+    _selectedName = selectedCell.textLabel.text;
 
-//    _selectedCommunity = [NSString stringWithFormat:@"%@-%@", selection, currentSnapKey];
+    _selectedCommunity = [NSString stringWithFormat:@"%@-%@", _selectedName, _selectedKey];
     
     NSLog(@"The selection is %@", _selectedCommunity);
-    
-//    [self dismissViewControllerAnimated:YES completion:nil];
     
     [self performSegueWithIdentifier:superUnitSegue sender:self];
 }
@@ -88,18 +108,7 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    [self getCommunities];
-    [UBFIRDatabaseManager getAllValuesFromNode:@"communities"
-                            withSuccessHandler:^(NSArray *results) {
-                                
-                                _results = [NSMutableArray arrayWithArray:results];
-                                                                
-                                [_communityTable reloadData];
-                                
-                            }
-                                orErrorHandler:^(NSError *error) {
-                                    
-                                }];
+    [self getCommunities];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,26 +123,16 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     
-//    if ([segue.identifier isEqualToString:superUnitSegue]) {
-//        
-//        UBSuperUnitTableViewController *suvc = [segue destinationViewController];
-//        
-//        NSIndexPath *path = [_communityTable indexPathForSelectedRow];
-//        
-//        FIRDataSnapshot *currentSnapshot = _results[path.row];
-//        NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
-//        
-//        NSString *name = snapshotDict[@"name"];
-//        NSString *key = currentSnapshot.key;
-//        
-//        NSLog(@"The community name: %@", name);
-//        
-//        // Pass the selected object to the new view controller.
-//        
-//        [suvc setHomeViewController:_homeViewController];
-//        [suvc setCommunityName:name];
-//        [suvc setCommunityKey:key];
-//    }
+    if ([segue.identifier isEqualToString:superUnitSegue]) {
+        
+        UBSuperUnitTableViewController *suvc = [segue destinationViewController];
+            
+        // Pass the selected object to the new view controller.
+        
+        [suvc setHomeViewController:_homeViewController];
+        [suvc setCommunityName:_selectedName];
+        [suvc setCommunityKey:_selectedKey];
+    }
 }
 
 

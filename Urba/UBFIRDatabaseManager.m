@@ -24,12 +24,12 @@
 
 + (void)getAllValuesFromNode:(NSString *)node withSuccessHandler:(FIRSuccessHandler)successHandler orErrorHandler:(FIRErrorHandler)errorHandler {
     
+    FIRDatabaseHandle refHandle;
     FIRDatabaseReference *ref = [self databaseRef];
     ref = [ref child:node];
-    
     NSMutableArray *results = [[NSMutableArray alloc] init];
     
-    [ref observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+    refHandle = [ref observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
         
         [results addObject:snapshot];
         
@@ -37,6 +37,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 successHandler ([self mapResults:results]);
             });
+            [ref removeObserverWithHandle:refHandle];
         }
         
     } withCancelBlock:^(NSError *error) {
@@ -45,12 +46,47 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 errorHandler (error);
             });
+            [ref removeObserverWithHandle:refHandle];
         }
-        
-        NSLog(@"%@", error.description);
-
-        // TODO: SHOW ERROR ALERT
     }];
+    
+    
+}
+
++(void)getAllValuesFromNode:(NSString *)node orderedBy:(NSString *)orderBy filteredBy:(NSString *)filter withSuccessHandler:(FIRSuccessHandler)successHandler orErrorHandler:(FIRErrorHandler)errorHandler {
+    
+    FIRDatabaseHandle refHandle;
+    FIRDatabaseReference *ref = [self databaseRef];
+    ref = [ref child:node];
+    FIRDatabaseQuery *query;
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    
+    query = [[ref queryOrderedByChild:orderBy] queryEqualToValue:filter];
+
+    refHandle = [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+        
+        [results addObject:snapshot];
+        
+        if (successHandler) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                successHandler ([self mapResults:results]);
+            });
+            [ref removeObserverWithHandle:refHandle];
+        }
+    } withCancelBlock:^(NSError *error) {
+        
+        if (errorHandler) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                errorHandler (error);
+            });
+            [ref removeObserverWithHandle:refHandle];
+        }
+    }];
+    
+}
+
++(NSString *)getCurrentUser {
+    return [FIRAuth auth].currentUser.providerID;
 }
 
 + (NSArray *)mapResults:(NSArray *)results {
@@ -59,10 +95,11 @@
     [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
       
         FIRDataSnapshot *snapshot = obj;
+        NSString *name = snapshot.value[@"name"];
         
-        NSLog(@"Key: %@\nValue: %@", snapshot.key, snapshot.value);
+        NSLog(@"Name: %@", name);
         
-        NSDictionary <NSString *, NSString *> *snapshotDict = snapshot.value;
+        NSDictionary <NSString *, NSString *> *snapshotDict = [NSDictionary dictionaryWithObjectsAndKeys:name, @"name", snapshot.key, @"key", nil];
         [temp addObject: snapshotDict];
     }];
     

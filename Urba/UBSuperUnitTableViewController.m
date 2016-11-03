@@ -8,20 +8,18 @@
 
 #import "UBSuperUnitTableViewController.h"
 #import "UBHomeViewController.h"
+#import "UBFIRDatabaseManager.h"
 #import "ActivityView.h"
 
 NSString *const unitSegue = @"UnitSegue";
 
-@import Firebase;
+@interface UBSuperUnitTableViewController ()
 
-@interface UBSuperUnitTableViewController () {
-    FIRDatabaseHandle _refHandle;
-}
-
-@property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-
+@property (strong, nonatomic) NSMutableArray *results;
 @property (weak, nonatomic) NSString *communityId;
+@property (weak, nonatomic) NSString *selectedSuper;
+@property (weak, nonatomic) NSString *selectedName;
+@property (weak, nonatomic) NSString *selectedKey;
 
 @end
 
@@ -31,27 +29,23 @@ NSString *const unitSegue = @"UnitSegue";
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    FIRDatabaseQuery *query;
-    
-    _ref = [[FIRDatabase database] reference];
-    _ref = [_ref child:@"super-units"];
-    
-    _results = nil;
-    _results = [[NSMutableArray alloc] init];
-
-    query = [[_ref queryOrderedByChild:@"community"] queryEqualToValue:_communityId];
-    
-    _refHandle = [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
-        
-        [_results addObject:snapshot];
-        [[self tableView] insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]]
-                               withRowAnimation: UITableViewRowAnimationLeft];
-        [spinner removeSpinner];
-    } withCancelBlock:^(NSError *error) {
-        
-        [spinner removeSpinner];
-        NSLog(@"%@", error.description);
-    }];
+    [UBFIRDatabaseManager getAllValuesFromNode:@"super-units"
+                                     orderedBy:@"community"
+                                    filteredBy:_communityId
+                            withSuccessHandler:^(NSArray *results) {
+                                
+                                _results = [NSMutableArray arrayWithArray:results];
+                                
+                                //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
+                                [self.tableView reloadData];
+                                
+                                [spinner removeSpinner];
+                            }
+                                orErrorHandler:^(NSError *error) {
+                                    
+                                    [spinner removeSpinner];
+                                    NSLog(@"Error: %@", error.description);
+                                }];
 }
 
 - (void)viewDidLoad {
@@ -90,16 +84,26 @@ NSString *const unitSegue = @"UnitSegue";
     
     // Configure the cell...
     
-    // Unpack from Firebase DataSnapshot
-    FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
-    NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
-    NSString *name = snapshotDict[@"name"];
+    // Unpack from results array
+    NSDictionary<NSString *, NSString *> *snapshotDict = _results[indexPath.row];
+    NSString *name = [snapshotDict objectForKey:@"name"];
+    
+    NSLog(@"Dictionary: %@\nName: %@", snapshotDict, name);
+    
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    NSDictionary *currentSnapshot = _results[indexPath.row];
+    
+    _selectedKey = currentSnapshot[@"key"];
+    _selectedName = selectedCell.textLabel.text;
+    
+    _selectedSuper = [NSString stringWithFormat:@"%@-%@", _selectedName, _selectedKey];
  
     [self performSegueWithIdentifier:unitSegue sender:self];
 }
@@ -148,24 +152,16 @@ NSString *const unitSegue = @"UnitSegue";
     if ([segue.identifier isEqualToString:unitSegue]) {
         
         UBFindUnitTableViewController *uvc = [segue destinationViewController];
-        
-        NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        
-        FIRDataSnapshot *currentSnapshot = _results[path.row];
-        NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
-        
-        NSString *name = snapshotDict[@"name"];
-        NSString *key = currentSnapshot.key;
-        
-        NSLog(@"The super-unit name: %@", name);
+            
+        NSLog(@"The super-unit name: %@", _selectedName);
         
         // Pass the selected object to the new view controller.
         
         [uvc setHomeViewController:_homeViewController];
         [uvc setCommunityName:_communityName];
         [uvc setCommunityKey:_communityKey];
-        [uvc setSuperUnitName:name];
-        [uvc setSuperUnitKey:key];
+        [uvc setSuperUnitName:_selectedName];
+        [uvc setSuperUnitKey:_selectedKey];
     }
 }
 
