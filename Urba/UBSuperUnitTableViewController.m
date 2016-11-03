@@ -14,12 +14,11 @@ NSString *const unitSegue = @"UnitSegue";
 
 @import Firebase;
 
-@interface UBSuperUnitTableViewController () {
-    FIRDatabaseHandle _refHandle;
-}
+@interface UBSuperUnitTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (nonatomic) FIRDatabaseHandle refHandle;
 
 @property (weak, nonatomic) NSString *communityId;
 
@@ -52,26 +51,6 @@ NSString *const unitSegue = @"UnitSegue";
         [spinner removeSpinner];
         NSLog(@"%@", error.description);
     }];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    NSLog(@"The community: %@", _communityName);
-    NSLog(@"The key: %@", _communityKey);
-    _communityId = [NSString stringWithFormat:@"%@-%@", _communityName, _communityKey];
-    [self getSuperUnits];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -137,6 +116,29 @@ NSString *const unitSegue = @"UnitSegue";
     return YES;
 }
 */
+
+#pragma mark - Life Cycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSLog(@"The community: %@", _communityName);
+    NSLog(@"The key: %@", _communityKey);
+    _communityId = [NSString stringWithFormat:@"%@-%@", _communityName, _communityKey];
+    [self getSuperUnits];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 
 #pragma mark - Navigation

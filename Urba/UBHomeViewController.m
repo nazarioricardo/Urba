@@ -7,6 +7,9 @@
 //
 
 #import "UBHomeViewController.h"
+#import "ActivityView.h"
+
+@import Firebase;
 
 NSString *const findHomeSegue = @"FindHomeSegue";
 
@@ -17,15 +20,56 @@ NSString *const findHomeSegue = @"FindHomeSegue";
 @property (weak, nonatomic) IBOutlet UILabel *communityLabel;
 
 @property (strong, nonatomic) NSMutableArray *userUnitsArray;
+@property (strong, nonatomic) NSString *currentUserId;
+@property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (nonatomic) FIRDatabaseHandle refHandle;
 
 @end
 
 @implementation UBHomeViewController
 
+#pragma mark - IBActions
+
 - (IBAction)addHomePressed:(id)sender {
     
     [self performSegueWithIdentifier:findHomeSegue sender:self];
 }
+
+#pragma mark - Private
+
+- (void)getUnits {
+    
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+    
+    FIRDatabaseQuery *query;
+    
+    _ref = [[FIRDatabase database] reference];
+    _ref = [_ref child:@"units"];
+    
+    _results = nil;
+    _results = [[NSMutableArray alloc] init];
+    
+    query = [[_ref queryOrderedByChild:@"user"] queryEqualToValue:_currentUserId];
+    
+    _refHandle = [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+        
+        if (!snapshot) {
+            NSLog(@"No households!");
+        } else {
+            [_results addObject:snapshot];
+        }
+        
+        [spinner removeSpinner];
+        
+    } withCancelBlock:^(NSError *error) {
+        
+        [spinner removeSpinner];
+        NSLog(@"%@", error.description);
+    }];
+}
+
+#pragma mark - Life Cycle
 
 -(void)viewWillAppear:(BOOL)animated {
     
@@ -57,6 +101,8 @@ NSString *const findHomeSegue = @"FindHomeSegue";
 
 - (void)viewDidLoad {
     _userUnitsArray = [[NSMutableArray alloc] init];
+    _currentUserId = [FIRAuth auth].currentUser.uid;
+//    [self getUnits];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     

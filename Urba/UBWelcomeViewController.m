@@ -16,11 +16,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
-//@property (weak, nonatomic) UBActivityViewController *activityView;
+- (void)logIn;
 
 @end
 
 @implementation UBWelcomeViewController
+
+#pragma mark - IBActions
 
 
 - (IBAction)logInPressed:(id)sender {
@@ -28,18 +30,7 @@
     [self logIn];
 }
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    if (textField == _emailTextField) {
-        [textField resignFirstResponder];
-        [_passwordTextField becomeFirstResponder];
-    } else {
-        [self logIn];
-    }
-    
-    return YES;
-}
+#pragma mark - Private
 
 - (void)logIn {
     
@@ -62,22 +53,25 @@
                          }];
 }
 
-//- (void)presentActivityView {
-//    
-//    self.activityView = [self.storyboard instantiateViewControllerWithIdentifier:activityView];
-//    
-//    // Change the size of page view controller
-//    self.activityView.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-//    
-//    [self addChildViewController:_activityView];
-//    [self.view addSubview:_activityView.view];
-//    [self.activityView didMoveToParentViewController:self];
-//    
-//}
+#pragma mark -Text Field Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (textField == _emailTextField) {
+        [textField resignFirstResponder];
+        [_passwordTextField becomeFirstResponder];
+    } else {
+        [self logIn];
+    }
+    
+    return YES;
+}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     

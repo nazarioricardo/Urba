@@ -14,14 +14,13 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 
 @import Firebase;
 
-@interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate> {
-    FIRDatabaseHandle _refHandle;
-}
+@interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *communityTable;
 
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (nonatomic) FIRDatabaseHandle refHandle;
 
 @property (weak, nonatomic) NSString *selectedCommunity;
 
@@ -30,9 +29,13 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 
 @implementation UBFindCommunityViewController
 
+#pragma mark - IBActions
+
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Private
 
 - (void)getCommunities {
     

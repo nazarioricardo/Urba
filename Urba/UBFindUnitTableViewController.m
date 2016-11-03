@@ -12,12 +12,12 @@
 
 @import Firebase;
 
-@interface UBFindUnitTableViewController () {
-    FIRDatabaseHandle _refHandle;
-}
+@interface UBFindUnitTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (nonatomic) FIRDatabaseHandle refHandle;
+
 
 @property (weak, nonatomic) NSString *superUnitId;
 
@@ -51,26 +51,6 @@
         [spinner removeSpinner];
         NSLog(@"%@", error.description);
     }];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    NSLog(@"The super-unit: %@", _superUnitName);
-    NSLog(@"The key: %@", _superUnitKey);
-    _superUnitId = [NSString stringWithFormat:@"%@-%@", _superUnitName, _superUnitKey];
-    [self getUnits];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -115,6 +95,28 @@
     [_homeViewController setCommunityKey:_communityKey];
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Life Cycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSLog(@"The super-unit: %@", _superUnitName);
+    NSLog(@"The key: %@", _superUnitKey);
+    _superUnitId = [NSString stringWithFormat:@"%@-%@", _superUnitName, _superUnitKey];
+    [self getUnits];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*

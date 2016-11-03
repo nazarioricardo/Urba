@@ -65,7 +65,7 @@
     }
 }
 
-#pragma mark - TextField Delegate
+#pragma mark - Text Field Delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
@@ -80,6 +80,10 @@
     }
     
     return YES;
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Life Cycle
