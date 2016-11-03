@@ -33,8 +33,6 @@
         
         [results addObject:snapshot];
         
-        NSLog(@"%@", snapshot.value);
-        
         if (successHandler) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 successHandler ([self mapResults:results]);
@@ -61,7 +59,11 @@
     [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
       
         FIRDataSnapshot *snapshot = obj;
-        [temp addObject:snapshot];
+        
+        NSLog(@"Key: %@\nValue: %@", snapshot.key, snapshot.value);
+        
+        NSDictionary <NSString *, NSString *> *snapshotDict = [[NSDictionary alloc] initWithObjectsAndKeys:snapshot.value, snapshot.key, nil];
+        [temp addObject: snapshotDict];
     }];
     
     return [NSArray arrayWithArray:temp];

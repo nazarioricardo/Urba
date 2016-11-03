@@ -40,7 +40,14 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
 //    
 //    // Unpack community from Firebase DataSnapshot
     NSDictionary<NSString *, NSString *> *snapshotDict = _results[indexPath.row];
-    NSString *name = snapshotDict[@"name"];
+    NSString *name = [snapshotDict objectForKey:@"name"];
+    
+    NSLog(@"Dictionary: %@\nName: %@", snapshotDict, name);
+    
+    NSDictionary *testDict = [NSDictionary dictionaryWithObjectsAndKeys:@"name", @"ricky", nil];
+    
+    NSLog(@"Test dict: %@", testDict);
+    
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
     
     return cell;
@@ -86,9 +93,8 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
                             withSuccessHandler:^(NSArray *results) {
                                 
                                 _results = [NSMutableArray arrayWithArray:results];
-                                
-                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]]
-                                                       withRowAnimation: UITableViewRowAnimationLeft];
+                                                                
+                                [_communityTable reloadData];
                                 
                             }
                                 orErrorHandler:^(NSError *error) {
