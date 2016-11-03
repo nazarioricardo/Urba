@@ -62,7 +62,7 @@
         
         NSLog(@"Key: %@\nValue: %@", snapshot.key, snapshot.value);
         
-        NSDictionary <NSString *, NSString *> *snapshotDict = [[NSDictionary alloc] initWithObjectsAndKeys:snapshot.value, snapshot.key, nil];
+        NSDictionary <NSString *, NSString *> *snapshotDict = snapshot.value;
         [temp addObject: snapshotDict];
     }];
     
