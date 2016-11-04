@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-<<<<<<< HEAD
-@interface UBCreateUserViewController : UIViewController <UITextFieldDelegate>
-=======
 @interface UBCreateUserViewController : UIViewController <UITextViewDelegate>
->>>>>>> firdbmanager
 
 @end

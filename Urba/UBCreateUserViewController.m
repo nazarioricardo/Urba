@@ -13,9 +13,9 @@
 
 @interface UBCreateUserViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *emailTextfield;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
-@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 
 -(void)createUser;
 
@@ -26,23 +26,7 @@
 #pragma IBActions
 
 - (IBAction)donePressed:(id)sender {
-<<<<<<< HEAD
     [self createUser];
-=======
-    
-    if ([_emailTextfield.text  isEqual: @""] && [_passwordTextfield.text  isEqual: @""] && [_confirmPasswordTextfield.text  isEqual: @""]) {
-        
-        NSLog(@"Please fill all blank fields");
-    
-    } else if (_passwordTextfield.text != _confirmPasswordTextfield.text) {
-        
-        // ERROR Password mismatch
-        NSLog(@"Passwords didn't match! Please try again!");
-    } else {
-
-        [self createUser];
-    }
->>>>>>> firdbmanager
 }
 
 - (IBAction)cancelPressed:(id)sender {
@@ -54,17 +38,19 @@
 
 - (void)createUser {
     
-<<<<<<< HEAD
     if ([_emailTextField.text  isEqual: @""] || [_passwordTextField.text  isEqual: @""] || [_confirmPasswordTextField.text  isEqual: @""]) {
         
         NSLog(@"Please fill all fields");
         
     } else if (![_passwordTextField.text isEqualToString:_confirmPasswordTextField.text]) {
-=======
+        
+        NSLog(@"Password mismatch!");
+    } else {
+
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [[FIRAuth auth] createUserWithEmail:_emailTextfield.text
-                               password:_passwordTextfield.text
+    [[FIRAuth auth] createUserWithEmail:_emailTextField.text
+                               password:_passwordTextField.text
                              completion:^(FIRUser *user, NSError *error) {
                                  
                                  if (error) {
@@ -75,43 +61,8 @@
                                      [self dismissViewControllerAnimated:YES completion:nil];
                                  }
                              }];
-    
-}
-
-#pragma Text Field Delegate
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    if (textField == _emailTextfield) {
-        
-        [textField resignFirstResponder];
-        [_passwordTextfield becomeFirstResponder];
-    } else if (textField == _passwordTextfield) {
->>>>>>> firdbmanager
-        
-        [textField resignFirstResponder];
-        [_confirmPasswordTextfield becomeFirstResponder];
-
-    } else {
-<<<<<<< HEAD
-        
-        ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
-        
-        [[FIRAuth auth] createUserWithEmail:_emailTextField.text
-                                   password:_passwordTextField.text
-                                 completion:^(FIRUser *user, NSError *error) {
-                                     
-                                     if (error) {
-                                         
-                                         [spinner removeSpinner];
-                                         NSLog(@"%@", error.description);
-                                     } else {
-                                         
-                                         NSLog(@"Successfuly created user.");
-                                         [self dismissViewControllerAnimated:YES completion:nil];
-                                     }
-        }];
     }
+    
 }
 
 #pragma mark - Text Field Delegate
@@ -125,8 +76,6 @@
         [textField resignFirstResponder];
         [_confirmPasswordTextField becomeFirstResponder];
     } else {
-=======
->>>>>>> firdbmanager
         [self createUser];
     }
     
