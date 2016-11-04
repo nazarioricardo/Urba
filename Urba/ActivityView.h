@@ -12,6 +12,6 @@
 
 + (ActivityView *)loadSpinnerIntoView:(UIView *)superView;
 
--(void)removeSpinner;
+- (void)removeSpinner;
 
 @end

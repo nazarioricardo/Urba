@@ -55,7 +55,7 @@
                                 </constraints>
                                 <state key="normal" title="Or tap here to sign up"/>
                                 <connections>
-                                    <segue destination="bG5-Dg-X7z" kind="presentation" identifier="CreateUserSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="F2E-Wj-NJ0"/>
+                                    <segue destination="bG5-Dg-X7z" kind="presentation" identifier="CreateUserSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="F2E-Wj-NJ0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -73,14 +73,58 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="XGf-8P-06R" id="BSo-To-nlZ"/>
+<<<<<<< HEAD
                         <outlet property="passwordTextField" destination="9eL-59-c10" id="aNa-s5-cJe"/>
                         <segue destination="sdS-8R-ygx" kind="show" identifier="LogInSegue" id="TXl-tv-k2d"/>
+=======
+                        <outlet property="passwordTextfield" destination="9eL-59-c10" id="4fl-gP-T3w"/>
+                        <segue destination="sdS-8R-ygx" kind="showDetail" identifier="LogInSegue" action="showViewController:sender:" id="TXl-tv-k2d"/>
+>>>>>>> firdbmanager
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="305" y="387"/>
         </scene>
+<<<<<<< HEAD
+=======
+        <!--View Controller-->
+        <scene sceneID="Zi0-3e-JgS">
+            <objects>
+                <viewController id="1x4-5G-lBK" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MlJ-8F-aPm"/>
+                        <viewControllerLayoutGuide type="bottom" id="zOo-nc-6HI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qi9-nE-0PN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any households listed." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zk8-NA-DOA">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add one by tapping the plus button on top!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pf8-WZ-tUu">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pf8-WZ-tUu" firstAttribute="top" secondItem="zk8-NA-DOA" secondAttribute="bottom" constant="8" symbolic="YES" id="LiC-aN-0Pq"/>
+                            <constraint firstItem="pf8-WZ-tUu" firstAttribute="centerX" secondItem="Qi9-nE-0PN" secondAttribute="centerX" id="QqD-md-uaU"/>
+                            <constraint firstItem="zk8-NA-DOA" firstAttribute="centerY" secondItem="Qi9-nE-0PN" secondAttribute="centerY" id="ihX-Md-7v6"/>
+                            <constraint firstItem="zk8-NA-DOA" firstAttribute="centerX" secondItem="Qi9-nE-0PN" secondAttribute="centerX" id="kRD-bc-d20"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gnk-kH-kmH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2722" y="-774"/>
+        </scene>
+>>>>>>> firdbmanager
         <!--Home View Controller-->
         <scene sceneID="Wpy-6b-1CX">
             <objects>
@@ -122,11 +166,18 @@
                             <constraint firstItem="rNv-IS-u9p" firstAttribute="trailing" secondItem="x3Y-MP-V6H" secondAttribute="trailingMargin" id="xsl-n1-k2n"/>
                         </constraints>
                     </view>
+<<<<<<< HEAD
                     <navigationItem key="navigationItem" id="sNf-7e-ndc">
                         <barButtonItem key="leftBarButtonItem" systemItem="organize" id="xJK-Px-O2i"/>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="Pwq-L2-KBG">
                             <connections>
                                 <action selector="addHomePressed:" destination="woN-Po-N7u" id="KIq-uG-pUj"/>
+=======
+                    <navigationItem key="navigationItem" id="zPA-v2-EjP">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cbj-gu-ba0">
+                            <connections>
+                                <action selector="addHomePressed:" destination="woN-Po-N7u" id="rgD-tq-rcL"/>
+>>>>>>> firdbmanager
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -139,7 +190,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qhv-Tb-D8d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="2985" y="10"/>
+=======
+            <point key="canvasLocation" x="2722" y="11"/>
+>>>>>>> firdbmanager
         </scene>
         <!--Ur Community-->
         <scene sceneID="Sb2-j8-EUb">
@@ -189,7 +244,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c14-nC-zGz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="4460" y="-651"/>
+=======
+            <point key="canvasLocation" x="4222" y="-632"/>
+>>>>>>> firdbmanager
         </scene>
         <!--Ur Street-->
         <scene sceneID="O5e-P9-gLF">
@@ -220,7 +279,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bhf-XQ-fj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="5180" y="-651"/>
+=======
+            <point key="canvasLocation" x="4942" y="-632"/>
+>>>>>>> firdbmanager
         </scene>
         <!--Ur Unit-->
         <scene sceneID="GMy-rO-3zx">
@@ -248,7 +311,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hRB-uX-pjb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="5870" y="-651"/>
+=======
+            <point key="canvasLocation" x="5631" y="-632"/>
+>>>>>>> firdbmanager
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rwg-MK-1ch">
@@ -260,7 +327,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+<<<<<<< HEAD
                         <segue destination="Nik-CU-tq8" kind="relationship" relationship="viewControllers" id="jC5-SW-wB3"/>
+=======
+                        <segue destination="xpV-yp-SKY" kind="relationship" relationship="viewControllers" id="jC5-SW-wB3"/>
+>>>>>>> firdbmanager
                         <segue destination="mDb-at-ZGI" kind="relationship" relationship="viewControllers" id="1nE-Qn-WCI"/>
                     </connections>
                 </tabBarController>
@@ -335,7 +406,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                 <connections>
+<<<<<<< HEAD
                                     <outlet property="delegate" destination="bG5-Dg-X7z" id="R92-ec-lpg"/>
+=======
+                                    <outlet property="delegate" destination="bG5-Dg-X7z" id="8tC-RS-iyS"/>
+>>>>>>> firdbmanager
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6ST-ef-8oe">
@@ -346,7 +421,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                 <connections>
+<<<<<<< HEAD
                                     <outlet property="delegate" destination="bG5-Dg-X7z" id="jDn-Zp-p3b"/>
+=======
+                                    <outlet property="delegate" destination="bG5-Dg-X7z" id="2aZ-VJ-Hjr"/>
+>>>>>>> firdbmanager
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yYC-JW-WJH">
@@ -357,7 +436,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                 <connections>
+<<<<<<< HEAD
                                     <outlet property="delegate" destination="bG5-Dg-X7z" id="EC8-pT-DeT"/>
+=======
+                                    <outlet property="delegate" destination="bG5-Dg-X7z" id="6NX-0e-zhy"/>
+>>>>>>> firdbmanager
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wu-ZF-T24">
@@ -397,14 +480,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="confirmPasswordTextField" destination="yYC-JW-WJH" id="3sI-Sj-hfg"/>
-                        <outlet property="emailTextField" destination="G3N-QB-OGE" id="Ary-T0-AEY"/>
-                        <outlet property="passwordTextField" destination="6ST-ef-8oe" id="vQO-0q-EM7"/>
+                        <outlet property="confirmPasswordTextfield" destination="yYC-JW-WJH" id="uGq-fv-p67"/>
+                        <outlet property="emailTextfield" destination="G3N-QB-OGE" id="P5S-fm-dVy"/>
+                        <outlet property="passwordTextfield" destination="6ST-ef-8oe" id="TPt-cD-ieV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeY-RV-qnq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="304.80000000000001" y="-321.58920539730138"/>
+            <point key="canvasLocation" x="305" y="-295"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="EFC-cw-W6C">
@@ -470,7 +553,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MAv-S1-ddc" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hDa-4h-Uer">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hDa-4h-Uer">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -481,6 +564,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZh-Xo-dy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="3745" y="-651"/>
         </scene>
         <!--Home-->
@@ -490,17 +574,37 @@
                     <tabBarItem key="tabBarItem" title="Home" id="Hsm-rW-X7i"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uuT-8i-wzQ">
+=======
+            <point key="canvasLocation" x="3506" y="-632"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="v7Q-F3-kXp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xpV-yp-SKY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" id="Hsm-rW-X7i"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PzS-31-mow">
+>>>>>>> firdbmanager
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
+<<<<<<< HEAD
                         <segue destination="woN-Po-N7u" kind="relationship" relationship="rootViewController" id="y4N-3h-GZD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nUh-iA-FFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2204" y="10"/>
+=======
+                        <segue destination="woN-Po-N7u" kind="relationship" relationship="rootViewController" id="cn0-U7-dsP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bNi-CP-IFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1969" y="11"/>
+>>>>>>> firdbmanager
         </scene>
     </scenes>
 </document>

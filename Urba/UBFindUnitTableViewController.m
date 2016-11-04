@@ -8,52 +8,48 @@
 
 #import "UBFindUnitTableViewController.h"
 #import "UBHomeViewController.h"
+#import "UBFIRDatabaseManager.h"
 #import "ActivityView.h"
-
-@import Firebase;
 
 @interface UBFindUnitTableViewController ()
 
-@property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (nonatomic) FIRDatabaseHandle refHandle;
-
+@property (strong, nonatomic) NSMutableArray *results;
 
 @property (weak, nonatomic) NSString *superUnitId;
+@property (weak, nonatomic) NSString *selectedSuper;
+@property (weak, nonatomic) NSString *selectedName;
+@property (weak, nonatomic) NSString *selectedKey;
 
 @end
 
 @implementation UBFindUnitTableViewController
 
+#pragma mark - IBActions
+
 - (void)getUnits {
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    FIRDatabaseQuery *query;
-    
-    _ref = [[FIRDatabase database] reference];
-    _ref = [_ref child:@"units"];
-    
-    _results = nil;
-    _results = [[NSMutableArray alloc] init];
-    
-    query = [[_ref queryOrderedByChild:@"super-unit"] queryEqualToValue:_superUnitId];
-    
-    _refHandle = [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
-        [_results addObject:snapshot];
-        [[self tableView] insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]]
-                                withRowAnimation: UITableViewRowAnimationLeft];
-
-        [spinner removeSpinner];
-        
-    } withCancelBlock:^(NSError *error) {
-        
-        [spinner removeSpinner];
-        NSLog(@"%@", error.description);
-    }];
+    [UBFIRDatabaseManager getAllValuesFromNode:@"units"
+                                     orderedBy:@"super-unit"
+                                    filteredBy:_superUnitId
+                            withSuccessHandler:^(NSArray *results) {
+                                
+                                _results = [NSMutableArray arrayWithArray:results];
+                                
+                                //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
+                                [self.tableView reloadData];
+                                
+                                [spinner removeSpinner];
+                            }
+                                orErrorHandler:^(NSError *error) {
+                                    
+                                    [spinner removeSpinner];
+                                    NSLog(@"Error: %@", error.description);
+                                }];
 }
 
-#pragma mark - Table view data source
+#pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -69,23 +65,28 @@
     
     // Configure the cell...
     
-    // Unpack from Firebase DataSnapshot
-    FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
-    NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
-    NSString *name = snapshotDict[@"name"];
+    // Unpack from results array
+    NSDictionary<NSString *, NSString *> *snapshotDict = _results[indexPath.row];
+    NSString *name = [snapshotDict objectForKey:@"name"];
+    
+    NSLog(@"Dictionary: %@\nName: %@", snapshotDict, name);
+    
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
     
     return cell;
 }
 
+#pragma mark - Table View Methods
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    FIRDataSnapshot *currentSnapshot = _results[indexPath.row];
-    NSDictionary<NSString *, NSString *> *snapshotDict = currentSnapshot.value;
+    NSDictionary *currentSnapshot = _results[indexPath.row];
     
-    NSString *key = currentSnapshot.key;
+    NSString *key = currentSnapshot[@"key"];
     
-    NSString *name = snapshotDict[@"name"];
+    NSString *name = currentSnapshot[@"name"];
+    
+//    NSString *user = [UBFIRDatabaseManager getCurrentUser];
     
     [_homeViewController setUnitName:name];
     [_homeViewController setUnitKey:key];

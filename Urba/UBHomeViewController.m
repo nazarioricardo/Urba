@@ -36,6 +36,7 @@ NSString *const findHomeSegue = @"FindHomeSegue";
     [self performSegueWithIdentifier:findHomeSegue sender:self];
 }
 
+<<<<<<< HEAD
 #pragma mark - Private
 
 - (void)getUnits {
@@ -70,6 +71,9 @@ NSString *const findHomeSegue = @"FindHomeSegue";
 }
 
 #pragma mark - Life Cycle
+=======
+#pragma Life Cycle
+>>>>>>> firdbmanager
 
 -(void)viewWillAppear:(BOOL)animated {
     

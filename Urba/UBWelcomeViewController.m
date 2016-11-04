@@ -16,14 +16,20 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
+<<<<<<< HEAD
 - (void)logIn;
 
+=======
+>>>>>>> firdbmanager
 @end
 
 @implementation UBWelcomeViewController
 
 #pragma mark - IBActions
+<<<<<<< HEAD
 
+=======
+>>>>>>> firdbmanager
 
 - (IBAction)logInPressed:(id)sender {
 
@@ -53,13 +59,23 @@
                          }];
 }
 
+<<<<<<< HEAD
 #pragma mark -Text Field Delegate
+=======
+#pragma mark - Text Field Delegate
+>>>>>>> firdbmanager
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if (textField == _emailTextField) {
+<<<<<<< HEAD
         [textField resignFirstResponder];
         [_passwordTextField becomeFirstResponder];
+=======
+        
+        [textField resignFirstResponder];
+        [_passwordTextfield becomeFirstResponder];
+>>>>>>> firdbmanager
     } else {
         [self logIn];
     }
@@ -67,11 +83,19 @@
     return YES;
 }
 
+<<<<<<< HEAD
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
 #pragma mark - Life Cycle
+=======
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+#pragma Life Cycle
+>>>>>>> firdbmanager
 
 - (void)viewDidLoad {
     
