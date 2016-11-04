@@ -24,6 +24,8 @@
 
 @implementation UBFindUnitTableViewController
 
+#pragma mark - IBActions
+
 - (void)getUnits {
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
@@ -47,6 +49,8 @@
                                 }];
 }
 
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -67,7 +71,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -93,6 +97,8 @@
     
     return cell;
 }
+
+#pragma mark - Table View Methods
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

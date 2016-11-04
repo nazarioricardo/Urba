@@ -25,6 +25,8 @@ NSString *const unitSegue = @"UnitSegue";
 
 @implementation UBSuperUnitTableViewController
 
+#pragma IBActions
+
 - (void)getSuperUnits {
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
@@ -48,6 +50,8 @@ NSString *const unitSegue = @"UnitSegue";
                                 }];
 }
 
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -68,7 +72,7 @@ NSString *const unitSegue = @"UnitSegue";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -94,6 +98,8 @@ NSString *const unitSegue = @"UnitSegue";
     
     return cell;
 }
+
+#pragma mark - Text Field Methods
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

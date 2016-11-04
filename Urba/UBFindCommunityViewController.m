@@ -88,6 +88,8 @@ NSString *const superUnitSegue = @"SuperUnitSegue";
     return 1;
 }
 
+#pragma mark - Text Field Delegate
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];

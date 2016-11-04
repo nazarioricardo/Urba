@@ -16,31 +16,18 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
 
-//@property (weak, nonatomic) UBActivityViewController *activityView;
-
 @end
 
 @implementation UBWelcomeViewController
 
+#pragma mark - IBActions
 
 - (IBAction)logInPressed:(id)sender {
 
     [self logIn];
 }
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    if (textField == _emailTextField) {
-        
-        [textField resignFirstResponder];
-        [_passwordTextfield becomeFirstResponder];
-    } else {
-        [self logIn];
-    }
-    
-    return YES;
-}
+#pragma mark - Private
 
 - (void)logIn {
     
@@ -63,9 +50,26 @@
                          }];
 }
 
+#pragma mark - Text Field Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (textField == _emailTextField) {
+        
+        [textField resignFirstResponder];
+        [_passwordTextfield becomeFirstResponder];
+    } else {
+        [self logIn];
+    }
+    
+    return YES;
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
+#pragma Life Cycle
 
 - (void)viewDidLoad {
     

@@ -22,10 +22,14 @@ NSString *const findHomeSegue = @"FindHomeSegue";
 
 @implementation UBHomeViewController
 
+#pragma mark - IBActions
+
 - (IBAction)addHomePressed:(id)sender {
     
     [self performSegueWithIdentifier:findHomeSegue sender:self];
 }
+
+#pragma Life Cycle
 
 -(void)viewWillAppear:(BOOL)animated {
     

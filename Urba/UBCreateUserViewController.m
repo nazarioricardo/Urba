@@ -23,6 +23,8 @@
 
 @implementation UBCreateUserViewController
 
+#pragma IBActions
+
 - (IBAction)donePressed:(id)sender {
     
     if ([_emailTextfield.text  isEqual: @""] && [_passwordTextfield.text  isEqual: @""] && [_confirmPasswordTextfield.text  isEqual: @""]) {
@@ -44,6 +46,29 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Private
+
+- (void)createUser {
+    
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+    
+    [[FIRAuth auth] createUserWithEmail:_emailTextfield.text
+                               password:_passwordTextfield.text
+                             completion:^(FIRUser *user, NSError *error) {
+                                 
+                                 if (error) {
+                                     [spinner removeSpinner];
+                                     NSLog(@"%@", error.description);
+                                 } else {
+                                     NSLog(@"User created!");
+                                     [self dismissViewControllerAnimated:YES completion:nil];
+                                 }
+                             }];
+    
+}
+
+#pragma Text Field Delegate
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if (textField == _emailTextfield) {
@@ -64,27 +89,6 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
-}
-
-#pragma mark - Private
-
-- (void)createUser {
-    
-    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
-    
-    [[FIRAuth auth] createUserWithEmail:_emailTextfield.text
-                               password:_passwordTextfield.text
-                             completion:^(FIRUser *user, NSError *error) {
-    
-                                 if (error) {
-                                     [spinner removeSpinner];
-                                     NSLog(@"%@", error.description);
-                                 } else {
-                                     NSLog(@"User created!");
-                                     [self dismissViewControllerAnimated:YES completion:nil];
-                                 }
-    }];
-    
 }
 
 #pragma mark - Life Cycle
