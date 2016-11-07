@@ -11,8 +11,6 @@
 #import "UBFIRDatabaseManager.h"
 #import "ActivityView.h"
 
-NSString *const unitSegue = @"UnitSegue";
-
 @interface UBSuperUnitTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *results;

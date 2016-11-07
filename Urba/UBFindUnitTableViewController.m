@@ -81,9 +81,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSDictionary *currentSnapshot = _results[indexPath.row];
-    
     NSString *key = currentSnapshot[@"key"];
-    
     NSString *name = currentSnapshot[@"name"];
     
 //    NSString *user = [UBFIRDatabaseManager getCurrentUser];

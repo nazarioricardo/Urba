@@ -85,6 +85,13 @@
     
 }
 
++(void)createNode:(NSString *)node withValue:(NSString *)value forKey:(NSString *)key {
+    
+    FIRDatabaseReference *ref = [self databaseRef];
+    
+    [[[ref child:node] childByAutoId] setValue:value forKey:key];
+}
+
 +(NSString *)getCurrentUser {
     return [FIRAuth auth].currentUser.providerID;
 }

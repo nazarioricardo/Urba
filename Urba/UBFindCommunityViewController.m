@@ -9,9 +9,8 @@
 #import "UBFindCommunityViewController.h"
 #import "UBHomeViewController.h"
 #import "UBFIRDatabaseManager.h"
+#import "Constants.h"
 #import "ActivityView.h"
-
-NSString *const superUnitSegue = @"SuperUnitSegue";
 
 @interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate>
 

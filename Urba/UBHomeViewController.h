@@ -18,5 +18,4 @@
 @property (nonatomic) NSString *unitName;
 @property (nonatomic) NSString *unitKey;
 
-
 @end

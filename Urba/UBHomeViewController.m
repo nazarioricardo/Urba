@@ -7,11 +7,9 @@
 //
 
 #import "UBHomeViewController.h"
+#import "UBFIRDatabaseManager.h"
+#import "Constants.h"
 #import "ActivityView.h"
-
-@import Firebase;
-
-NSString *const findHomeSegue = @"FindHomeSegue";
 
 @interface UBHomeViewController ()
 
@@ -21,9 +19,6 @@ NSString *const findHomeSegue = @"FindHomeSegue";
 
 @property (strong, nonatomic) NSMutableArray *userUnitsArray;
 @property (strong, nonatomic) NSString *currentUserId;
-@property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *results;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (nonatomic) FIRDatabaseHandle refHandle;
 
 @end
 
@@ -42,31 +37,23 @@ NSString *const findHomeSegue = @"FindHomeSegue";
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    FIRDatabaseQuery *query;
+    [UBFIRDatabaseManager getAllValuesFromNode:@"units"
+                                     orderedBy:@"user"
+                                    filteredBy:[UBFIRDatabaseManager getCurrentUser]
+                            withSuccessHandler:^(NSArray *results) {
+                                
+//                                _results = [NSMutableArray arrayWithArray:results];
+//                                
+//                                [self.tableView reloadData];
+                                
+                                [spinner removeSpinner];
+                            }
+                                orErrorHandler:^(NSError *error) {
+                                    
+                                    [spinner removeSpinner];
+                                    NSLog(@"Error: %@", error.description);
+                                }];
     
-    _ref = [[FIRDatabase database] reference];
-    _ref = [_ref child:@"units"];
-    
-    _results = nil;
-    _results = [[NSMutableArray alloc] init];
-    
-    query = [[_ref queryOrderedByChild:@"user"] queryEqualToValue:_currentUserId];
-    
-    _refHandle = [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
-        
-        if (!snapshot) {
-            NSLog(@"No households!");
-        } else {
-            [_results addObject:snapshot];
-        }
-        
-        [spinner removeSpinner];
-        
-    } withCancelBlock:^(NSError *error) {
-        
-        [spinner removeSpinner];
-        NSLog(@"%@", error.description);
-    }];
 }
 
 #pragma mark - Life Cycle
@@ -74,6 +61,7 @@ NSString *const findHomeSegue = @"FindHomeSegue";
 -(void)viewWillAppear:(BOOL)animated {
     
     NSLog(@"%@ %@ %@ was selected", _unitName, _superUnitName, _communityName);
+    
     if (_unitName) {
         NSString *unit = [NSString stringWithFormat:@"%@", _unitName];
         NSString *superUnit = [NSString stringWithFormat:@"%@", _superUnitName];
@@ -101,7 +89,6 @@ NSString *const findHomeSegue = @"FindHomeSegue";
 
 - (void)viewDidLoad {
     _userUnitsArray = [[NSMutableArray alloc] init];
-    _currentUserId = [FIRAuth auth].currentUser.uid;
 //    [self getUnits];
     [super viewDidLoad];
     // Do any additional setup after loading the view.

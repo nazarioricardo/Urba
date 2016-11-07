@@ -54,10 +54,13 @@
                              completion:^(FIRUser *user, NSError *error) {
                                  
                                  if (error) {
+                                     
                                      [spinner removeSpinner];
                                      NSLog(@"%@", error.description);
                                  } else {
+                                     
                                      NSLog(@"User created!");
+                                     
                                      [self dismissViewControllerAnimated:YES completion:nil];
                                  }
                              }];
