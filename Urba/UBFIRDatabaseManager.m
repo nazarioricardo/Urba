@@ -39,7 +39,6 @@
             });
             [ref removeObserverWithHandle:refHandle];
         }
-        
     } withCancelBlock:^(NSError *error) {
         
         if (errorHandler) {
@@ -89,7 +88,7 @@
     
     FIRDatabaseReference *ref = [self databaseRef];
     
-    [[[ref child:node] childByAutoId] setValue:value forKey:key];
+    [[[[ref child:node] childByAutoId] child:key] setValue:value];
 }
 
 +(NSString *)getCurrentUser {

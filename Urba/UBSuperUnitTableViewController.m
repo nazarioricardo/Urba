@@ -9,6 +9,7 @@
 #import "UBSuperUnitTableViewController.h"
 #import "UBHomeViewController.h"
 #import "UBFIRDatabaseManager.h"
+#import "Constants.h"
 #import "ActivityView.h"
 
 @interface UBSuperUnitTableViewController ()
