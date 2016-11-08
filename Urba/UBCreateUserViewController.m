@@ -17,8 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 
--(void)createUser;
-
 @end
 
 @implementation UBCreateUserViewController
