@@ -9,6 +9,7 @@
 #import "UBFIRMessaging.h"
 
 @import FirebaseInstanceID;
+@import FirebaseMessaging;
 
 @implementation UBFIRMessaging
 

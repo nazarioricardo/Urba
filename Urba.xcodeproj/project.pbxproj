@@ -89,6 +89,7 @@
 		8CA2933D1D87A0A500931859 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		8CB60B5A1DDCB7A200B68E02 /* UBFIRMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFIRMessaging.h; sourceTree = "<group>"; };
 		8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFIRMessaging.m; sourceTree = "<group>"; };
+		8CB60B5D1DDCC1AE00B68E02 /* Urba.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Urba.entitlements; sourceTree = "<group>"; };
 		8CB6EC041DC0131600B36FE9 /* UBFindUnitTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindUnitTableViewController.h; sourceTree = "<group>"; };
 		8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindUnitTableViewController.m; sourceTree = "<group>"; };
 		8CD6779A1DD0C84E005DDD31 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -198,6 +199,7 @@
 		8C6257E41D870B0700737D73 /* Urba */ = {
 			isa = PBXGroup;
 			children = (
+				8CB60B5D1DDCC1AE00B68E02 /* Urba.entitlements */,
 				8C6257E81D870B0700737D73 /* AppDelegate.h */,
 				8C6257E91D870B0700737D73 /* AppDelegate.m */,
 				8CD6779A1DD0C84E005DDD31 /* Constants.h */,
@@ -354,6 +356,11 @@
 					8C6257E11D870B0700737D73 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = SGRW3864BW;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					8C6257FA1D870B0700737D73 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -704,6 +711,7 @@
 			baseConfigurationReference = 8B4A0737E2F025A999670504 /* Pods-Urba.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Urba/Urba.entitlements;
 				DEVELOPMENT_TEAM = SGRW3864BW;
 				INFOPLIST_FILE = Urba/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -717,6 +725,7 @@
 			baseConfigurationReference = 1013DEC27E332C8C9A31A6D2 /* Pods-Urba.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Urba/Urba.entitlements;
 				DEVELOPMENT_TEAM = SGRW3864BW;
 				INFOPLIST_FILE = Urba/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
