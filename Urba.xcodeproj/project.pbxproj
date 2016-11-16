@@ -30,8 +30,6 @@
 		8CD6779C1DD0C84E005DDD31 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD6779B1DD0C84E005DDD31 /* Constants.m */; };
 		8CEBF7981D9C5B5D00DAE919 /* UBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */; };
 		94D1A61122041418569FB89C /* libPods-Urba.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC50DA3B76C2262B3C721FD5 /* libPods-Urba.a */; };
-		CA1305C4DE7171C77CBFD1AE /* libPods-UrbaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3749C0697F67D8B33E1B8A0 /* libPods-UrbaTests.a */; };
-		CA6733B7C75425B8A0DC1D82 /* libPods-UrbaUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EE4EB488D33C5E002CD035 /* libPods-UrbaUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,8 +95,6 @@
 		8CEBF7961D9C5B5D00DAE919 /* UBHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBHomeViewController.h; sourceTree = "<group>"; };
 		8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBHomeViewController.m; sourceTree = "<group>"; };
 		967308A1FD2897E5F240E193 /* Pods-UrbaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrbaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UrbaTests/Pods-UrbaTests.release.xcconfig"; sourceTree = "<group>"; };
-		B6EE4EB488D33C5E002CD035 /* libPods-UrbaUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UrbaUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D3749C0697F67D8B33E1B8A0 /* libPods-UrbaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UrbaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC50DA3B76C2262B3C721FD5 /* libPods-Urba.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Urba.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,7 +111,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA1305C4DE7171C77CBFD1AE /* libPods-UrbaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +118,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA6733B7C75425B8A0DC1D82 /* libPods-UrbaUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,8 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				EC50DA3B76C2262B3C721FD5 /* libPods-Urba.a */,
-				D3749C0697F67D8B33E1B8A0 /* libPods-UrbaTests.a */,
-				B6EE4EB488D33C5E002CD035 /* libPods-UrbaUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -451,7 +443,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Urba/Pods-Urba-frameworks.sh\"\n";
+			shellScript = "
+";
 			showEnvVarsInLog = 0;
 		};
 		542B6F27ED486B4E6F5A55D0 /* 📦 Check Pods Manifest.lock */ = {
