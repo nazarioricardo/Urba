@@ -31,7 +31,7 @@
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
     [UBFIRDatabaseManager getAllValuesFromNode:@"super-units"
-                                     orderedBy:@"community"
+                                     orderedBy:@"owner"
                                     filteredBy:_communityId
                             withSuccessHandler:^(NSArray *results) {
                                 
@@ -39,7 +39,6 @@
                                 
                                 //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
                                 [self.tableView reloadData];
-                                
                                 [spinner removeSpinner];
                             }
                                 orErrorHandler:^(NSError *error) {

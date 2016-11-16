@@ -10,6 +10,4 @@
 
 @interface UBWelcomeViewController : UIViewController <UITextViewDelegate>
 
-
 @end
-
