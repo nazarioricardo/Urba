@@ -235,10 +235,6 @@ Copyright 2016 Google
    limitations under the License.
 
 
-## Google
-
-Copyright 2016 Google Inc.
-
 ## GoogleInterchangeUtilities
 
 Copyright 2016 Google

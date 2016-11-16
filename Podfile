@@ -6,7 +6,6 @@ target 'Urba' do
   # use_frameworks!
 
   # Pods for Urba
-  pod 'Google'
   pod 'Firebase'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
@@ -16,7 +15,6 @@ target 'Urba' do
   target 'UrbaTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'Google'
     pod 'Firebase'
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
@@ -27,7 +25,6 @@ target 'Urba' do
   target 'UrbaUITests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'Google'
     pod 'Firebase'
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
