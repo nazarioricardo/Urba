@@ -25,6 +25,7 @@
 		8C62581B1D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
 		8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */; };
 		8CA2933E1D87A0A500931859 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933D1D87A0A500931859 /* User.m */; };
+		8CB60B5C1DDCB7A200B68E02 /* UBFIRMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */; };
 		8CB6EC061DC0131600B36FE9 /* UBFindUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */; };
 		8CD6779C1DD0C84E005DDD31 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD6779B1DD0C84E005DDD31 /* Constants.m */; };
 		8CEBF7981D9C5B5D00DAE919 /* UBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */; };
@@ -86,6 +87,8 @@
 		8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCreateUserViewController.m; sourceTree = "<group>"; };
 		8CA2933C1D87A0A500931859 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		8CA2933D1D87A0A500931859 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		8CB60B5A1DDCB7A200B68E02 /* UBFIRMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFIRMessaging.h; sourceTree = "<group>"; };
+		8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFIRMessaging.m; sourceTree = "<group>"; };
 		8CB6EC041DC0131600B36FE9 /* UBFindUnitTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindUnitTableViewController.h; sourceTree = "<group>"; };
 		8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindUnitTableViewController.m; sourceTree = "<group>"; };
 		8CD6779A1DD0C84E005DDD31 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 			children = (
 				8C4881E21DC56F100030B548 /* UBFIRDatabaseManager.h */,
 				8C4881E31DC56F100030B548 /* UBFIRDatabaseManager.m */,
+				8CB60B5A1DDCB7A200B68E02 /* UBFIRMessaging.h */,
+				8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -547,6 +552,7 @@
 				8C2650531DC3C9CB00AE3973 /* ActivityView.m in Sources */,
 				8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
+				8CB60B5C1DDCB7A200B68E02 /* UBFIRMessaging.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
 				8C4881E41DC56F100030B548 /* UBFIRDatabaseManager.m in Sources */,
 				8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */,

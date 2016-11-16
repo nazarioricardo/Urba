@@ -9,6 +9,7 @@ target 'Urba' do
   pod 'Firebase'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Messaging'
 
   target 'UrbaTests' do
     inherit! :search_paths
@@ -16,6 +17,7 @@ target 'Urba' do
     pod 'Firebase'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
+    pod 'Firebase/Messaging'
   end
 
   target 'UrbaUITests' do
@@ -24,6 +26,7 @@ target 'Urba' do
     pod 'Firebase'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
+    pod 'Firebase/Messaging'
   end
 
 end
