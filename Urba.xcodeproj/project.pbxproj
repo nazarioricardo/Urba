@@ -22,10 +22,8 @@
 		8C6257F51D870B0700737D73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6257F31D870B0700737D73 /* LaunchScreen.storyboard */; };
 		8C6258001D870B0700737D73 /* UrbaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257FF1D870B0700737D73 /* UrbaTests.m */; };
 		8C62580B1D870B0700737D73 /* UrbaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C62580A1D870B0700737D73 /* UrbaUITests.m */; };
-		8C6258191D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
-		8C62581A1D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
-		8C62581B1D870BAA00737D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6258181D870BA900737D73 /* GoogleService-Info.plist */; };
 		8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */; };
+		8C7485FD1DDE0694002CD1EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C7485FC1DDE0694002CD1EE /* GoogleService-Info.plist */; };
 		8CA2933E1D87A0A500931859 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933D1D87A0A500931859 /* User.m */; };
 		8CB60B5C1DDCB7A200B68E02 /* UBFIRMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */; };
 		8CB6EC061DC0131600B36FE9 /* UBFindUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */; };
@@ -84,9 +82,9 @@
 		8C6258061D870B0700737D73 /* UrbaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UrbaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C62580A1D870B0700737D73 /* UrbaUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UrbaUITests.m; sourceTree = "<group>"; };
 		8C62580C1D870B0700737D73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C6258181D870BA900737D73 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C67E2FB1D87626D0044C9F3 /* UBCreateUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBCreateUserViewController.h; sourceTree = "<group>"; };
 		8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCreateUserViewController.m; sourceTree = "<group>"; };
+		8C7485FC1DDE0694002CD1EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8CA2933C1D87A0A500931859 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		8CA2933D1D87A0A500931859 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		8CB60B5A1DDCB7A200B68E02 /* UBFIRMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFIRMessaging.h; sourceTree = "<group>"; };
@@ -215,7 +213,7 @@
 				8C6257F11D870B0700737D73 /* Assets.xcassets */,
 				8C6257F31D870B0700737D73 /* LaunchScreen.storyboard */,
 				8C6257F61D870B0700737D73 /* Info.plist */,
-				8C6258181D870BA900737D73 /* GoogleService-Info.plist */,
+				8C7485FC1DDE0694002CD1EE /* GoogleService-Info.plist */,
 				8C6257E51D870B0700737D73 /* Supporting Files */,
 			);
 			path = Urba;
@@ -402,7 +400,7 @@
 			files = (
 				8C6257F51D870B0700737D73 /* LaunchScreen.storyboard in Resources */,
 				8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */,
-				8C6258191D870BAA00737D73 /* GoogleService-Info.plist in Resources */,
+				8C7485FD1DDE0694002CD1EE /* GoogleService-Info.plist in Resources */,
 				8C6257F21D870B0700737D73 /* Assets.xcassets in Resources */,
 				8C6257F01D870B0700737D73 /* Main.storyboard in Resources */,
 			);
@@ -412,7 +410,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C62581A1D870BAA00737D73 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,7 +417,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C62581B1D870BAA00737D73 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +711,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Urba/Urba.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = SGRW3864BW;
 				INFOPLIST_FILE = Urba/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -729,6 +726,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Urba/Urba.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = SGRW3864BW;
 				INFOPLIST_FILE = Urba/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -27,7 +27,7 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
-	<string>NO</string>
+	<false/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
