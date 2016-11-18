@@ -86,6 +86,10 @@
     
 //    NSString *user = [UBFIRDatabaseManager getCurrentUser];
     
+//    [UBFIRDatabaseManager sendUnitVerificationRequestTo:<#(NSString *)#>
+//                                                forUnit:name
+//                                            inSuperUnit:_superUnitName];
+    
     [_homeViewController setUnitName:name];
     [_homeViewController setUnitKey:key];
     [_homeViewController setSuperUnitName:_superUnitName];

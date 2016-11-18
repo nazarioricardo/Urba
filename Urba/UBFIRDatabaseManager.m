@@ -91,6 +91,18 @@
     [[[[ref child:node] childByAutoId] child:key] setValue:value];
 }
 
++(void)sendUnitVerificationRequestTo:(NSString *)adminId forUnit:(NSString *)unit inSuperUnit:(NSString *)superUnit {
+    
+    FIRDatabaseReference *ref = [self databaseRef];
+    
+    ref = [[ref child:@"unit-verification-requests"] childByAutoId];
+    
+    [[ref child:@"from"] setValue:[self getCurrentUser]];
+    [[ref child:@"to"] setValue:adminId];
+    [[ref child:@"super-unit"] setValue:superUnit];
+    [[ref child:@"unit"] setValue:unit];    
+}
+
 +(NSString *)getCurrentUser {
     return [FIRAuth auth].currentUser.providerID;
 }
@@ -102,6 +114,21 @@
       
         FIRDataSnapshot *snapshot = obj;
         NSString *name = snapshot.value[@"name"];
+        
+        NSDictionary <NSString *, NSString *> *snapDict;
+        NSMutableArray *temporary = [[NSMutableArray alloc] init];
+        
+        for (FIRDataSnapshot *child in snapshot.children.allObjects) {
+            NSString *key = child.key;
+            NSString *value = child.value;
+            
+            NSLog(@"Values: %@", value);
+            
+            snapDict = [NSDictionary dictionaryWithObjectsAndKeys:value, key, nil];
+            [temporary addObject:snapDict];
+        }
+        
+        NSLog(@"Array: %@", temporary);
         
         NSLog(@"Name: %@", name);
         
