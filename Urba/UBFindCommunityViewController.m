@@ -69,10 +69,8 @@
     UITableViewCell *cell = [_communityTable dequeueReusableCellWithIdentifier:@"communityCell" forIndexPath:indexPath];
     
     // Unpack community from results array
-    NSDictionary<NSString *, NSString *> *snapshotDict = _results[indexPath.row];
-    NSString *name = [snapshotDict objectForKey:@"name"];
-    
-    NSLog(@"Dictionary: %@\nName: %@", snapshotDict, name);
+    NSDictionary<NSString *, NSDictionary *> *snapshotDict = _results[indexPath.row];
+    NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
     
@@ -92,9 +90,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    NSDictionary *currentSnapshot = _results[indexPath.row];
+    NSDictionary *selectedSnapshot = _results[indexPath.row];
     
-    _selectedKey = currentSnapshot[@"key"];
+    _selectedKey = [selectedSnapshot valueForKey:@"id"];
     _selectedName = selectedCell.textLabel.text;
 
     _selectedCommunity = [NSString stringWithFormat:@"%@-%@", _selectedName, _selectedKey];

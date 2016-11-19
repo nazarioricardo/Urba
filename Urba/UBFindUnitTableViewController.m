@@ -14,7 +14,6 @@
 @interface UBFindUnitTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *results;
-
 @property (weak, nonatomic) NSString *superUnitId;
 @property (weak, nonatomic) NSString *selectedSuper;
 @property (weak, nonatomic) NSString *selectedName;
@@ -38,8 +37,8 @@
                                 _results = [NSMutableArray arrayWithArray:results];
                                 
                                 //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
-                                [self.tableView reloadData];
                                 
+                                [self.tableView reloadData];
                                 [spinner removeSpinner];
                             }
                                 orErrorHandler:^(NSError *error) {
@@ -66,10 +65,8 @@
     // Configure the cell...
     
     // Unpack from results array
-    NSDictionary<NSString *, NSString *> *snapshotDict = _results[indexPath.row];
-    NSString *name = [snapshotDict objectForKey:@"name"];
-    
-    NSLog(@"Dictionary: %@\nName: %@", snapshotDict, name);
+    NSDictionary<NSString *, NSDictionary *> *snapshotDict = _results[indexPath.row];
+    NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
     
@@ -80,22 +77,22 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSDictionary *currentSnapshot = _results[indexPath.row];
-    NSString *key = currentSnapshot[@"key"];
-    NSString *name = currentSnapshot[@"name"];
+//    NSDictionary *currentSnapshot = _results[indexPath.row];
+//    NSString *key = currentSnapshot[@"key"];
+//    NSString *name = currentSnapshot[@"name"];
     
 //    NSString *user = [UBFIRDatabaseManager getCurrentUser];
     
-//    [UBFIRDatabaseManager sendUnitVerificationRequestTo:<#(NSString *)#>
+//    [UBFIRDatabaseManager sendUnitVerificationRequestTo:
 //                                                forUnit:name
 //                                            inSuperUnit:_superUnitName];
     
-    [_homeViewController setUnitName:name];
-    [_homeViewController setUnitKey:key];
-    [_homeViewController setSuperUnitName:_superUnitName];
-    [_homeViewController setSuperUnitKey:_superUnitKey];
-    [_homeViewController setCommunityName:_communityName];
-    [_homeViewController setCommunityKey:_communityKey];
+//    [_homeViewController setUnitName:name];
+//    [_homeViewController setUnitKey:key];
+//    [_homeViewController setSuperUnitName:_superUnitName];
+//    [_homeViewController setSuperUnitKey:_superUnitKey];
+//    [_homeViewController setCommunityName:_communityName];
+//    [_homeViewController setCommunityKey:_communityKey];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

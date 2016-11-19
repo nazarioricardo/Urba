@@ -113,29 +113,31 @@
     [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
       
         FIRDataSnapshot *snapshot = obj;
-        NSString *name = snapshot.value[@"name"];
         
-        NSDictionary <NSString *, NSString *> *snapDict;
-        NSMutableArray *temporary = [[NSMutableArray alloc] init];
+        NSMutableDictionary <NSString *, NSString *> *childDict;
+        
+        NSMutableArray *childKeyArr = [[NSMutableArray alloc] init];
+        NSMutableArray *childValArr = [[NSMutableArray alloc] init];
         
         for (FIRDataSnapshot *child in snapshot.children.allObjects) {
             NSString *key = child.key;
             NSString *value = child.value;
             
-            NSLog(@"Values: %@", value);
-            
-            snapDict = [NSDictionary dictionaryWithObjectsAndKeys:value, key, nil];
-            [temporary addObject:snapDict];
+            [childKeyArr addObject:key];
+            [childValArr addObject:value];
         }
         
-        NSLog(@"Array: %@", temporary);
+        childDict = [NSMutableDictionary dictionaryWithObjects:childValArr forKeys:childKeyArr];
         
-        NSLog(@"Name: %@", name);
+        NSLog(@"Dictionary %@", childDict);
         
-        NSDictionary <NSString *, NSString *> *snapshotDict = [NSDictionary dictionaryWithObjectsAndKeys:name, @"name", snapshot.key, @"key", nil];
-        [temp addObject: snapshotDict];
+        NSDictionary <NSString *, NSArray *> *snapDict = [NSDictionary dictionaryWithObjectsAndKeys: snapshot.key, @"id", childDict, @"values", nil];
+        
+//        NSDictionary <NSString *, NSString *> *snapshotDict = [NSDictionary dictionaryWithObjectsAndKeys:name, @"name", snapshot.key, @"key", nil];
+        [temp addObject: snapDict];
     }];
     
+    NSLog(@"ARRAY %@", temp);
     return [NSArray arrayWithArray:temp];
 }
 
