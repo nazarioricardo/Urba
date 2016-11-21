@@ -7,7 +7,6 @@
 //
 
 #import "Constants.h"
-#import "UBFIRDatabaseManager.h"
 
 @implementation Constants
 

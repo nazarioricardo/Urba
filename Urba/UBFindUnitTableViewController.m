@@ -48,6 +48,18 @@
                                 }];
 }
 
+- (void)sendRequest {
+    
+    NSString *userId = [UBFIRDatabaseManager getCurrentUser];
+    
+    NSLog(@"Selected unit key: %@", _selectedKey);
+    NSLog(@"User Id: %@", userId);
+    
+    NSDictionary *requestDict = [NSDictionary dictionaryWithObjectsAndKeys:_adminId, @"to", [UBFIRDatabaseManager getCurrentUser], @"from", _selectedKey, @"for-unit", nil];
+    
+    [UBFIRDatabaseManager addChildByAutoId:@"requests" withPairs:requestDict];
+}
+
 #pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -77,9 +89,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    NSDictionary *currentSnapshot = _results[indexPath.row];
-//    NSString *key = currentSnapshot[@"key"];
-//    NSString *name = currentSnapshot[@"name"];
+    NSDictionary *currentSnapshot = _results[indexPath.row];
+    _selectedKey = currentSnapshot[@"id"];
+    
+    [self sendRequest];
+
     
 //    NSString *user = [UBFIRDatabaseManager getCurrentUser];
     

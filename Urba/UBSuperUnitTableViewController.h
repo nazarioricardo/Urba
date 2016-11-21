@@ -17,5 +17,6 @@
 
 @property (weak, nonatomic) NSString *communityName;
 @property (weak, nonatomic) NSString *communityKey;
+@property (weak, nonatomic) NSString *adminId;
 
 @end

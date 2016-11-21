@@ -91,6 +91,21 @@
     [[[[ref child:node] childByAutoId] child:key] setValue:value];
 }
 
++(void)addChildByAutoId:(NSString *)child withPairs:(NSDictionary *)dictionary {
+    
+    FIRDatabaseReference *ref = [self databaseRef];
+    
+    ref = [[ref child:child] childByAutoId];
+    
+    [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        
+        NSString *keyString = key;
+        NSString *value = obj;
+        
+        [[ref child:keyString] setValue:value];
+    }];
+}
+
 +(void)sendUnitVerificationRequestTo:(NSString *)adminId forUnit:(NSString *)unit inSuperUnit:(NSString *)superUnit {
     
     FIRDatabaseReference *ref = [self databaseRef];
@@ -104,7 +119,7 @@
 }
 
 +(NSString *)getCurrentUser {
-    return [FIRAuth auth].currentUser.providerID;
+    return [FIRAuth auth].currentUser.uid;
 }
 
 + (NSArray *)mapResults:(NSArray *)results {
@@ -129,15 +144,11 @@
         
         childDict = [NSMutableDictionary dictionaryWithObjects:childValArr forKeys:childKeyArr];
         
-        NSLog(@"Dictionary %@", childDict);
-        
         NSDictionary <NSString *, NSArray *> *snapDict = [NSDictionary dictionaryWithObjectsAndKeys: snapshot.key, @"id", childDict, @"values", nil];
         
-//        NSDictionary <NSString *, NSString *> *snapshotDict = [NSDictionary dictionaryWithObjectsAndKeys:name, @"name", snapshot.key, @"key", nil];
         [temp addObject: snapDict];
     }];
     
-    NSLog(@"ARRAY %@", temp);
     return [NSArray arrayWithArray:temp];
 }
 

@@ -20,6 +20,7 @@
 @property (weak, nonatomic) NSString *selectedCommunity;
 @property (weak, nonatomic) NSString *selectedName;
 @property (weak, nonatomic) NSString *selectedKey;
+@property (weak, nonatomic) NSString *adminId;
 
 @end
 
@@ -38,7 +39,7 @@
 
 #pragma mark - Private
 
-- (void) getCommunities {
+- (void)getCommunities {
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
@@ -93,6 +94,7 @@
     NSDictionary *selectedSnapshot = _results[indexPath.row];
     
     _selectedKey = [selectedSnapshot valueForKey:@"id"];
+    _adminId = [selectedSnapshot valueForKeyPath:@"values.admin-id"];
     _selectedName = selectedCell.textLabel.text;
 
     _selectedCommunity = [NSString stringWithFormat:@"%@-%@", _selectedName, _selectedKey];
@@ -131,6 +133,7 @@
         [suvc setHomeViewController:_homeViewController];
         [suvc setCommunityName:_selectedName];
         [suvc setCommunityKey:_selectedKey];
+        [suvc setAdminId:_adminId];
     }
 }
 

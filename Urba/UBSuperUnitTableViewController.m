@@ -165,6 +165,7 @@
         [uvc setCommunityKey:_communityKey];
         [uvc setSuperUnitName:_selectedName];
         [uvc setSuperUnitKey:_selectedKey];
+        [uvc setAdminId:_adminId];
     }
 }
 
