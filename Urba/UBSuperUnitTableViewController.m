@@ -133,8 +133,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSLog(@"The community: %@", _communityName);
-    NSLog(@"The key: %@", _communityKey);
+    NSLog(@"The admin name: %@", _adminName);
     _communityId = [NSString stringWithFormat:@"%@-%@", _communityName, _communityKey];
     [self getSuperUnits];
 }
@@ -155,9 +154,7 @@
     if ([segue.identifier isEqualToString:unitSegue]) {
         
         UBFindUnitTableViewController *uvc = [segue destinationViewController];
-            
-        NSLog(@"The super-unit name: %@", _selectedName);
-        
+                
         // Pass the selected object to the new view controller.
         
         [uvc setHomeViewController:_homeViewController];
@@ -166,6 +163,7 @@
         [uvc setSuperUnitName:_selectedName];
         [uvc setSuperUnitKey:_selectedKey];
         [uvc setAdminId:_adminId];
+        [uvc setAdminName:_adminName];
     }
 }
 

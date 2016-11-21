@@ -14,7 +14,6 @@
 @interface UBFindUnitTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *results;
-@property (weak, nonatomic) NSString *superUnitId;
 @property (weak, nonatomic) NSString *selectedSuper;
 @property (weak, nonatomic) NSString *selectedName;
 @property (weak, nonatomic) NSString *selectedKey;
@@ -55,7 +54,13 @@
     NSLog(@"Selected unit key: %@", _selectedKey);
     NSLog(@"User Id: %@", userId);
     
-    NSDictionary *requestDict = [NSDictionary dictionaryWithObjectsAndKeys:_adminId, @"to", [UBFIRDatabaseManager getCurrentUser], @"from", _selectedKey, @"for-unit", nil];
+    NSDictionary *unitDict = [NSDictionary dictionaryWithObjectsAndKeys:_selectedName,@"name",_selectedKey,@"id", _superUnitName, @"owner", nil];
+    NSDictionary *fromDict = [NSDictionary dictionaryWithObjectsAndKeys: [UBFIRDatabaseManager getCurrentUserEmail],@"name", [UBFIRDatabaseManager getCurrentUser], @"id", nil];
+    NSDictionary *toDict = [NSDictionary dictionaryWithObjectsAndKeys:_adminName,@"name",_adminId,@"id", nil];
+    
+    NSDictionary *requestDict = [NSDictionary dictionaryWithObjectsAndKeys:toDict, @"to", fromDict, @"from", unitDict, @"unit", nil];
+    
+    NSLog(@"%@", unitDict);
     
     [UBFIRDatabaseManager addChildByAutoId:@"requests" withPairs:requestDict];
 }
@@ -90,24 +95,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSDictionary *currentSnapshot = _results[indexPath.row];
-    _selectedKey = currentSnapshot[@"id"];
+    _selectedKey = [currentSnapshot valueForKey:@"id"];
+    _selectedName = [currentSnapshot valueForKeyPath:@"values.name"];
     
     [self sendRequest];
-
-    
-//    NSString *user = [UBFIRDatabaseManager getCurrentUser];
-    
-//    [UBFIRDatabaseManager sendUnitVerificationRequestTo:
-//                                                forUnit:name
-//                                            inSuperUnit:_superUnitName];
-    
-//    [_homeViewController setUnitName:name];
-//    [_homeViewController setUnitKey:key];
-//    [_homeViewController setSuperUnitName:_superUnitName];
-//    [_homeViewController setSuperUnitKey:_superUnitKey];
-//    [_homeViewController setCommunityName:_communityName];
-//    [_homeViewController setCommunityKey:_communityKey];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -121,10 +112,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    NSLog(@"The super-unit: %@", _superUnitName);
-    NSLog(@"The key: %@", _superUnitKey);
-    _superUnitId = [NSString stringWithFormat:@"%@-%@", _superUnitName, _superUnitKey];
+    NSLog(@"Admin Name: %@", _adminName);
     [self getUnits];
 }
 

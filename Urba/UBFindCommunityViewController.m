@@ -21,6 +21,7 @@
 @property (weak, nonatomic) NSString *selectedName;
 @property (weak, nonatomic) NSString *selectedKey;
 @property (weak, nonatomic) NSString *adminId;
+@property (weak, nonatomic) NSString *adminName;
 
 @end
 
@@ -95,6 +96,7 @@
     
     _selectedKey = [selectedSnapshot valueForKey:@"id"];
     _adminId = [selectedSnapshot valueForKeyPath:@"values.admin-id"];
+    _adminName = [selectedSnapshot valueForKeyPath:@"values.admin-email"];
     _selectedName = selectedCell.textLabel.text;
 
     _selectedCommunity = [NSString stringWithFormat:@"%@-%@", _selectedName, _selectedKey];
@@ -134,6 +136,7 @@
         [suvc setCommunityName:_selectedName];
         [suvc setCommunityKey:_selectedKey];
         [suvc setAdminId:_adminId];
+        [suvc setAdminName:_adminName];
     }
 }
 

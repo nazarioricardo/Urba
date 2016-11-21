@@ -19,5 +19,6 @@ typedef void(^FIRErrorHandler)(NSError *error);
 +(void)addChildByAutoId:(NSString *)child withPairs:(NSDictionary *)dictionary;
 +(void)sendUnitVerificationRequestTo:(NSString *)adminId forUnit:(NSString *)unit inSuperUnit:(NSString *)superUnit;
 +(NSString *)getCurrentUser;
++(NSString *)getCurrentUserEmail;
 
 @end
