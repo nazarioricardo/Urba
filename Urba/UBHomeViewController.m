@@ -13,12 +13,8 @@
 
 @interface UBHomeViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *unitLabel;
-@property (weak, nonatomic) IBOutlet UILabel *superLabel;
-@property (weak, nonatomic) IBOutlet UILabel *communityLabel;
-
-@property (strong, nonatomic) NSMutableArray *userUnitsArray;
-@property (strong, nonatomic) NSString *currentUserId;
+@property (weak, nonatomic) IBOutlet UITableView *unitsTable;
+@property (strong, nonatomic) NSMutableArray *unitsArray;
 
 @end
 
@@ -35,61 +31,57 @@
 
 - (void)getUnits {
     
-    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
-    
     [UBFIRDatabaseManager getAllValuesFromNode:@"units"
-                                     orderedBy:@"user"
+                                     orderedBy:@"user/id"
                                     filteredBy:[UBFIRDatabaseManager getCurrentUser]
                             withSuccessHandler:^(NSArray *results) {
                                 
-//                                _results = [NSMutableArray arrayWithArray:results];
-//                                
-//                                [self.tableView reloadData];
-                                
-                                [spinner removeSpinner];
+                                _unitsArray = [NSMutableArray arrayWithArray:results];
+                                [_unitsTable reloadData];
+                        
                             }
                                 orErrorHandler:^(NSError *error) {
                                     
-                                    [spinner removeSpinner];
                                     NSLog(@"Error: %@", error.description);
                                 }];
+}
+
+#pragma mark - Table View Data Source
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_unitsArray count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [_unitsTable dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    NSDictionary<NSString *, NSDictionary *> *snapshotDict = _unitsArray[indexPath.row];
+    NSString *unit = [snapshotDict valueForKeyPath:@"name"];
+    NSString *owner = [snapshotDict valueForKeyPath:@"owner-name"];
+    NSString *address = [NSString stringWithFormat:@"%@ %@", unit, owner];
+
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", address];
+    
+    return cell;
+}
+
+#pragma mark - Table View Delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
 
 #pragma mark - Life Cycle
 
 -(void)viewWillAppear:(BOOL)animated {
-    
-    NSLog(@"%@ %@ %@ was selected", _unitName, _superUnitName, _communityName);
-    
-    if (_unitName) {
-        NSString *unit = [NSString stringWithFormat:@"%@", _unitName];
-        NSString *superUnit = [NSString stringWithFormat:@"%@", _superUnitName];
-        NSString *community = [NSString stringWithFormat:@"%@", _communityName];
-        
-        NSDictionary<NSString *, NSString *> *unitDict = [[NSDictionary alloc] initWithObjectsAndKeys:_unitKey, _unitName, nil];
-        NSDictionary<NSString *, NSString *> *superUnitDict = [[NSDictionary alloc] initWithObjectsAndKeys:_superUnitKey, _superUnitName, nil];
-        NSDictionary<NSString *, NSString *> *communityDict = [[NSDictionary alloc] initWithObjectsAndKeys:_communityKey, _communityName, nil];
-        
-        NSArray *unitArray = [[NSArray alloc] initWithObjects:unitDict, superUnitDict, communityDict, nil];
-        
-        [_userUnitsArray addObject:unitArray];
-        
-        NSLog(@"The array: %@", _userUnitsArray);
-        
-        [_unitLabel setText:unit];
-        [_superLabel setText:superUnit];
-        [_communityLabel setText:community];
-    }
-}
 
--(void)viewDidAppear:(BOOL)animated {
-    NSLog(@"View did appear");
 }
 
 - (void)viewDidLoad {
-    _userUnitsArray = [[NSMutableArray alloc] init];
-//    [self getUnits];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     

@@ -9,13 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UBFindCommunityViewController.h"
 
-@interface UBHomeViewController : UIViewController
-
-@property (nonatomic) NSString *communityName;
-@property (nonatomic) NSString *communityKey;
-@property (nonatomic) NSString *superUnitName;
-@property (nonatomic) NSString *superUnitKey;
-@property (nonatomic) NSString *unitName;
-@property (nonatomic) NSString *unitKey;
+@interface UBHomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

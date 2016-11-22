@@ -64,7 +64,7 @@
                                 }];
 }
 
-#pragma mark - Table View Delegate
+#pragma mark - Table View Data Source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -87,7 +87,7 @@
     return 1;
 }
 
-#pragma mark - Text Field Delegate
+#pragma mark - Table View Delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
