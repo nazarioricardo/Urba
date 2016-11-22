@@ -38,6 +38,7 @@
                                 
                                 _unitsArray = [NSMutableArray arrayWithArray:results];
                                 [_unitsTable reloadData];
+                                NSLog(@"Units: %@", _unitsArray);
                         
                             }
                                 orErrorHandler:^(NSError *error) {
@@ -60,8 +61,8 @@
     UITableViewCell *cell = [_unitsTable dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     NSDictionary<NSString *, NSDictionary *> *snapshotDict = _unitsArray[indexPath.row];
-    NSString *unit = [snapshotDict valueForKeyPath:@"name"];
-    NSString *owner = [snapshotDict valueForKeyPath:@"owner-name"];
+    NSString *unit = [snapshotDict valueForKeyPath:@"values.name"];
+    NSString *owner = [snapshotDict valueForKeyPath:@"values.owner-name"];
     NSString *address = [NSString stringWithFormat:@"%@ %@", unit, owner];
 
     cell.textLabel.text = [NSString stringWithFormat:@"%@", address];
@@ -78,7 +79,7 @@
 #pragma mark - Life Cycle
 
 -(void)viewWillAppear:(BOOL)animated {
-
+    [self getUnits];
 }
 
 - (void)viewDidLoad {
