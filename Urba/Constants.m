@@ -13,5 +13,6 @@
 NSString *const findHomeSegue = @"FindHomeSegue";
 NSString *const superUnitSegue = @"SuperUnitSegue";
 NSString *const unitSegue = @"UnitSegue";
+NSString *const unitManageSegue = @"UnitManagementSegue";
 
 @end

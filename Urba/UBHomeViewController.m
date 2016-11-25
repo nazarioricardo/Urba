@@ -8,6 +8,7 @@
 
 #import "UBHomeViewController.h"
 #import "UBFIRDatabaseManager.h"
+#import "UBUnitManagementViewController.h"
 #import "Constants.h"
 #import "ActivityView.h"
 
@@ -15,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *unitsTable;
 @property (strong, nonatomic) NSMutableArray *unitsArray;
+@property (weak, nonatomic) NSDictionary <NSString *, NSDictionary *> *unitDict;
 
 @end
 
@@ -74,6 +76,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    _unitDict = _unitsArray[indexPath.row];
+    
+    [self performSegueWithIdentifier:unitManageSegue sender:self];
 }
 
 #pragma mark - Life Cycle
@@ -98,7 +103,6 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
     
     if ([segue.identifier isEqualToString:findHomeSegue])
     {
@@ -106,7 +110,14 @@
         UBFindCommunityViewController *fcvc = (UBFindCommunityViewController *)[nvc topViewController];
         fcvc.homeViewController = self;
     }
-    // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:unitManageSegue]) {
+        
+        UINavigationController *nvc = [segue destinationViewController];
+        UBUnitManagementViewController *umvc = (UBUnitManagementViewController *)[nvc topViewController];
+        
+        [umvc setUnit:_unitDict];
+    }
 }
 
 @end

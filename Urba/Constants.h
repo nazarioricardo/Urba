@@ -13,5 +13,6 @@
 extern NSString *const findHomeSegue;
 extern NSString *const superUnitSegue;
 extern NSString *const unitSegue;
+extern NSString *const unitManageSegue;
 
 @end

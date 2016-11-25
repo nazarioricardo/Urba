@@ -26,6 +26,7 @@
 		8C7485FD1DDE0694002CD1EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C7485FC1DDE0694002CD1EE /* GoogleService-Info.plist */; };
 		8C7485FF1DDE2010002CD1EE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7485FE1DDE2010002CD1EE /* AdSupport.framework */; };
 		8CA2933E1D87A0A500931859 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933D1D87A0A500931859 /* User.m */; };
+		8CB4CF261DE5E42A00539FB3 /* UBUnitManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CF251DE5E42A00539FB3 /* UBUnitManagementViewController.m */; };
 		8CB60B5C1DDCB7A200B68E02 /* UBFIRMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */; };
 		8CB6EC061DC0131600B36FE9 /* UBFindUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */; };
 		8CD6779C1DD0C84E005DDD31 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD6779B1DD0C84E005DDD31 /* Constants.m */; };
@@ -89,6 +90,8 @@
 		8C7485FE1DDE2010002CD1EE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		8CA2933C1D87A0A500931859 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		8CA2933D1D87A0A500931859 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		8CB4CF241DE5E42A00539FB3 /* UBUnitManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnitManagementViewController.h; sourceTree = "<group>"; };
+		8CB4CF251DE5E42A00539FB3 /* UBUnitManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnitManagementViewController.m; sourceTree = "<group>"; };
 		8CB60B5A1DDCB7A200B68E02 /* UBFIRMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFIRMessaging.h; sourceTree = "<group>"; };
 		8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFIRMessaging.m; sourceTree = "<group>"; };
 		8CB60B5D1DDCC1AE00B68E02 /* Urba.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Urba.entitlements; sourceTree = "<group>"; };
@@ -158,6 +161,8 @@
 			children = (
 				8CEBF7961D9C5B5D00DAE919 /* UBHomeViewController.h */,
 				8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */,
+				8CB4CF241DE5E42A00539FB3 /* UBUnitManagementViewController.h */,
+				8CB4CF251DE5E42A00539FB3 /* UBUnitManagementViewController.m */,
 				8C4956981DBAB0CC00CAD822 /* Find Home */,
 			);
 			name = "Main Views";
@@ -563,6 +568,7 @@
 				8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */,
 				8CB6EC061DC0131600B36FE9 /* UBFindUnitTableViewController.m in Sources */,
 				8C2650531DC3C9CB00AE3973 /* ActivityView.m in Sources */,
+				8CB4CF261DE5E42A00539FB3 /* UBUnitManagementViewController.m in Sources */,
 				8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
 				8CB60B5C1DDCB7A200B68E02 /* UBFIRMessaging.m in Sources */,
