@@ -64,8 +64,8 @@
     
     NSDictionary<NSString *, NSDictionary *> *snapshotDict = _unitsArray[indexPath.row];
     NSString *unit = [snapshotDict valueForKeyPath:@"values.name"];
-    NSString *owner = [snapshotDict valueForKeyPath:@"values.owner-name"];
-    NSString *address = [NSString stringWithFormat:@"%@ %@", unit, owner];
+    NSString *superUnit = [snapshotDict valueForKeyPath:@"values.super-unit"];
+    NSString *address = [NSString stringWithFormat:@"%@ %@", unit, superUnit];
 
     cell.textLabel.text = [NSString stringWithFormat:@"%@", address];
     
@@ -116,7 +116,7 @@
         UINavigationController *nvc = [segue destinationViewController];
         UBUnitManagementViewController *umvc = (UBUnitManagementViewController *)[nvc topViewController];
         
-        [umvc setUnit:_unitDict];
+        [umvc setUnitDict:_unitDict];
     }
 }
 

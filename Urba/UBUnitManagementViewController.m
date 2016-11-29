@@ -13,9 +13,15 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *tempVisitorTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *permVisitorTextField;
+@property (weak, nonatomic) NSString *address;
 
-@property (weak, nonatomic) NSString *unitTitle;
+@property (strong, nonatomic) NSString *unitName;
 @property (strong, nonatomic) NSString *unitId;
+@property (strong, nonatomic) NSString *community;
+@property (strong, nonatomic) NSString *communityId;
+@property (strong, nonatomic) NSString *superUnit;
+@property (strong, nonatomic) NSString *superUnitId;
+
 
 @end
 
@@ -25,7 +31,7 @@
     
     if (![_tempVisitorTextField.text isEqualToString:@""]) {
         
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_tempVisitorTextField.text, @"name", _unitTitle, @"unit", _unitId, @"unit-id", nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_tempVisitorTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id", nil];
         
         [UBFIRDatabaseManager addChildByAutoId:@"visitors" withPairs:dict];
     }
@@ -44,15 +50,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSString *name = [_unit valueForKeyPath:@"values.name"];
-    NSString *owner = [_unit valueForKeyPath:@"values.owner-name"];
-    _unitTitle = [NSString stringWithFormat:@"%@ %@", name, owner];
+    NSString *name = [_unitDict valueForKeyPath:@"values.name"];
+    NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
+    _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
     
-    _unitId = [NSString stringWithFormat:@"%@", [_unit valueForKey:@"id"]];
+    _unitId = [NSString stringWithFormat:@"%@", [_unitDict valueForKey:@"id"]];
+    _unitName = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.name"]];
+    _communityId = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.community-id"]];
+    _community = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.community"]];
+    _superUnit = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.super-unit"]];
+    _superUnitId = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.super-unit-id"]];
     
     NSLog(@"Unit id: %@", _unitId);
     
-    self.navigationItem.title = _unitTitle;
+    self.navigationItem.title = _address;
 }
 
 - (void)didReceiveMemoryWarning {

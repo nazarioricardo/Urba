@@ -29,7 +29,7 @@
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
     [UBFIRDatabaseManager getAllValuesFromNode:@"units"
-                                     orderedBy:@"owner-id"
+                                     orderedBy:@"super-unit-id"
                                     filteredBy:_superUnitKey
                             withSuccessHandler:^(NSArray *results) {
                                 

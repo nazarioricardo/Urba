@@ -10,6 +10,6 @@
 
 @interface UBUnitManagementViewController : UIViewController
 
-@property (weak, nonatomic) NSDictionary<NSString *, NSDictionary *> *unit;
+@property (weak, nonatomic) NSDictionary<NSString *, NSDictionary *> *unitDict;
 
 @end
