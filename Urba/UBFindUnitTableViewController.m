@@ -33,12 +33,21 @@
                                     filteredBy:_superUnitKey
                             withSuccessHandler:^(NSArray *results) {
                                 
-                                _results = [NSMutableArray arrayWithArray:results];
-                                
-                                //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
-                                
-                                [self.tableView reloadData];
-                                [spinner removeSpinner];
+                                if (![results count]) {
+                                    
+                                    [spinner removeSpinner];
+                                    NSLog(@"Snapshot doesn't exist");
+                                    
+                                } else {
+                                    
+                                    _results = [NSMutableArray arrayWithArray:results];
+                                    
+                                    //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
+                                    
+                                    [self.tableView reloadData];
+                                    [spinner removeSpinner];
+                                    
+                                }
                             }
                                 orErrorHandler:^(NSError *error) {
                                     
@@ -62,7 +71,7 @@
     
     NSLog(@"%@", unitDict);
     
-    [UBFIRDatabaseManager addChildByAutoId:@"requests" withPairs:requestDict];
+    [UBFIRDatabaseManager addToChildByAutoId:@"requests" withPairs:requestDict];
 }
 
 #pragma mark - Table View Data Source

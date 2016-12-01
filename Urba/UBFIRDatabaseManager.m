@@ -18,6 +18,8 @@
 
 @implementation UBFIRDatabaseManager
 
+#pragma mark - Database
+
 + (FIRDatabaseReference *)databaseRef {
     return [[FIRDatabase database] reference];
 }
@@ -48,8 +50,6 @@
             [ref removeObserverWithHandle:refHandle];
         }
     }];
-    
-    
 }
 
 +(void)getAllValuesFromNode:(NSString *)node orderedBy:(NSString *)orderBy filteredBy:(NSString *)filter withSuccessHandler:(FIRSuccessHandler)successHandler orErrorHandler:(FIRErrorHandler)errorHandler {
@@ -62,11 +62,18 @@
     
     query = [[ref queryOrderedByChild:orderBy] queryEqualToValue:filter];
 
-    refHandle = [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+    refHandle = [query observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
         
-        [results addObject:snapshot];
+        if ([snapshot exists]) {
+            for (FIRDataSnapshot *snap in snapshot.children) {
+                
+                [results addObject:snap];
+                NSLog(@"SNAP KEY: %@", snap.key);
+            }
+        }
         
         if (successHandler) {
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 successHandler ([self mapResults:results]);
             });
@@ -84,14 +91,21 @@
     
 }
 
-+(void)createNode:(NSString *)node withValue:(NSString *)value forKey:(NSString *)key {
++(void)addToChild:(NSString *)child withId:(NSString *)identifier withPairs:(NSDictionary *)dictionary; {
     
     FIRDatabaseReference *ref = [self databaseRef];
+    ref = [[ref child:child] child:identifier];
     
-    [[[[ref child:node] childByAutoId] child:key] setValue:value];
+    [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        
+        NSString *keyString = key;
+        NSString *value = obj;
+        
+        [[ref child:keyString] setValue:value];
+    }];
 }
 
-+(void)addChildByAutoId:(NSString *)child withPairs:(NSDictionary *)dictionary {
++(void)addToChildByAutoId:(NSString *)child withPairs:(NSDictionary *)dictionary {
     
     FIRDatabaseReference *ref = [self databaseRef];
     
@@ -106,17 +120,7 @@
     }];
 }
 
-+(void)sendUnitVerificationRequestTo:(NSString *)adminId forUnit:(NSString *)unit inSuperUnit:(NSString *)superUnit {
-    
-    FIRDatabaseReference *ref = [self databaseRef];
-    
-    ref = [[ref child:@"unit-verification-requests"] childByAutoId];
-    
-    [[ref child:@"from"] setValue:[self getCurrentUser]];
-    [[ref child:@"to"] setValue:adminId];
-    [[ref child:@"super-unit"] setValue:superUnit];
-    [[ref child:@"unit"] setValue:unit];    
-}
+#pragma mark - Auth
 
 +(NSString *)getCurrentUser {
     return [FIRAuth auth].currentUser.uid;
@@ -125,6 +129,8 @@
 +(NSString *)getCurrentUserEmail {
     return [FIRAuth auth].currentUser.email;
 }
+
+#pragma mark - Private
 
 + (NSArray *)mapResults:(NSArray *)results {
     

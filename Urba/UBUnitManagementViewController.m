@@ -33,7 +33,7 @@
         
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_tempVisitorTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id", nil];
         
-        [UBFIRDatabaseManager addChildByAutoId:@"visitors" withPairs:dict];
+        [UBFIRDatabaseManager addToChildByAutoId:@"visitors" withPairs:dict];
     }
     
 }
