@@ -53,7 +53,7 @@
                                 _results = [NSMutableArray arrayWithArray:results];
                                 
 //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
-                                [_communityTable reloadData];
+                                [_communityTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _communityTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationFade];
 
                                 [spinner removeSpinner];
                             }

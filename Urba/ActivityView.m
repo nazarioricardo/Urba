@@ -31,16 +31,32 @@
     
     // Just to show we've done something, let's make the background black
     spinnerView.backgroundColor = [UIColor blackColor];
-    spinnerView.alpha = .50;
+    spinnerView.alpha = 0;
     
     // Add the spinner view to the superView. Boom.
-    [superView addSubview:spinnerView];
+    [UIView animateWithDuration:0.1
+                          delay:0
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         spinnerView.alpha = .50;
+                     }
+                     completion:^(BOOL finished){
+                         [superView addSubview:spinnerView];
+                     }];
     
     return  spinnerView;
 }
 
 -(void)removeSpinner {
-    [super removeFromSuperview];
+    [UIView animateWithDuration:0.2
+                          delay:0
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.alpha = 0;
+                     }
+                     completion:^(BOOL finished){
+                         [self removeFromSuperview];
+                     }];
 }
 
 /*
