@@ -7,7 +7,7 @@
 //
 
 #import "UBUnitManagementViewController.h"
-#import "UBFIRDatabaseManager.h"
+#import "FIRManager.h"
 
 @interface UBUnitManagementViewController ()
 
@@ -33,7 +33,7 @@
         
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_tempVisitorTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id", nil];
         
-        [UBFIRDatabaseManager addToChildByAutoId:@"visitors" withPairs:dict];
+        [FIRManager addToChildByAutoId:@"visitors" withPairs:dict];
     }
     
 }

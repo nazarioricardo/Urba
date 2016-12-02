@@ -30,15 +30,16 @@
     [indicator startAnimating];
     
     // Just to show we've done something, let's make the background black
-    spinnerView.backgroundColor = [UIColor blackColor];
-    spinnerView.alpha = 0;
+    UIColor *urbaGreen = [UIColor colorWithRed:98.0/255.0 green:248.0/255.0 blue:72.0/255.0 alpha:1];
+    indicator.color = urbaGreen;
+    spinnerView.backgroundColor = [UIColor whiteColor];
     
     // Add the spinner view to the superView. Boom.
     [UIView animateWithDuration:0.1
                           delay:0
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         spinnerView.alpha = .50;
+                         spinnerView.alpha = 1;
                      }
                      completion:^(BOOL finished){
                          [superView addSubview:spinnerView];

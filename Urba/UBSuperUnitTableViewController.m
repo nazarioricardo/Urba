@@ -8,7 +8,7 @@
 
 #import "UBSuperUnitTableViewController.h"
 #import "UBHomeViewController.h"
-#import "UBFIRDatabaseManager.h"
+#import "FIRManager.h"
 #import "Constants.h"
 #import "ActivityView.h"
 
@@ -30,7 +30,7 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [UBFIRDatabaseManager getAllValuesFromNode:@"super-units"
+    [FIRManager getAllValuesFromNode:@"super-units"
                                      orderedBy:@"community-id"
                                     filteredBy:_communityKey
                             withSuccessHandler:^(NSArray *results) {

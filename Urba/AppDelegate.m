@@ -70,6 +70,10 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    UIColor *urbaGreen = [UIColor colorWithRed:98.0/255.0 green:248.0/255.0 blue:72.0/255.0 alpha:1];
+    
+    [[UINavigationBar appearance] setBarTintColor:urbaGreen];
+    
     // Register for remote notifications
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         // iOS 7.1 or earlier. Disable the deprecation warnings.

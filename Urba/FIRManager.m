@@ -1,22 +1,22 @@
 //
-//  UBFIRDatabaseManager.m
+//  FIRManager.h
 //  
 //
 //  Created by Ricardo Nazario on 10/29/16.
 //
 //
 
-#import "UBFIRDatabaseManager.h"
+#import "FIRManager.h"
 
 @import Firebase;
 
-@interface UBFIRDatabaseManager ()
+@interface FIRManager ()
 
 @property (nonatomic) FIRDatabaseHandle refHandle;
 
 @end
 
-@implementation UBFIRDatabaseManager
+@implementation FIRManager
 
 #pragma mark - Database
 

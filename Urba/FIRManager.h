@@ -1,5 +1,5 @@
 //
-//  UBFIRDatabaseManager.h
+//  FIRManager.h
 //  
 //
 //  Created by Ricardo Nazario on 10/29/16.
@@ -11,7 +11,7 @@
 typedef void(^FIRSuccessHandler)(NSArray *results);
 typedef void(^FIRErrorHandler)(NSError *error);
 
-@interface UBFIRDatabaseManager : NSObject
+@interface FIRManager : NSObject
 
 +(void)getAllValuesFromNode:(NSString *)node withSuccessHandler:(FIRSuccessHandler)successHandler orErrorHandler:(FIRErrorHandler)errorHandler;
 +(void)getAllValuesFromNode:(NSString *)node orderedBy:(NSString *)orderBy filteredBy:(NSString *)filter withSuccessHandler:(FIRSuccessHandler)successHandler orErrorHandler:(FIRErrorHandler)errorHandler;

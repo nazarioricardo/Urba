@@ -8,7 +8,7 @@
 
 #import "UBFindUnitTableViewController.h"
 #import "UBHomeViewController.h"
-#import "UBFIRDatabaseManager.h"
+#import "FIRManager.h"
 #import "ActivityView.h"
 
 @interface UBFindUnitTableViewController ()
@@ -28,7 +28,7 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [UBFIRDatabaseManager getAllValuesFromNode:@"units"
+    [FIRManager getAllValuesFromNode:@"units"
                                      orderedBy:@"super-unit-id"
                                     filteredBy:_superUnitKey
                             withSuccessHandler:^(NSArray *results) {
@@ -58,20 +58,20 @@
 
 - (void)sendRequest {
     
-    NSString *userId = [UBFIRDatabaseManager getCurrentUser];
+    NSString *userId = [FIRManager getCurrentUser];
     
     NSLog(@"Selected unit key: %@", _selectedKey);
     NSLog(@"User Id: %@", userId);
     
     NSDictionary *unitDict = [NSDictionary dictionaryWithObjectsAndKeys:_selectedName,@"name",_selectedKey,@"id", _superUnitName, @"owner", nil];
-    NSDictionary *fromDict = [NSDictionary dictionaryWithObjectsAndKeys: [UBFIRDatabaseManager getCurrentUserEmail],@"name", [UBFIRDatabaseManager getCurrentUser], @"id", nil];
+    NSDictionary *fromDict = [NSDictionary dictionaryWithObjectsAndKeys: [FIRManager getCurrentUserEmail],@"name", [FIRManager getCurrentUser], @"id", nil];
     NSDictionary *toDict = [NSDictionary dictionaryWithObjectsAndKeys:_adminName,@"name",_adminId,@"id", nil];
     
     NSDictionary *requestDict = [NSDictionary dictionaryWithObjectsAndKeys:toDict, @"to", fromDict, @"from", unitDict, @"unit", nil];
     
     NSLog(@"%@", unitDict);
     
-    [UBFIRDatabaseManager addToChildByAutoId:@"requests" withPairs:requestDict];
+    [FIRManager addToChildByAutoId:@"requests" withPairs:requestDict];
 }
 
 #pragma mark - Table View Data Source

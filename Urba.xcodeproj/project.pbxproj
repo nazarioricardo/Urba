@@ -12,7 +12,7 @@
 		8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */; };
 		8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */; };
 		8C2650531DC3C9CB00AE3973 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2650521DC3C9CB00AE3973 /* ActivityView.m */; };
-		8C4881E41DC56F100030B548 /* UBFIRDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4881E31DC56F100030B548 /* UBFIRDatabaseManager.m */; };
+		8C4881E41DC56F100030B548 /* FIRManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4881E31DC56F100030B548 /* FIRManager.m */; };
 		8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */; };
 		8C6257E71D870B0700737D73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E61D870B0700737D73 /* main.m */; };
 		8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E91D870B0700737D73 /* AppDelegate.m */; };
@@ -27,7 +27,6 @@
 		8C7485FF1DDE2010002CD1EE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7485FE1DDE2010002CD1EE /* AdSupport.framework */; };
 		8CA2933E1D87A0A500931859 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933D1D87A0A500931859 /* User.m */; };
 		8CB4CF261DE5E42A00539FB3 /* UBUnitManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CF251DE5E42A00539FB3 /* UBUnitManagementViewController.m */; };
-		8CB60B5C1DDCB7A200B68E02 /* UBFIRMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */; };
 		8CB6EC061DC0131600B36FE9 /* UBFindUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */; };
 		8CD6779C1DD0C84E005DDD31 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD6779B1DD0C84E005DDD31 /* Constants.m */; };
 		8CEBF7981D9C5B5D00DAE919 /* UBHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEBF7971D9C5B5D00DAE919 /* UBHomeViewController.m */; };
@@ -64,8 +63,8 @@
 		8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSuperUnitTableViewController.m; sourceTree = "<group>"; };
 		8C2650511DC3C9CB00AE3973 /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
 		8C2650521DC3C9CB00AE3973 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
-		8C4881E21DC56F100030B548 /* UBFIRDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFIRDatabaseManager.h; sourceTree = "<group>"; };
-		8C4881E31DC56F100030B548 /* UBFIRDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFIRDatabaseManager.m; sourceTree = "<group>"; };
+		8C4881E21DC56F100030B548 /* FIRManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRManager.h; sourceTree = "<group>"; };
+		8C4881E31DC56F100030B548 /* FIRManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRManager.m; sourceTree = "<group>"; };
 		8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindCommunityViewController.h; sourceTree = "<group>"; };
 		8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindCommunityViewController.m; sourceTree = "<group>"; };
 		8C6257E21D870B0700737D73 /* Urba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urba.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,8 +91,6 @@
 		8CA2933D1D87A0A500931859 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		8CB4CF241DE5E42A00539FB3 /* UBUnitManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnitManagementViewController.h; sourceTree = "<group>"; };
 		8CB4CF251DE5E42A00539FB3 /* UBUnitManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnitManagementViewController.m; sourceTree = "<group>"; };
-		8CB60B5A1DDCB7A200B68E02 /* UBFIRMessaging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFIRMessaging.h; sourceTree = "<group>"; };
-		8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFIRMessaging.m; sourceTree = "<group>"; };
 		8CB60B5D1DDCC1AE00B68E02 /* Urba.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Urba.entitlements; sourceTree = "<group>"; };
 		8CB6EC041DC0131600B36FE9 /* UBFindUnitTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindUnitTableViewController.h; sourceTree = "<group>"; };
 		8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindUnitTableViewController.m; sourceTree = "<group>"; };
@@ -266,10 +263,8 @@
 		8CA293381D87A04E00931859 /* Control */ = {
 			isa = PBXGroup;
 			children = (
-				8C4881E21DC56F100030B548 /* UBFIRDatabaseManager.h */,
-				8C4881E31DC56F100030B548 /* UBFIRDatabaseManager.m */,
-				8CB60B5A1DDCB7A200B68E02 /* UBFIRMessaging.h */,
-				8CB60B5B1DDCB7A200B68E02 /* UBFIRMessaging.m */,
+				8C4881E21DC56F100030B548 /* FIRManager.h */,
+				8C4881E31DC56F100030B548 /* FIRManager.m */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -571,9 +566,8 @@
 				8CB4CF261DE5E42A00539FB3 /* UBUnitManagementViewController.m in Sources */,
 				8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
-				8CB60B5C1DDCB7A200B68E02 /* UBFIRMessaging.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
-				8C4881E41DC56F100030B548 /* UBFIRDatabaseManager.m in Sources */,
+				8C4881E41DC56F100030B548 /* FIRManager.m in Sources */,
 				8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */,
 				8CD6779C1DD0C84E005DDD31 /* Constants.m in Sources */,
 			);

@@ -8,7 +8,7 @@
 
 #import "UBFindCommunityViewController.h"
 #import "UBHomeViewController.h"
-#import "UBFIRDatabaseManager.h"
+#import "FIRManager.h"
 #import "Constants.h"
 #import "ActivityView.h"
 
@@ -47,7 +47,7 @@
     [_results removeAllObjects];
     [_communityTable reloadData];
     
-    [UBFIRDatabaseManager getAllValuesFromNode:@"communities"
+    [FIRManager getAllValuesFromNode:@"communities"
                             withSuccessHandler:^(NSArray *results) {
                                 
                                 _results = [NSMutableArray arrayWithArray:results];

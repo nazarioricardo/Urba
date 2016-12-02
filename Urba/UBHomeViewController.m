@@ -7,8 +7,8 @@
 //
 
 #import "UBHomeViewController.h"
-#import "UBFIRDatabaseManager.h"
 #import "UBUnitManagementViewController.h"
+#import "FIRManager.h"
 #import "Constants.h"
 #import "ActivityView.h"
 
@@ -33,9 +33,9 @@
 
 - (void)getUnits {
     
-    [UBFIRDatabaseManager getAllValuesFromNode:@"units"
+    [FIRManager getAllValuesFromNode:@"units"
                                      orderedBy:@"user/id"
-                                    filteredBy:[UBFIRDatabaseManager getCurrentUser]
+                                    filteredBy:[FIRManager getCurrentUser]
                             withSuccessHandler:^(NSArray *results) {
                                 
                                 _unitsArray = [NSMutableArray arrayWithArray:results];
