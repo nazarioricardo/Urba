@@ -73,10 +73,7 @@
                           
                       } else if ([results count] > 1){
                           
-                          NSString *storyboardName = @"Main";
-                          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-                          UBUnitSelectionViewController *usvc = [storyboard instantiateViewControllerWithIdentifier:@"Unit List"];
-                          [self presentViewController:usvc animated:YES completion:nil];
+                          [self performSegueWithIdentifier:@"ManyUnitsSegue" sender:self];
                           
                       } else {
                           
@@ -129,6 +126,16 @@
         UBUnitViewController *uuvc = (UBUnitViewController *)[nav topViewController];
         [uuvc setUnitDict:_unitDict];
 
+    }
+    
+    if ([segue.identifier isEqualToString:@"ManyUnitsSegue"]) {
+        UINavigationController *nav = [segue destinationViewController];
+        UBUnitSelectionViewController *usvc = (UBUnitSelectionViewController *)[nav topViewController];
+        
+    }
+    
+    if ([segue.identifier isEqualToString:@"NoUnitsSegue"]) {
+        UBNilViewController *unvc = [segue destinationViewController];
     }
     
 }
