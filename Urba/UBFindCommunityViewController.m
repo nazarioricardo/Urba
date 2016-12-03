@@ -132,7 +132,6 @@
             
         // Pass the selected object to the new view controller.
         
-        [suvc setHomeViewController:_homeViewController];
         [suvc setCommunityName:_selectedName];
         [suvc setCommunityKey:_selectedKey];
         [suvc setAdminId:_adminId];

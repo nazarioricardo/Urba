@@ -12,8 +12,6 @@
 
 @interface UBFindUnitTableViewController : UITableViewController
 
-@property (nonatomic, weak) UBHomeViewController *homeViewController;
-
 @property (weak, nonatomic) NSString *communityName;
 @property (weak, nonatomic) NSString *communityKey;
 @property (weak, nonatomic) NSString *superUnitName;

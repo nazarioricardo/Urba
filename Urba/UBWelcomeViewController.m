@@ -96,6 +96,7 @@
         [_passwordTextField becomeFirstResponder];
     } else {
         [self logIn];
+        [textField resignFirstResponder];
     }
     
     return YES;
@@ -127,17 +128,6 @@
         [uuvc setUnitDict:_unitDict];
 
     }
-    
-    if ([segue.identifier isEqualToString:@"ManyUnitsSegue"]) {
-        UINavigationController *nav = [segue destinationViewController];
-        UBUnitSelectionViewController *usvc = (UBUnitSelectionViewController *)[nav topViewController];
-        
-    }
-    
-    if ([segue.identifier isEqualToString:@"NoUnitsSegue"]) {
-        UBNilViewController *unvc = [segue destinationViewController];
-    }
-    
 }
 
 @end

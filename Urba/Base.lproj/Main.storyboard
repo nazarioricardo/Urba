@@ -131,7 +131,7 @@
                                 <action selector="donePressed:" destination="6Xa-pq-LKA" id="84X-hH-LJg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="6Ti-ep-Twh">
+                        <barButtonItem key="rightBarButtonItem" id="6Ti-ep-Twh">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xhh-qy-hTJ">
                                 <rect key="frame" x="299" y="7" width="60" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

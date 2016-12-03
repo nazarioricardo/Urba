@@ -104,13 +104,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:findHomeSegue])
-    {
-        UINavigationController *nvc = [segue destinationViewController];
-        UBFindCommunityViewController *fcvc = (UBFindCommunityViewController *)[nvc topViewController];
-        fcvc.homeViewController = self;
-    }
-    
     if ([segue.identifier isEqualToString:unitManageSegue]) {
         
         UINavigationController *nvc = [segue destinationViewController];

@@ -14,6 +14,4 @@
 
 @interface UBFindCommunityViewController : UIViewController
 
-@property (nonatomic, weak) UBHomeViewController *homeViewController;
-
 @end
