@@ -7,7 +7,7 @@
 //
 
 #import "UBFindCommunityViewController.h"
-#import "UBHomeViewController.h"
+#import "UBUnitSelectionViewController.h"
 #import "FIRManager.h"
 #import "Constants.h"
 #import "ActivityView.h"

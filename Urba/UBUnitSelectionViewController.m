@@ -1,18 +1,18 @@
 //
-//  UBHomeViewController.m
+//  UBUnitSelectionViewController.m
 //  Urba
 //
 //  Created by Ricardo Nazario on 9/28/16.
 //  Copyright © 2016 Ricardo Nazario. All rights reserved.
 //
 
-#import "UBHomeViewController.h"
-#import "UBUnitManagementViewController.h"
+#import "UBUnitSelectionViewController.h"
+#import "UBUnitViewController.h"
 #import "FIRManager.h"
 #import "Constants.h"
 #import "ActivityView.h"
 
-@interface UBHomeViewController ()
+@interface UBUnitSelectionViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *unitsTable;
 @property (strong, nonatomic) NSMutableArray *unitsArray;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation UBHomeViewController
+@implementation UBUnitSelectionViewController
 
 #pragma mark - IBActions
 
@@ -114,9 +114,8 @@
     if ([segue.identifier isEqualToString:unitManageSegue]) {
         
         UINavigationController *nvc = [segue destinationViewController];
-        UBUnitManagementViewController *umvc = (UBUnitManagementViewController *)[nvc topViewController];
-        
-        [umvc setUnitDict:_unitDict];
+        UBUnitViewController *uuvc = (UBUnitViewController *)[nvc topViewController];
+        [uuvc setUnitDict:_unitDict];
     }
 }
 

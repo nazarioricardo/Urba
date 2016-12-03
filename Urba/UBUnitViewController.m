@@ -1,20 +1,23 @@
 //
-//  UBUnitManagementViewController.m
+//  UBUnitViewController.m
 //  Urba
 //
 //  Created by Ricardo Nazario on 11/23/16.
 //  Copyright © 2016 Ricardo Nazario. All rights reserved.
 //
 
-#import "UBUnitManagementViewController.h"
+#import "UBUnitViewController.h"
+#import "UBNilViewController.h"
+#import "UBUnitSelectionViewController.h"
+#import "ActivityView.h"
 #import "FIRManager.h"
 
-@interface UBUnitManagementViewController ()
+@interface UBUnitViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *tempVisitorTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *permVisitorTextField;
-@property (weak, nonatomic) NSString *address;
 
+@property (strong, nonatomic) NSString *address;
 @property (strong, nonatomic) NSString *unitName;
 @property (strong, nonatomic) NSString *unitId;
 @property (strong, nonatomic) NSString *community;
@@ -25,7 +28,7 @@
 
 @end
 
-@implementation UBUnitManagementViewController
+@implementation UBUnitViewController
 
 - (IBAction)tempVisitorPressed:(id)sender {
     
@@ -49,7 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+        
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
     NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];

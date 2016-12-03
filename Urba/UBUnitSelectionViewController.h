@@ -1,5 +1,5 @@
 //
-//  UBHomeViewController.h
+//  UBUnitSelectionViewController.h
 //  Urba
 //
 //  Created by Ricardo Nazario on 9/28/16.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UBFindCommunityViewController.h"
 
-@interface UBHomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface UBUnitSelectionViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end
