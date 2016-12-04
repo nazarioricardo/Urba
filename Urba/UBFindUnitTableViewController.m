@@ -74,6 +74,10 @@
     NSLog(@"%@", unitDict);
     
     [FIRManager addToChildByAutoId:@"requests" withPairs:requestDict];
+    
+    NSString *message = [NSString stringWithFormat:@"You've sent a request for verification to %@ for the unit at %@, %@", _adminName, _selectedName, _superUnitName];
+                         
+    [self alert:@"Success!" withMessage:message];
 }
 
 -(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
