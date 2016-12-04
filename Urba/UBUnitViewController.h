@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UBUnitViewController : UIViewController
+@interface UBUnitViewController : UIViewController <UITextViewDelegate>
 
 @property (weak, nonatomic) NSDictionary<NSString *, NSDictionary *> *unitDict;
 

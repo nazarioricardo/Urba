@@ -33,20 +33,48 @@
 
 - (void)getUnits {
     
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+    
     [FIRManager getAllValuesFromNode:@"units"
                                      orderedBy:@"user/id"
                                     filteredBy:[FIRManager getCurrentUser]
                             withSuccessHandler:^(NSArray *results) {
                                 
                                 _unitsArray = [NSMutableArray arrayWithArray:results];
-                                [_unitsTable reloadData];
-                                NSLog(@"Units: %@", _unitsArray);
-                        
+                                
+                                if ([results count] == 1) {
+                                    
+                                    [spinner removeSpinner];
+                                    [self alert:@"Wait a minute..." withMessage:@"You only have one registered household! If this is wrong, try reloading the page, or make sure you don't have any unverified requests."];
+                                    [self dismissViewControllerAnimated:YES completion:nil];
+                                } else {
+                                    
+                                    [spinner removeSpinner];
+                                    [_unitsTable reloadData];
+                                }
                             }
                                 orErrorHandler:^(NSError *error) {
-                                    
-                                    NSLog(@"Error: %@", error.description);
+                                    [spinner removeSpinner];
+                                    [self alert:@"Error!" withMessage:error.description];
                                 }];
+}
+
+-(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+    
+    UIAlertController *alertView = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(title, nil)
+                                    message:errorMsg
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [alertView dismissViewControllerAnimated:YES
+                                                                                 completion:nil];
+                                               }];
+    [alertView addAction:ok];
+    [self presentViewController:alertView animated:YES completion:nil];
+    
 }
 
 #pragma mark - Table View Data Source

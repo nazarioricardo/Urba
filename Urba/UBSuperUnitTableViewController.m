@@ -37,15 +37,41 @@
                                 
                                 _results = [NSMutableArray arrayWithArray:results];
                                 
-                                //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
-                                [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.tableView.numberOfSections)] withRowAnimation:UITableViewRowAnimationFade];
-                                [spinner removeSpinner];
+                                if (![results count]) {
+                                    
+                                    [spinner removeSpinner];
+                                    [self alert:@"Wait a minute..." withMessage:@"There aren't any streets here! Try contacting your community administrator to get this fixed."];
+                                } else {
+                                    
+                                    //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
+                                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.tableView.numberOfSections)] withRowAnimation:UITableViewRowAnimationFade];
+                                    [spinner removeSpinner];
+                                }
                             }
                                 orErrorHandler:^(NSError *error) {
                                     
                                     [spinner removeSpinner];
-                                    NSLog(@"Error: %@", error.description);
+                                    [self alert:@"Error!" withMessage:error.description];
                                 }];
+}
+
+#pragma mark - Private 
+
+-(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+    
+    UIAlertController *alertView = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(title, nil)
+                                    message:errorMsg
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [alertView dismissViewControllerAnimated:YES
+                                                                                 completion:nil];
+                                               }];
+    [alertView addAction:ok];
+    [self presentViewController:alertView animated:YES completion:nil];
 }
 
 #pragma mark - Table View Data Source

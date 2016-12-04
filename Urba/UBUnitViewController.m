@@ -30,11 +30,15 @@
 
 @implementation UBUnitViewController
 
+#pragma mark - IBActions
+
 - (IBAction)tempVisitorPressed:(id)sender {
     
     if (![_tempVisitorTextField.text isEqualToString:@""]) {
         
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_tempVisitorTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id", nil];
+        
+        [_tempVisitorTextField resignFirstResponder];
         
         [FIRManager addToChildByAutoId:@"visitors" withPairs:dict];
     }
@@ -48,6 +52,28 @@
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Private
+
+
+#pragma mark - Text Field Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];    
+    return YES;
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - Table View Delegate
+
+#pragma mark - Table View Data Source
+
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];

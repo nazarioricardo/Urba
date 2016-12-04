@@ -36,7 +36,7 @@
                                 if (![results count]) {
                                     
                                     [spinner removeSpinner];
-                                    NSLog(@"Snapshot doesn't exist");
+                                    [self alert:@"Wait a minute..." withMessage:@"There are no houses registered here. Contact your community administrator to get this fixed."];
                                     
                                 } else {
                                     
@@ -52,9 +52,11 @@
                                 orErrorHandler:^(NSError *error) {
                                     
                                     [spinner removeSpinner];
-                                    NSLog(@"Error: %@", error.description);
+                                    [self alert:@"Error!" withMessage:error.description];
                                 }];
 }
+
+#pragma mark - Private
 
 - (void)sendRequest {
     
@@ -72,6 +74,23 @@
     NSLog(@"%@", unitDict);
     
     [FIRManager addToChildByAutoId:@"requests" withPairs:requestDict];
+}
+
+-(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+    
+    UIAlertController *alertView = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(title, nil)
+                                    message:errorMsg
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [alertView dismissViewControllerAnimated:YES
+                                                                                 completion:nil];
+                                               }];
+    [alertView addAction:ok];
+    [self presentViewController:alertView animated:YES completion:nil];
 }
 
 #pragma mark - Table View Data Source

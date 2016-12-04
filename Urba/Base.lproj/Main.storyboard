@@ -103,14 +103,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eer-KB-UVL">
-                                <rect key="frame" x="16" y="89" width="119" height="30"/>
+                                <rect key="frame" x="16" y="72" width="119" height="30"/>
                                 <state key="normal" title="Link a Household"/>
                                 <connections>
                                     <segue destination="MAv-S1-ddc" kind="showDetail" identifier="FindHomeSegue" id="KfB-Bn-UGc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45D-au-j4f">
-                                <rect key="frame" x="16" y="127" width="173" height="30"/>
+                                <rect key="frame" x="16" y="110" width="173" height="30"/>
                                 <state key="normal" title="Manage other Household"/>
                                 <connections>
                                     <segue destination="woN-Po-N7u" kind="show" id="q1Y-sh-mCc"/>
@@ -121,7 +121,7 @@
                         <constraints>
                             <constraint firstItem="45D-au-j4f" firstAttribute="top" secondItem="eer-KB-UVL" secondAttribute="bottom" constant="8" id="57H-2q-d8R"/>
                             <constraint firstAttribute="leadingMargin" secondItem="45D-au-j4f" secondAttribute="leading" id="IKC-9V-f6L"/>
-                            <constraint firstItem="eer-KB-UVL" firstAttribute="top" secondItem="vZz-ng-ih3" secondAttribute="bottom" constant="25" id="OA0-xI-6G0"/>
+                            <constraint firstItem="eer-KB-UVL" firstAttribute="top" secondItem="vZz-ng-ih3" secondAttribute="bottom" constant="8" id="OA0-xI-6G0"/>
                             <constraint firstAttribute="leadingMargin" secondItem="eer-KB-UVL" secondAttribute="leading" id="sqc-BX-6lV"/>
                         </constraints>
                     </view>
@@ -262,20 +262,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IGj-zc-nVg">
-                                <rect key="frame" x="0.0" y="89" width="375" height="578"/>
+                                <rect key="frame" x="0.0" y="107" width="375" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="zC7-vI-3Lj">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zC7-vI-3Lj" id="BM8-Im-Gha">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Always Permitted" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b7A-Hr-owv">
                                 <rect key="frame" x="16" y="117" width="313" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GZ3-6c-jFl" id="5M2-gw-lTF"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Incoming Visitor" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bvv-mX-wK3">
                                 <rect key="frame" x="16" y="79" width="313" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GZ3-6c-jFl" id="Cg0-oZ-oUI"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZd-tB-xBs">
                                 <rect key="frame" x="337" y="83" width="22" height="22"/>
@@ -300,7 +316,7 @@
                             <constraint firstItem="D3d-nY-XsG" firstAttribute="top" secondItem="IGj-zc-nVg" secondAttribute="bottom" id="SCQ-M9-bZr"/>
                             <constraint firstItem="fZd-tB-xBs" firstAttribute="centerY" secondItem="bvv-mX-wK3" secondAttribute="centerY" id="WbP-hg-fgb"/>
                             <constraint firstItem="b7A-Hr-owv" firstAttribute="top" secondItem="bvv-mX-wK3" secondAttribute="bottom" constant="8" id="WpM-nt-56w"/>
-                            <constraint firstItem="IGj-zc-nVg" firstAttribute="top" secondItem="bCw-9u-Xwn" secondAttribute="bottom" constant="25" id="aKH-oI-hCA"/>
+                            <constraint firstItem="IGj-zc-nVg" firstAttribute="top" secondItem="bCw-9u-Xwn" secondAttribute="bottom" constant="43" id="aKH-oI-hCA"/>
                             <constraint firstItem="fZd-tB-xBs" firstAttribute="leading" secondItem="bvv-mX-wK3" secondAttribute="trailing" constant="8" id="f11-Ix-ld6"/>
                             <constraint firstItem="IGj-zc-nVg" firstAttribute="leading" secondItem="b7A-Hr-owv" secondAttribute="trailing" constant="-329" id="g7h-RZ-Bbk"/>
                             <constraint firstItem="fZd-tB-xBs" firstAttribute="trailing" secondItem="gRH-ix-hGM" secondAttribute="trailingMargin" id="nfo-8o-uvo"/>
@@ -324,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iM4-6C-zC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1930" y="385"/>
+            <point key="canvasLocation" x="1928.8" y="384.55772113943033"/>
         </scene>
         <!--Ur Community-->
         <scene sceneID="Sb2-j8-EUb">
@@ -636,8 +652,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tcB-QH-6wz"/>
         <segue reference="q1Y-sh-mCc"/>
+        <segue reference="tcB-QH-6wz"/>
         <segue reference="KfB-Bn-UGc"/>
     </inferredMetricsTieBreakers>
 </document>

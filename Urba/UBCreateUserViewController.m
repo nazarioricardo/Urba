@@ -38,11 +38,11 @@
     
     if ([_emailTextField.text  isEqual: @""] || [_passwordTextField.text  isEqual: @""] || [_confirmPasswordTextField.text  isEqual: @""]) {
         
-        NSLog(@"Please fill all fields");
+        [self alert:@"Error!" withMessage:@"Please fill in all blank fields"];
         
     } else if (![_passwordTextField.text isEqualToString:_confirmPasswordTextField.text]) {
         
-        NSLog(@"Password mismatch!");
+        [self alert:@"Error!" withMessage:@"Passwords did not match!"];
     } else {
 
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
@@ -54,15 +54,34 @@
                                  if (error) {
                                      
                                      [spinner removeSpinner];
-                                     NSLog(@"%@", error.description);
+                                     [self alert:@"Error!" withMessage:error.description];
                                  } else {
                                      
                                      NSLog(@"User created!");
+                                     [self alert:@"Success!" withMessage:@"User Created."];
                                      
                                      [self dismissViewControllerAnimated:YES completion:nil];
                                  }
                              }];
     }
+    
+}
+
+-(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+    
+    UIAlertController *alertView = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(title, nil)
+                                    message:errorMsg
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [alertView dismissViewControllerAnimated:YES
+                                                                                 completion:nil];
+                                               }];
+    [alertView addAction:ok];
+    [self presentViewController:alertView animated:YES completion:nil];
     
 }
 

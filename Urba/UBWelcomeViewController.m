@@ -46,7 +46,7 @@
                              if (error) {
                                  
                                  [spinner removeSpinner];
-                                 NSLog(@"There has been an error!\n %@", error.description);
+                                 [self alert:error.description];
                                  
                                  // TODO : SHOW ERROR ALERT
                              } else {
@@ -83,8 +83,26 @@
                   }
                       orErrorHandler:^(NSError *error) {
                           
-                          NSLog(@"Error: %@", error.description);
+                          [self alert:error.description];
                       }];
+}
+
+-(void)alert:(NSString *)errorMsg {
+    
+    UIAlertController *alertView = [UIAlertController
+                                          alertControllerWithTitle:NSLocalizedString(@"Error!", nil)
+                                          message:errorMsg
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [alertView dismissViewControllerAnimated:YES
+                                                                             completion:nil];
+                                               }];
+    [alertView addAction:ok];
+    [self presentViewController:alertView animated:YES completion:nil];
+    
 }
 
 #pragma mark - Text Field Delegate

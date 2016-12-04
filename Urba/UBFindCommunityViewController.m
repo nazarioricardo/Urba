@@ -60,8 +60,25 @@
                                 orErrorHandler:^(NSError *error) {
                                     
                                     [spinner removeSpinner];
-                                    NSLog(@"Error: %@", error.description);
+                                    [self alert:@"Error!" withMessage:error.description];
                                 }];
+}
+
+-(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+    
+    UIAlertController *alertView = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(title, nil)
+                                    message:errorMsg
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [alertView dismissViewControllerAnimated:YES
+                                                                                 completion:nil];
+                                               }];
+    [alertView addAction:ok];
+    [self presentViewController:alertView animated:YES completion:nil];
 }
 
 #pragma mark - Table View Data Source
