@@ -22,7 +22,7 @@
 
 @implementation UBFindUnitTableViewController
 
-#pragma mark - IBActions
+#pragma mark - Private
 
 - (void)getUnits {
     
@@ -53,12 +53,11 @@
                                     
                                     [spinner removeSpinner];
                                     [self alert:@"Error!" withMessage:error.description];
+                                    [self dismissViewControllerAnimated:YES completion:nil];
                                 }];
 }
 
-#pragma mark - Private
-
-- (void)sendRequest {
+- (void)sendRequestToUser:(NSString *)unitUser withId:(NSString *)unitUserId {
     
     NSString *userId = [FIRManager getCurrentUser];
     
@@ -67,7 +66,17 @@
     
     NSDictionary *unitDict = [NSDictionary dictionaryWithObjectsAndKeys:_selectedName,@"name",_selectedKey,@"id", _superUnitName, @"owner", nil];
     NSDictionary *fromDict = [NSDictionary dictionaryWithObjectsAndKeys: [FIRManager getCurrentUserEmail],@"name", [FIRManager getCurrentUser], @"id", nil];
-    NSDictionary *toDict = [NSDictionary dictionaryWithObjectsAndKeys:_adminName,@"name",_adminId,@"id", nil];
+    NSDictionary *toDict;
+    
+    NSString *message;
+    
+    if (unitUserId) {
+        toDict = [NSDictionary dictionaryWithObjectsAndKeys:unitUserId,@"id", nil];
+        message = [NSString stringWithFormat:@"You've sent a verification request to a resident at %@, %@",  _selectedName, _superUnitName];
+    } else {
+        toDict = [NSDictionary dictionaryWithObjectsAndKeys:_adminName,@"name",_adminId,@"id", nil];
+        message = [NSString stringWithFormat:@"You've sent a verification request to a community admin for the unit %@, %@",  _selectedName, _superUnitName];
+    }
     
     NSDictionary *requestDict = [NSDictionary dictionaryWithObjectsAndKeys:toDict, @"to", fromDict, @"from", unitDict, @"unit", nil];
     
@@ -75,7 +84,7 @@
     
     [FIRManager addToChildByAutoId:@"requests" withPairs:requestDict];
     
-    NSString *message = [NSString stringWithFormat:@"You've sent a request for verification to %@ for the unit at %@, %@", _adminName, _selectedName, _superUnitName];
+    
                          
     [self alert:@"Success!" withMessage:message];
 }
@@ -92,6 +101,8 @@
                                                handler:^(UIAlertAction * action) {
                                                    [alertView dismissViewControllerAnimated:YES
                                                                                  completion:nil];
+                                                   [self dismissViewControllerAnimated:YES
+                                                                            completion:nil];
                                                }];
     [alertView addAction:ok];
     [self presentViewController:alertView animated:YES completion:nil];
@@ -111,8 +122,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"unitCell" forIndexPath:indexPath];
     
-    // Configure the cell...
-    
     // Unpack from results array
     NSDictionary<NSString *, NSDictionary *> *snapshotDict = _results[indexPath.row];
     NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
@@ -130,8 +139,21 @@
     _selectedKey = [currentSnapshot valueForKey:@"id"];
     _selectedName = [currentSnapshot valueForKeyPath:@"values.name"];
     
-    [self sendRequest];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"User Values: %@", [currentSnapshot valueForKeyPath:@"values.users"]);
+    
+    if (![currentSnapshot valueForKeyPath:@"values.users"]) {
+        [self sendRequestToUser:nil withId:nil];
+    } else {
+        
+        NSArray *userArray = [currentSnapshot valueForKeyPath:@"values.users"];
+        
+        for (NSString *userId in userArray) {
+            NSLog(@"User Id: %@", userId);
+            
+            [self sendRequestToUser:nil withId:userId];
+        }
+        
+    }
 }
 
 #pragma mark - Life Cycle

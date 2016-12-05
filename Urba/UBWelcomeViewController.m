@@ -59,9 +59,11 @@
 
 - (void)getUnits {
     
+    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRManager getCurrentUser]];
+    
     [FIRManager getAllValuesFromNode:@"units"
-                           orderedBy:@"user/id"
-                          filteredBy:[FIRManager getCurrentUser]
+                           orderedBy:unitRef
+                          filteredBy:[FIRManager getCurrentUserEmail]
                   withSuccessHandler:^(NSArray *results) {
                       
                       if (![results count]) {
