@@ -166,8 +166,6 @@
 			children = (
 				8CB4CF241DE5E42A00539FB3 /* UBUnitViewController.h */,
 				8CB4CF251DE5E42A00539FB3 /* UBUnitViewController.m */,
-				8CEBF7961D9C5B5D00DAE919 /* UBUnitSelectionViewController.h */,
-				8CEBF7971D9C5B5D00DAE919 /* UBUnitSelectionViewController.m */,
 				8C4956981DBAB0CC00CAD822 /* Settings */,
 			);
 			name = "Main Views";
@@ -178,12 +176,9 @@
 			children = (
 				8C06A1A61DF20E3B00EDA13D /* UBSettingsViewController.h */,
 				8C06A1A71DF20E3B00EDA13D /* UBSettingsViewController.m */,
-				8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */,
-				8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */,
-				8C19DF091DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.h */,
-				8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */,
-				8CB6EC041DC0131600B36FE9 /* UBFindUnitTableViewController.h */,
-				8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */,
+				8CEBF7961D9C5B5D00DAE919 /* UBUnitSelectionViewController.h */,
+				8CEBF7971D9C5B5D00DAE919 /* UBUnitSelectionViewController.m */,
+				8C64A4CD1DF5F0F000016CB7 /* Find Unit */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -259,6 +254,19 @@
 				8C62580C1D870B0700737D73 /* Info.plist */,
 			);
 			path = UrbaUITests;
+			sourceTree = "<group>";
+		};
+		8C64A4CD1DF5F0F000016CB7 /* Find Unit */ = {
+			isa = PBXGroup;
+			children = (
+				8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */,
+				8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */,
+				8C19DF091DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.h */,
+				8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */,
+				8CB6EC041DC0131600B36FE9 /* UBFindUnitTableViewController.h */,
+				8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */,
+			);
+			name = "Find Unit";
 			sourceTree = "<group>";
 		};
 		8CA293341D879FF400931859 /* Model */ = {

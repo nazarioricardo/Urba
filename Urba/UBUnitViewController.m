@@ -14,8 +14,7 @@
 
 @interface UBUnitViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *tempVisitorTextField;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *permVisitorTextField;
+@property (weak, nonatomic) IBOutlet UITableView *feedTable;
 
 @property (strong, nonatomic) NSString *address;
 @property (strong, nonatomic) NSString *unitName;
@@ -25,6 +24,8 @@
 @property (strong, nonatomic) NSString *superUnit;
 @property (strong, nonatomic) NSString *superUnitId;
 
+@property (strong, nonatomic) NSMutableArray *visitorsArray;
+
 
 @end
 
@@ -32,29 +33,90 @@
 
 #pragma mark - IBActions
 
-- (IBAction)tempVisitorPressed:(id)sender {
+- (IBAction)addGuestPressed:(id)sender {
     
-    if (![_tempVisitorTextField.text isEqualToString:@""]) {
-        
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_tempVisitorTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id", nil];
-        
-        [_tempVisitorTextField resignFirstResponder];
-        
-        [FIRManager addToChildByAutoId:@"visitors" withPairs:dict];
-    }
-    
-}
-
-- (IBAction)permVisitorPressed:(id)sender {
-
-}
-
-- (IBAction)cancelPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self addGuestController];
 }
 
 #pragma mark - Private
 
+-(void)getGuests {
+    
+    [FIRManager getAllValuesFromNode:@"visitors"
+                           orderedBy:@"unit-id"
+                          filteredBy:_unitId
+                  withSuccessHandler:^(NSArray *results) {
+                      
+                      NSLog(@"VISITORS: %@", results);
+                      _visitorsArray = [NSMutableArray arrayWithArray:results];
+                      [_feedTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _feedTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationFade];
+                  }
+                      orErrorHandler:^(NSError *error) {
+                          
+                          [self alert:@"Error!" withMessage:error.description];
+                      }];
+    
+}
+
+-(void)addGuestController {
+    
+    UIAlertController *addView = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(@"Add Guest", nil)
+                                    message:@"What's your guest's name?"
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *add = [UIAlertAction actionWithTitle:@"Add"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   
+                                                   UITextField *addTextField = addView.textFields.firstObject;
+                                                   
+                                                   if (![addTextField.text isEqualToString:@""]) {
+                                                       
+                                                       NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:addTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id", nil];
+                                                       
+                                                       [addTextField resignFirstResponder];
+                                                       
+                                                       [FIRManager addToChildByAutoId:@"visitors" withPairs:dict];
+                                                   }
+                                                   
+                                                  
+                                               }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [addView dismissViewControllerAnimated:YES
+                                                                                 completion:nil];
+                                               }];
+    
+    [addView addTextFieldWithConfigurationHandler:^(UITextField *textField)
+     {
+         textField.placeholder = NSLocalizedString(@"Guest Name", @"GuestName");
+     }];
+    
+    [addView addAction:add];
+    [addView addAction:cancel];
+
+    [self presentViewController:addView animated:YES completion:nil];
+}
+
+-(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+    
+    UIAlertController *alertView = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(title, nil)
+                                    message:errorMsg
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [alertView dismissViewControllerAnimated:YES
+                                                                                 completion:nil];
+                                               }];
+    [alertView addAction:ok];
+    [self presentViewController:alertView animated:YES completion:nil];
+}
 
 #pragma mark - Text Field Delegate
 
@@ -70,15 +132,36 @@
 
 #pragma mark - Table View Delegate
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_visitorsArray count];
+}
+
+
 #pragma mark - Table View Data Source
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    // Unpack community from results array
+    NSDictionary<NSString *, NSDictionary *> *snapshotDict = _visitorsArray[indexPath.row];
+    NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
+    
+    return cell;
+}
 
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-        
+    
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
     NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
@@ -91,6 +174,8 @@
     _superUnitId = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.super-unit-id"]];
     
     NSLog(@"Unit id: %@", _unitId);
+    [self getGuests];
+
     
     self.navigationItem.title = _address;
 }

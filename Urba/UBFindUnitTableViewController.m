@@ -29,9 +29,9 @@
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
     [FIRManager getAllValuesFromNode:@"units"
-                                     orderedBy:@"super-unit-id"
-                                    filteredBy:_superUnitKey
-                            withSuccessHandler:^(NSArray *results) {
+                           orderedBy:@"super-unit-id"
+                          filteredBy:_superUnitKey
+                  withSuccessHandler:^(NSArray *results) {
                                 
                                 if (![results count]) {
                                     
@@ -83,8 +83,6 @@
     NSLog(@"%@", unitDict);
     
     [FIRManager addToChildByAutoId:@"requests" withPairs:requestDict];
-    
-    
                          
     [self alert:@"Success!" withMessage:message];
 }
