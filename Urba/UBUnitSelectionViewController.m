@@ -35,18 +35,19 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
+    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRManager getCurrentUser]];
+    
     [FIRManager getAllValuesFromNode:@"units"
-                                     orderedBy:@"user/id"
-                                    filteredBy:[FIRManager getCurrentUser]
-                            withSuccessHandler:^(NSArray *results) {
+                           orderedBy:unitRef
+                          filteredBy:[FIRManager getCurrentUser]
+                  withSuccessHandler:^(NSArray *results) {
                                 
                                 _unitsArray = [NSMutableArray arrayWithArray:results];
                                 
-                                if ([results count] == 1) {
+                                if ([results count] <= 1) {
                                     
                                     [spinner removeSpinner];
                                     [self alert:@"Wait a minute..." withMessage:@"You only have one registered household! If this is wrong, try reloading the page, or make sure you don't have any unverified requests."];
-                                    [self dismissViewControllerAnimated:YES completion:nil];
                                 } else {
                                     
                                     [spinner removeSpinner];
@@ -71,6 +72,7 @@
                                                handler:^(UIAlertAction * action) {
                                                    [alertView dismissViewControllerAnimated:YES
                                                                                  completion:nil];
+                                                   [self dismissViewControllerAnimated:YES completion:nil];
                                                }];
     [alertView addAction:ok];
     [self presentViewController:alertView animated:YES completion:nil];

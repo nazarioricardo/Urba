@@ -71,8 +71,7 @@
     NSString *message;
     
     if (unitUserId) {
-        toDict = [NSDictionary dictionaryWithObjectsAndKeys:unitUserId,@"id", nil];
-        message = [NSString stringWithFormat:@"You've sent a verification request to a resident at %@, %@",  _selectedName, _superUnitName];
+        message = [NSString stringWithFormat:@"You've sent a verification request to the resident(s) at %@, %@",  _selectedName, _superUnitName];
     } else {
         toDict = [NSDictionary dictionaryWithObjectsAndKeys:_adminName,@"name",_adminId,@"id", nil];
         message = [NSString stringWithFormat:@"You've sent a verification request to a community admin for the unit %@, %@",  _selectedName, _superUnitName];

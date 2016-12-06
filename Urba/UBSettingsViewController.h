@@ -10,4 +10,6 @@
 
 @interface UBSettingsViewController : UIViewController
 
+@property (weak, nonatomic) NSDictionary *unitDict;
+
 @end

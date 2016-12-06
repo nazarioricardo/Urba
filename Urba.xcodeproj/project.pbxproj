@@ -25,6 +25,8 @@
 		8C6258001D870B0700737D73 /* UrbaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257FF1D870B0700737D73 /* UrbaTests.m */; };
 		8C62580B1D870B0700737D73 /* UrbaUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C62580A1D870B0700737D73 /* UrbaUITests.m */; };
 		8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */; };
+		8C7005991DF73A7D00ED8BDC /* UBUnitRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C7005981DF73A7D00ED8BDC /* UBUnitRequestsViewController.m */; };
+		8C70059D1DF7560D00ED8BDC /* UBGuestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C70059C1DF7560D00ED8BDC /* UBGuestTableViewCell.m */; };
 		8C7485FD1DDE0694002CD1EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C7485FC1DDE0694002CD1EE /* GoogleService-Info.plist */; };
 		8C7485FF1DDE2010002CD1EE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7485FE1DDE2010002CD1EE /* AdSupport.framework */; };
 		8CA2933E1D87A0A500931859 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2933D1D87A0A500931859 /* User.m */; };
@@ -91,6 +93,10 @@
 		8C62580C1D870B0700737D73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C67E2FB1D87626D0044C9F3 /* UBCreateUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBCreateUserViewController.h; sourceTree = "<group>"; };
 		8C67E2FC1D87626D0044C9F3 /* UBCreateUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBCreateUserViewController.m; sourceTree = "<group>"; };
+		8C7005971DF73A7D00ED8BDC /* UBUnitRequestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnitRequestsViewController.h; sourceTree = "<group>"; };
+		8C7005981DF73A7D00ED8BDC /* UBUnitRequestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnitRequestsViewController.m; sourceTree = "<group>"; };
+		8C70059B1DF7560D00ED8BDC /* UBGuestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBGuestTableViewCell.h; sourceTree = "<group>"; };
+		8C70059C1DF7560D00ED8BDC /* UBGuestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBGuestTableViewCell.m; sourceTree = "<group>"; };
 		8C7485FC1DDE0694002CD1EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C7485FE1DDE2010002CD1EE /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		8CA2933C1D87A0A500931859 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -164,8 +170,11 @@
 		8C2700981D9C317700BACCDE /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
-				8CB4CF241DE5E42A00539FB3 /* UBUnitViewController.h */,
-				8CB4CF251DE5E42A00539FB3 /* UBUnitViewController.m */,
+				8C70059A1DF755F400ED8BDC /* New Group */,
+				8C7005971DF73A7D00ED8BDC /* UBUnitRequestsViewController.h */,
+				8C7005981DF73A7D00ED8BDC /* UBUnitRequestsViewController.m */,
+				8C06A1A61DF20E3B00EDA13D /* UBSettingsViewController.h */,
+				8C06A1A71DF20E3B00EDA13D /* UBSettingsViewController.m */,
 				8C4956981DBAB0CC00CAD822 /* Settings */,
 			);
 			name = "Main Views";
@@ -174,8 +183,6 @@
 		8C4956981DBAB0CC00CAD822 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				8C06A1A61DF20E3B00EDA13D /* UBSettingsViewController.h */,
-				8C06A1A71DF20E3B00EDA13D /* UBSettingsViewController.m */,
 				8CEBF7961D9C5B5D00DAE919 /* UBUnitSelectionViewController.h */,
 				8CEBF7971D9C5B5D00DAE919 /* UBUnitSelectionViewController.m */,
 				8C64A4CD1DF5F0F000016CB7 /* Find Unit */,
@@ -267,6 +274,17 @@
 				8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */,
 			);
 			name = "Find Unit";
+			sourceTree = "<group>";
+		};
+		8C70059A1DF755F400ED8BDC /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				8CB4CF241DE5E42A00539FB3 /* UBUnitViewController.h */,
+				8CB4CF251DE5E42A00539FB3 /* UBUnitViewController.m */,
+				8C70059B1DF7560D00ED8BDC /* UBGuestTableViewCell.h */,
+				8C70059C1DF7560D00ED8BDC /* UBGuestTableViewCell.m */,
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 		8CA293341D879FF400931859 /* Model */ = {
@@ -578,6 +596,7 @@
 				8CEBF7981D9C5B5D00DAE919 /* UBUnitSelectionViewController.m in Sources */,
 				8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */,
 				8CA2933E1D87A0A500931859 /* User.m in Sources */,
+				8C70059D1DF7560D00ED8BDC /* UBGuestTableViewCell.m in Sources */,
 				8C06A1A51DF201E200EDA13D /* UBNilViewController.m in Sources */,
 				8C06A1A81DF20E3B00EDA13D /* UBSettingsViewController.m in Sources */,
 				8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */,
@@ -586,6 +605,7 @@
 				8CB4CF261DE5E42A00539FB3 /* UBUnitViewController.m in Sources */,
 				8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
+				8C7005991DF73A7D00ED8BDC /* UBUnitRequestsViewController.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
 				8C4881E41DC56F100030B548 /* FIRManager.m in Sources */,
 				8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */,

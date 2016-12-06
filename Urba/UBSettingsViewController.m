@@ -10,6 +10,10 @@
 
 @interface UBSettingsViewController ()
 
+@property (strong, nonatomic) NSString *unitName;
+@property (strong, nonatomic) NSString *unitId;
+@property (strong, nonatomic) NSString *address;
+
 @end
 
 @implementation UBSettingsViewController
@@ -18,9 +22,18 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)signOutPressed:(id)sender {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSString *name = [_unitDict valueForKeyPath:@"values.name"];
+    NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
+    _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
+    
+    self.navigationItem.title = _address;
 }
 
 - (void)didReceiveMemoryWarning {

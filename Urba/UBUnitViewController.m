@@ -9,6 +9,7 @@
 #import "UBUnitViewController.h"
 #import "UBNilViewController.h"
 #import "UBUnitSelectionViewController.h"
+#import "UBGuestTableViewCell.h"
 #import "ActivityView.h"
 #import "FIRManager.h"
 
@@ -24,7 +25,8 @@
 @property (strong, nonatomic) NSString *superUnit;
 @property (strong, nonatomic) NSString *superUnitId;
 
-@property (strong, nonatomic) NSMutableArray *visitorsArray;
+@property (strong, nonatomic) NSMutableArray *feedArray;
+@property (strong, nonatomic) NSMutableArray *requestsArray;
 
 
 @end
@@ -48,7 +50,8 @@
                   withSuccessHandler:^(NSArray *results) {
                       
                       NSLog(@"VISITORS: %@", results);
-                      _visitorsArray = [NSMutableArray arrayWithArray:results];
+                      
+                      _feedArray = [NSMutableArray arrayWithArray:results];
                       [_feedTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _feedTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationFade];
                   }
                       orErrorHandler:^(NSError *error) {
@@ -137,7 +140,8 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_visitorsArray count];
+    
+    return [_feedArray count];
 }
 
 
@@ -145,13 +149,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    UBGuestTableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"GuestCell" forIndexPath:indexPath];
     
     // Unpack community from results array
-    NSDictionary<NSString *, NSDictionary *> *snapshotDict = _visitorsArray[indexPath.row];
+    NSDictionary<NSString *, NSDictionary *> *snapshotDict = _feedArray[indexPath.row];
     NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@", name];
+    cell.statusLabel.text = [NSString stringWithFormat:@"suck it"];
     
     return cell;
 }
@@ -175,7 +180,6 @@
     
     NSLog(@"Unit id: %@", _unitId);
     [self getGuests];
-
     
     self.navigationItem.title = _address;
 }
