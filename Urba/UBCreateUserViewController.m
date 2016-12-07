@@ -7,9 +7,8 @@
 //
 
 #import "UBCreateUserViewController.h"
+#import "FIRManager.h"
 #import "ActivityView.h"
-
-@import Firebase;
 
 @interface UBCreateUserViewController ()
 
@@ -47,31 +46,26 @@
 
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [[FIRAuth auth] createUserWithEmail:_emailTextField.text
-                               password:_passwordTextField.text
-                             completion:^(FIRUser *user, NSError *error) {
-                                 
-                                 if (error) {
-                                     
-                                     [spinner removeSpinner];
-                                     [self alert:@"Error!" withMessage:error.description];
-                                 } else {
-                                     
-                                     NSLog(@"User created!");
-                                     [self alert:@"Success!" withMessage:@"User Created."];
-                                     
-                                     [self dismissViewControllerAnimated:YES completion:nil];
-                                 }
-                             }];
+        [FIRManager createUser:_emailTextField.text withPassword:_passwordTextField.text withHandler:^(BOOL success, NSError *error) {
+            
+            if (error) {
+                [spinner removeSpinner];
+                [self alert:@"Error!" withMessage:error.description];
+            } else {
+                [spinner removeSpinner];
+                [self alert:@"Success!" withMessage:@"User created."];
+            }
+            
+        }];
     }
     
 }
 
--(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+-(void)alert:(NSString *)title withMessage:(NSString *)message {
     
     UIAlertController *alertView = [UIAlertController
                                     alertControllerWithTitle:NSLocalizedString(title, nil)
-                                    message:errorMsg
+                                    message:message
                                     preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
@@ -79,10 +73,12 @@
                                                handler:^(UIAlertAction * action) {
                                                    [alertView dismissViewControllerAnimated:YES
                                                                                  completion:nil];
+                                                   if ([title isEqualToString:@"Success!"]) {
+                                                       [self dismissViewControllerAnimated:YES completion:nil];
+                                                   }
                                                }];
     [alertView addAction:ok];
     [self presentViewController:alertView animated:YES completion:nil];
-    
 }
 
 #pragma mark - Text Field Delegate

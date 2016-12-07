@@ -130,7 +130,33 @@
     return [FIRAuth auth].currentUser.email;
 }
 
++(void)logIn:(NSString *)email withPassword:(NSString *)password withHandler:(FIRAuthHandler)authHandler {
+    
+    [[FIRAuth auth] signInWithEmail:email
+                           password:password
+                         completion:^(FIRUser *user, NSError *error) {
+                             
+                             if (error) {
+                                 authHandler(NO,error);
+                             } else {
+                                 authHandler(YES,nil);
+                             }
+    }];
+}
 
++(void)createUser:(NSString *)email withPassword:(NSString *)password withHandler:(FIRAuthHandler)authHandler {
+    
+    [[FIRAuth auth] createUserWithEmail:email
+                               password:password
+                             completion:^(FIRUser *user, NSError *error) {
+                                 
+                                 if (error) {
+                                     authHandler(NO,error);
+                                 } else {
+                                     authHandler(YES,nil);
+                                 }
+    }];
+}
 
 #pragma mark - Private
 

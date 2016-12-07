@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^FIRAuthHandler)(BOOL success, NSError *error);
 typedef void(^FIRSuccessHandler)(NSArray *results);
 typedef void(^FIRErrorHandler)(NSError *error);
 
@@ -21,5 +22,7 @@ typedef void(^FIRErrorHandler)(NSError *error);
 
 +(NSString *)getCurrentUser;
 +(NSString *)getCurrentUserEmail;
++(void)logIn:(NSString *)email withPassword:(NSString *)password withHandler:(FIRAuthHandler)authHandler;
++(void)createUser:(NSString *)email withPassword:(NSString *)password withHandler:(FIRAuthHandler)authHandler;
 
 @end

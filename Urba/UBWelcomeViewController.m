@@ -15,8 +15,6 @@
 #import "FIRManager.h"
 #import "ActivityView.h"
 
-@import Firebase;
-
 @interface UBWelcomeViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
@@ -41,22 +39,17 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [[FIRAuth auth] signInWithEmail:_emailTextField.text
-                           password:_passwordTextField.text
-                         completion:^(FIRUser *user, NSError *error) {
-                             
-                             if (error) {
-                                 
-                                 [spinner removeSpinner];
-                                 [self alert:error.description];
-                                 
-                                 // TODO : SHOW ERROR ALERT
-                             } else {
-                                 NSLog(@"Logged in as %@", user.email);
-                                 [self getUnits];
-//                                 [self performSegueWithIdentifier:@"LogInSegue" sender:self];
-                             }
-                         }];
+    [FIRManager logIn:_emailTextField.text withPassword:_passwordTextField.text withHandler:^(BOOL success, NSError *error) {
+        
+        if (error) {
+            [spinner removeSpinner];
+            [self alert:error.description];
+        } else {
+            
+            [self getUnits];
+        }
+        
+    }];
 }
 
 - (void)getUnits {
