@@ -14,6 +14,7 @@
 		8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */; };
 		8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */; };
 		8C2650531DC3C9CB00AE3973 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2650521DC3C9CB00AE3973 /* ActivityView.m */; };
+		8C2815EE1DF89E0E0015ECF9 /* UBRequestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2815ED1DF89E0D0015ECF9 /* UBRequestsTableViewCell.m */; };
 		8C4881E41DC56F100030B548 /* FIRManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4881E31DC56F100030B548 /* FIRManager.m */; };
 		8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */; };
 		8C6257E71D870B0700737D73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E61D870B0700737D73 /* main.m */; };
@@ -71,6 +72,8 @@
 		8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSuperUnitTableViewController.m; sourceTree = "<group>"; };
 		8C2650511DC3C9CB00AE3973 /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
 		8C2650521DC3C9CB00AE3973 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
+		8C2815EC1DF89E0D0015ECF9 /* UBRequestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequestsTableViewCell.h; sourceTree = "<group>"; };
+		8C2815ED1DF89E0D0015ECF9 /* UBRequestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequestsTableViewCell.m; sourceTree = "<group>"; };
 		8C4881E21DC56F100030B548 /* FIRManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRManager.h; sourceTree = "<group>"; };
 		8C4881E31DC56F100030B548 /* FIRManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRManager.m; sourceTree = "<group>"; };
 		8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindCommunityViewController.h; sourceTree = "<group>"; };
@@ -170,24 +173,42 @@
 		8C2700981D9C317700BACCDE /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
-				8C70059A1DF755F400ED8BDC /* New Group */,
-				8C7005971DF73A7D00ED8BDC /* UBUnitRequestsViewController.h */,
-				8C7005981DF73A7D00ED8BDC /* UBUnitRequestsViewController.m */,
-				8C06A1A61DF20E3B00EDA13D /* UBSettingsViewController.h */,
-				8C06A1A71DF20E3B00EDA13D /* UBSettingsViewController.m */,
-				8C4956981DBAB0CC00CAD822 /* Settings */,
+				8C70059A1DF755F400ED8BDC /* Guests */,
+				8C2815EA1DF89DB70015ECF9 /* Requests */,
+				8C2815EB1DF89DDB0015ECF9 /* Home */,
+				8C4956981DBAB0CC00CAD822 /* Select Unit */,
 			);
 			name = "Main Views";
 			sourceTree = "<group>";
 		};
-		8C4956981DBAB0CC00CAD822 /* Settings */ = {
+		8C2815EA1DF89DB70015ECF9 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				8C7005971DF73A7D00ED8BDC /* UBUnitRequestsViewController.h */,
+				8C7005981DF73A7D00ED8BDC /* UBUnitRequestsViewController.m */,
+				8C2815EC1DF89E0D0015ECF9 /* UBRequestsTableViewCell.h */,
+				8C2815ED1DF89E0D0015ECF9 /* UBRequestsTableViewCell.m */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
+		8C2815EB1DF89DDB0015ECF9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8C06A1A61DF20E3B00EDA13D /* UBSettingsViewController.h */,
+				8C06A1A71DF20E3B00EDA13D /* UBSettingsViewController.m */,
+				8C64A4CD1DF5F0F000016CB7 /* Find Unit */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		8C4956981DBAB0CC00CAD822 /* Select Unit */ = {
 			isa = PBXGroup;
 			children = (
 				8CEBF7961D9C5B5D00DAE919 /* UBUnitSelectionViewController.h */,
 				8CEBF7971D9C5B5D00DAE919 /* UBUnitSelectionViewController.m */,
-				8C64A4CD1DF5F0F000016CB7 /* Find Unit */,
 			);
-			name = Settings;
+			name = "Select Unit";
 			sourceTree = "<group>";
 		};
 		8C6257D91D870B0700737D73 = {
@@ -276,7 +297,7 @@
 			name = "Find Unit";
 			sourceTree = "<group>";
 		};
-		8C70059A1DF755F400ED8BDC /* New Group */ = {
+		8C70059A1DF755F400ED8BDC /* Guests */ = {
 			isa = PBXGroup;
 			children = (
 				8CB4CF241DE5E42A00539FB3 /* UBUnitViewController.h */,
@@ -284,7 +305,7 @@
 				8C70059B1DF7560D00ED8BDC /* UBGuestTableViewCell.h */,
 				8C70059C1DF7560D00ED8BDC /* UBGuestTableViewCell.m */,
 			);
-			name = "New Group";
+			name = Guests;
 			sourceTree = "<group>";
 		};
 		8CA293341D879FF400931859 /* Model */ = {
@@ -605,6 +626,7 @@
 				8CB4CF261DE5E42A00539FB3 /* UBUnitViewController.m in Sources */,
 				8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,
+				8C2815EE1DF89E0E0015ECF9 /* UBRequestsTableViewCell.m in Sources */,
 				8C7005991DF73A7D00ED8BDC /* UBUnitRequestsViewController.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
 				8C4881E41DC56F100030B548 /* FIRManager.m in Sources */,

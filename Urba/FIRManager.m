@@ -120,6 +120,14 @@
     }];
 }
 
++(void)removeChild:(NSString *)child {
+
+    FIRDatabaseReference *ref = [self databaseRef];
+    
+    ref = [ref child:child];
+    [ref removeValue];
+}
+
 #pragma mark - Auth
 
 +(NSString *)getCurrentUser {

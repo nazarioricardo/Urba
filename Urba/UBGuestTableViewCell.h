@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UBUnitViewController.h"
 
 @interface UBGuestTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) UBUnitViewController *uvc;
+
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (weak, nonatomic) NSString *visitorId;
+
+-(void)removeGuest;
 
 @end

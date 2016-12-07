@@ -19,6 +19,7 @@ typedef void(^FIRErrorHandler)(NSError *error);
 
 +(void)addToChild:(NSString *)child withId:(NSString *)identifier withPairs:(NSDictionary *)dictionary;
 +(void)addToChildByAutoId:(NSString *)child withPairs:(NSDictionary *)dictionary;
++(void)removeChild:(NSString *)child;
 
 +(NSString *)getCurrentUser;
 +(NSString *)getCurrentUserEmail;

@@ -61,6 +61,13 @@
     
 }
 
+-(void)removeGuest:(NSString *)visitorId {
+    
+    [_feedArray removeObject:visitorId];
+    [_feedTable reloadData];
+    [FIRManager removeChild:visitorId];
+}
+
 -(void)addGuestController {
     
     UIAlertController *addView = [UIAlertController
@@ -139,11 +146,9 @@
     return 1;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {    
     return [_feedArray count];
 }
-
 
 #pragma mark - Table View Data Source
 
@@ -156,10 +161,17 @@
     NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
     
     cell.nameLabel.text = [NSString stringWithFormat:@"%@", name];
+    cell.visitorId = [snapshotDict valueForKeyPath:@"id"];
     cell.statusLabel.text = [NSString stringWithFormat:@"suck it"];
+    cell.uvc = self;
     
+//    cell.delegate = self;
+        
     return cell;
 }
+
+#pragma mark - Cell Delegate
+
 
 #pragma mark - Life Cycle
 
@@ -180,6 +192,8 @@
     
     NSLog(@"Unit id: %@", _unitId);
     [self getGuests];
+    
+    _feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.navigationItem.title = _address;
 }

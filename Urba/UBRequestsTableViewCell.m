@@ -1,26 +1,14 @@
 //
-//  UBGuestTableViewCell.m
+//  UBRequestsTableViewCell.m
 //  Urba
 //
-//  Created by Ricardo Nazario on 12/6/16.
+//  Created by Ricardo Nazario on 12/7/16.
 //  Copyright © 2016 Ricardo Nazario. All rights reserved.
 //
 
-#import "UBGuestTableViewCell.h"
-#import "FIRManager.h"
+#import "UBRequestsTableViewCell.h"
 
-@implementation UBGuestTableViewCell
-
-- (IBAction)confirmPressed:(id)sender {
-}
-
-- (IBAction)cancelPressed:(id)sender {
-    [self removeGuest];
-}
-
--(void)removeGuest {
-    
-}
+@implementation UBRequestsTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

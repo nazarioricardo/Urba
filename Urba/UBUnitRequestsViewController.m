@@ -7,6 +7,7 @@
 //
 
 #import "UBUnitRequestsViewController.h"
+#import "UBRequestsTableViewCell.h"
 #import "FIRManager.h"
 
 @interface UBUnitRequestsViewController ()
@@ -74,13 +75,13 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    UBRequestsTableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     // Unpack community from results array
     NSDictionary<NSString *, NSDictionary *> *snapshotDict = _feedArray[indexPath.row];
     NSString *name = [snapshotDict valueForKeyPath:@"values.from.name"];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@", name];
     
     return cell;
 
@@ -101,6 +102,8 @@
     _unitName = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.name"]];
     
     self.navigationItem.title = _address;
+    
+    _feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     [self getRequests];
 }
