@@ -14,6 +14,8 @@ typedef void(^FIRErrorHandler)(NSError *error);
 
 @interface FIRManager : NSObject
 
++(void)stopObserving;
+
 +(void)getAllValuesFromNode:(NSString *)node withSuccessHandler:(FIRSuccessHandler)successHandler orErrorHandler:(FIRErrorHandler)errorHandler;
 +(void)getAllValuesFromNode:(NSString *)node orderedBy:(NSString *)orderBy filteredBy:(NSString *)filter withSuccessHandler:(FIRSuccessHandler)successHandler orErrorHandler:(FIRErrorHandler)errorHandler;
 

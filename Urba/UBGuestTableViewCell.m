@@ -20,6 +20,7 @@
 
 -(void)removeGuest {
     
+    [FIRManager removeChild:[NSString stringWithFormat:@"visitors/%@", _visitorId]];
 }
 
 - (void)awakeFromNib {

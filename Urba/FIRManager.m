@@ -10,18 +10,18 @@
 
 @import Firebase;
 
-@interface FIRManager ()
-
-@property (nonatomic) FIRDatabaseHandle refHandle;
-
-@end
-
 @implementation FIRManager
 
 #pragma mark - Database
 
 + (FIRDatabaseReference *)databaseRef {
     return [[FIRDatabase database] reference];
+}
+
++(void)stopObserving {
+    FIRDatabaseReference *ref = [self databaseRef];
+    [ref removeAllObservers];
+    NSLog(@"OBSERVERS REMOVED");
 }
 
 + (void)getAllValuesFromNode:(NSString *)node withSuccessHandler:(FIRSuccessHandler)successHandler orErrorHandler:(FIRErrorHandler)errorHandler {
@@ -76,7 +76,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 successHandler ([self mapResults:results]);
             });
-            [ref removeObserverWithHandle:refHandle];
+//            [ref removeAllObservers];
         }
     } withCancelBlock:^(NSError *error) {
         
@@ -84,10 +84,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 errorHandler (error);
             });
-            [ref removeObserverWithHandle:refHandle];
         }
     }];
-    
 }
 
 +(void)addToChild:(NSString *)child withId:(NSString *)identifier withPairs:(NSDictionary *)dictionary; {
