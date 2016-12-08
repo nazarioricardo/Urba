@@ -41,7 +41,6 @@
                           
                           [self alert:@"Error!" withMessage:error.description];
                       }];
-    
 }
 
 -(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {

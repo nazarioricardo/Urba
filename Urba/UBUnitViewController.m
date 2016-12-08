@@ -11,9 +11,14 @@
 #import "UBUnitSelectionViewController.h"
 #import "UBGuestTableViewCell.h"
 #import "ActivityView.h"
-#import "FIRManager.h"
 
-@interface UBUnitViewController ()
+@import FirebaseDatabase;
+
+@interface UBUnitViewController () {
+    FIRDatabaseHandle _refHandle;
+}
+
+@property (strong, nonatomic) FIRDatabaseReference *ref;
 
 @property (weak, nonatomic) IBOutlet UITableView *feedTable;
 
@@ -44,37 +49,29 @@
 
 -(void)getGuests {
     
-    [FIRManager getAllValuesFromNode:@"visitors"
-                           orderedBy:@"unit-id"
-                          filteredBy:_unitId
-                  withSuccessHandler:^(NSArray *results) {
-                                            
-                      for (NSDictionary *newGuest in results) {
-                          
-                          if (![_feedArray containsObject:newGuest]) {
-                              
-                              NSLog(@"GUEST: %@", newGuest);
-                              [_feedArray addObject:newGuest];
-                              [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
-                          }
-                          
-                      }
-                      
-//                      _feedArray = [NSMutableArray arrayWithArray:results];
-//                      [_feedTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _feedTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationTop];
-                  }
-                      orErrorHandler:^(NSError *error) {
-                          
-                          [self alert:@"Error!" withMessage:error.description];
-                      }];
+    _ref = [[[FIRDatabase database] reference] child:@"visitors"];
+    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit-id"] queryEqualToValue:_unitId];
     
+    _refHandle = [query observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        
+        if ([snapshot exists]) {
+            for (FIRDataSnapshot *snap in snapshot.children) {
+                
+                [_feedArray addObject:snap];
+                [_feedTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _feedTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationTop];
+            }
+        }
+    } withCancelBlock:^(NSError *error) {
+        
+        [self alert:@"Error!" withMessage:error.description];
+    }];
 }
 
 -(void)removeGuest:(NSString *)visitorId {
     
     [_feedArray removeObject:visitorId];
     [_feedTable reloadData];
-    [FIRManager removeChild:visitorId];
+//    [FIRManager removeChild:visitorId];
 }
 
 -(void)addGuestController {
@@ -96,7 +93,7 @@
                                                        
                                                        [addTextField resignFirstResponder];
                                                        
-                                                       [FIRManager addToChildByAutoId:@"visitors" withPairs:dict];
+//                                                       [FIRManager addToChildByAutoId:@"visitors" withPairs:dict];
                                                    }
                                                    
                                                   
@@ -166,13 +163,16 @@
     UBGuestTableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"GuestCell" forIndexPath:indexPath];
     
     // Unpack community from results array
-    NSDictionary<NSString *, NSDictionary *> *snapshotDict = _feedArray[indexPath.row];
-    NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
+    FIRDataSnapshot *visitorSnap = _feedArray[indexPath.row];
+    NSDictionary<NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:visitorSnap.key,@"id",visitorSnap.value,@"values", nil];
     
+    NSLog(@"CELL VALUE: %@", visitorDict);
+    NSString *name = [visitorDict valueForKeyPath:@"values.name"];
+//
     cell.nameLabel.text = [NSString stringWithFormat:@"%@", name];
-    cell.visitorId = [snapshotDict valueForKeyPath:@"id"];
-    cell.statusLabel.text = [NSString stringWithFormat:@"suck it"];
-    cell.uvc = self;
+//    cell.visitorId = [snapshotDict valueForKeyPath:@"id"];
+//    cell.statusLabel.text = [NSString stringWithFormat:@"suck it"];
+//    cell.uvc = self;
     
 //    cell.delegate = self;
         
