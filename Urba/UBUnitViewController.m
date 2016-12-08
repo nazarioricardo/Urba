@@ -48,11 +48,20 @@
                            orderedBy:@"unit-id"
                           filteredBy:_unitId
                   withSuccessHandler:^(NSArray *results) {
+                                            
+                      for (NSDictionary *newGuest in results) {
+                          
+                          if (![_feedArray containsObject:newGuest]) {
+                              
+                              NSLog(@"GUEST: %@", newGuest);
+                              [_feedArray addObject:newGuest];
+                              [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
+                          }
+                          
+                      }
                       
-                      NSLog(@"VISITORS: %@", results);
-                      
-                      _feedArray = [NSMutableArray arrayWithArray:results];
-                      [_feedTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _feedTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationFade];
+//                      _feedArray = [NSMutableArray arrayWithArray:results];
+//                      [_feedTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _feedTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationTop];
                   }
                       orErrorHandler:^(NSError *error) {
                           
@@ -178,6 +187,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _feedArray = [[NSMutableArray alloc] init];
     
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
     NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];

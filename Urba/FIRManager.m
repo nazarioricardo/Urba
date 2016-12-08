@@ -68,7 +68,6 @@
             for (FIRDataSnapshot *snap in snapshot.children) {
                 
                 [results addObject:snap];
-                NSLog(@"SNAP KEY: %@", snap.key);
             }
         }
         
@@ -110,14 +109,7 @@
     FIRDatabaseReference *ref = [self databaseRef];
     
     ref = [[ref child:child] childByAutoId];
-    
-    [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        
-        NSString *keyString = key;
-        NSString *value = obj;
-        
-        [[ref child:keyString] setValue:value];
-    }];
+    [ref setValue:dictionary];
 }
 
 +(void)removeChild:(NSString *)child {
