@@ -52,16 +52,27 @@
     _ref = [[[FIRDatabase database] reference] child:@"visitors"];
     FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit-id"] queryEqualToValue:_unitId];
     
-    _refHandle = [query observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+    _refHandle = [query observeEventType:FIRDataEventTypeValue
+                               withBlock:^(FIRDataSnapshot *snapshot) {
         
         if ([snapshot exists]) {
             for (FIRDataSnapshot *snap in snapshot.children) {
                 
-                [_feedArray addObject:snap];
-                [_feedTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _feedTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationTop];
+                NSDictionary<NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
+                
+                if (![_feedArray containsObject:visitorDict]) {
+                    
+                    [_feedArray addObject:visitorDict];
+                    
+                    NSLog(@"FEED ARRAY: %@", _feedArray);
+                    [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                }
             }
+        } else {
+            [self alert:@"Sorry..." withMessage:@"You don't seem to have any coming visitors."];
         }
-    } withCancelBlock:^(NSError *error) {
+    }
+                         withCancelBlock:^(NSError *error) {
         
         [self alert:@"Error!" withMessage:error.description];
     }];
@@ -92,11 +103,9 @@
                                                        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:addTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id", nil];
                                                        
                                                        [addTextField resignFirstResponder];
-                                                       
-//                                                       [FIRManager addToChildByAutoId:@"visitors" withPairs:dict];
+                                                       _ref = [_ref childByAutoId];
+                                                       [_ref setValue:dict];
                                                    }
-                                                   
-                                                  
                                                }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
@@ -162,9 +171,8 @@
     
     UBGuestTableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"GuestCell" forIndexPath:indexPath];
     
-    // Unpack community from results array
-    FIRDataSnapshot *visitorSnap = _feedArray[indexPath.row];
-    NSDictionary<NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:visitorSnap.key,@"id",visitorSnap.value,@"values", nil];
+    // Unpack visitor from feed array
+    NSDictionary<NSString *, NSDictionary *> *visitorDict = _feedArray[indexPath.row];
     
     NSLog(@"CELL VALUE: %@", visitorDict);
     NSString *name = [visitorDict valueForKeyPath:@"values.name"];

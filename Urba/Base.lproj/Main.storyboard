@@ -293,18 +293,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjO-8h-3GT">
-                                                    <rect key="frame" x="319" y="56" width="48" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="4no-wH-EjZ"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Cancel"/>
-                                                    <connections>
-                                                        <action selector="cancelPressed:" destination="zC7-vI-3Lj" eventType="touchUpInside" id="jjf-2Q-CuP"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYy-oz-a3U">
-                                                    <rect key="frame" x="24" y="56" width="103" height="35"/>
+                                                    <rect key="frame" x="24" y="64" width="103" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="ygy-8J-Yx0"/>
                                                     </constraints>
@@ -313,15 +303,25 @@
                                                         <action selector="confirmPressed:" destination="zC7-vI-3Lj" eventType="touchUpInside" id="c0v-6p-TQS"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjO-8h-3GT">
+                                                    <rect key="frame" x="319" y="64" width="48" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="4no-wH-EjZ"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Cancel"/>
+                                                    <connections>
+                                                        <action selector="cancelPressed:" destination="zC7-vI-3Lj" eventType="touchUpInside" id="jjf-2Q-CuP"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="x83-eC-qhP" firstAttribute="top" secondItem="xAo-gt-4K1" secondAttribute="bottom" constant="10" id="2Jp-Kz-vXg"/>
                                                 <constraint firstItem="mvw-hf-SsZ" firstAttribute="baseline" secondItem="x83-eC-qhP" secondAttribute="baseline" id="8vA-LS-8mL"/>
                                                 <constraint firstItem="WjO-8h-3GT" firstAttribute="trailing" secondItem="BM8-Im-Gha" secondAttribute="trailingMargin" id="C7b-AX-bYu"/>
                                                 <constraint firstItem="xAo-gt-4K1" firstAttribute="leading" secondItem="BM8-Im-Gha" secondAttribute="leadingMargin" constant="16" id="COe-ow-GYj"/>
-                                                <constraint firstItem="WjO-8h-3GT" firstAttribute="bottom" secondItem="BM8-Im-Gha" secondAttribute="bottomMargin" id="G2E-vF-Aag"/>
+                                                <constraint firstItem="WjO-8h-3GT" firstAttribute="bottom" secondItem="BM8-Im-Gha" secondAttribute="bottomMargin" constant="8" id="G2E-vF-Aag"/>
                                                 <constraint firstItem="xAo-gt-4K1" firstAttribute="trailing" secondItem="BM8-Im-Gha" secondAttribute="trailingMargin" id="XZW-g3-hiZ"/>
-                                                <constraint firstItem="VYy-oz-a3U" firstAttribute="top" secondItem="x83-eC-qhP" secondAttribute="bottom" constant="-4" id="ft3-iD-I38"/>
+                                                <constraint firstItem="VYy-oz-a3U" firstAttribute="top" secondItem="x83-eC-qhP" secondAttribute="bottom" constant="4" id="ft3-iD-I38"/>
                                                 <constraint firstItem="mvw-hf-SsZ" firstAttribute="leading" secondItem="x83-eC-qhP" secondAttribute="trailing" constant="8" id="hH5-xs-kdK"/>
                                                 <constraint firstItem="x83-eC-qhP" firstAttribute="leading" secondItem="BM8-Im-Gha" secondAttribute="leadingMargin" constant="16" id="k9B-s9-tj1"/>
                                                 <constraint firstItem="VYy-oz-a3U" firstAttribute="leading" secondItem="BM8-Im-Gha" secondAttribute="leadingMargin" constant="16" id="kaa-GM-Uov"/>
