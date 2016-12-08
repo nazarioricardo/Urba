@@ -8,7 +8,8 @@
 
 #import "FIRManager.h"
 
-@import Firebase;
+@import FirebaseDatabase;
+@import FirebaseAuth;
 
 @implementation FIRManager
 
