@@ -10,6 +10,20 @@
 
 @implementation UBRequestsTableViewCell
 
+- (IBAction)acceptPressed:(id)sender {
+    
+    if([_delegate respondsToSelector:@selector(acceptRequest:)]) {
+        [_delegate acceptRequest:self];
+    }
+}
+
+- (IBAction)denyPressed:(id)sender {
+    
+    if([_delegate respondsToSelector:@selector(denyRequest:)]) {
+        [_delegate denyRequest:self];
+    }
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

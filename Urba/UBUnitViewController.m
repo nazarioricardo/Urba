@@ -222,6 +222,21 @@
     
 }
 
+- (void)confirmGuest:(UBGuestTableViewCell *)cell {
+    
+    NSIndexPath *indexPath = [_feedTable indexPathForCell:cell];
+    [_ref removeAllObservers];
+    [[_ref child:cell.visitorId] removeValue];
+    [_feedTable beginUpdates];
+    [_feedArray removeObjectAtIndex:indexPath.row];
+    if ([_feedArray count] == 1) {
+        [_feedTable deleteSections:[NSIndexSet indexSet] withRowAnimation:UITableViewRowAnimationBottom];
+    }
+    [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+    [_feedTable endUpdates];
+    [self getGuests];
+}
+
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {

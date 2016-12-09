@@ -67,7 +67,6 @@
     NSDictionary *unitDict = [NSDictionary dictionaryWithObjectsAndKeys:_selectedName,@"name",_selectedKey,@"id", _superUnitName, @"owner", nil];
     NSDictionary *fromDict = [NSDictionary dictionaryWithObjectsAndKeys: [FIRManager getCurrentUserEmail],@"name", [FIRManager getCurrentUser], @"id", nil];
     NSDictionary *toDict;
-    
     NSString *message;
     
     if (unitUserId) {

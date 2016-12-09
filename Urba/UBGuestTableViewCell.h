@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UBUnitViewController.h"
 
 @class UBGuestTableViewCell;
 
 @protocol GuestCellDelegate <NSObject> //this delegate is fired each time you tap the cell
 
-- (void)cancelGuest:(UBGuestTableViewCell *)cell;
-//- (void) touchedTheCell:(CellTypeOne *)cell; //if u want t send entire cell this may give error add `@class CellTypeOne;` at the beginning
+-(void)cancelGuest:(UBGuestTableViewCell *)cell;
+-(void)confirmGuest:(UBGuestTableViewCell *)cell;
 
 @end
 

@@ -70,9 +70,13 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    UIColor *urbaGreen = [UIColor colorWithRed:98.0/255.0 green:248.0/255.0 blue:72.0/255.0 alpha:1];
+    UIColor *urbaGreen = [UIColor colorWithRed:0.0/255.0 green:190.0/255.0 blue:58.0/255.0 alpha:1];
     
     [[UINavigationBar appearance] setBarTintColor:urbaGreen];
+    [[UINavigationBar appearance] setClipsToBounds:YES];
+    [[UITabBar appearance] setBarTintColor:urbaGreen];
+    [[UITabBar appearance] setClipsToBounds:YES];
+    
     
     // Register for remote notifications
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {

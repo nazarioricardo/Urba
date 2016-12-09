@@ -7,20 +7,23 @@
 //
 
 #import "UBGuestTableViewCell.h"
+#import "UBRequestsTableViewCell.h"
 
 @implementation UBGuestTableViewCell
 
 - (IBAction)confirmPressed:(id)sender {
+    
+    if([_delegate respondsToSelector:@selector(cancelGuest:)])
+    {
+        [_delegate confirmGuest:self];
+    }
 }
 
 - (IBAction)cancelPressed:(id)sender {
     
-    if([self.delegate respondsToSelector:@selector(cancelGuest:)])
+    if([_delegate respondsToSelector:@selector(cancelGuest:)])
     {
-        [self.delegate cancelGuest:self];
-        //or u can send the whole cell itself
-        //for example for passing the cell itself
-        //[self.delegate touchedTheCell:self]; //while at the defining the delegate u must change the sender type to - (void)touchedTheCell:(CellTypeOne *)myCell; if it shows any error  in the defining of the delegate add "@class CellTypeOne;" above the defying the delegate
+        [_delegate cancelGuest:self];
     }
 }
 
