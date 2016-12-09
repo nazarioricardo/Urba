@@ -14,13 +14,14 @@
 
 @import FirebaseDatabase;
 
-@interface UBUnitViewController () {
+@interface UBUnitViewController () <GuestCellDelegate> {
     FIRDatabaseHandle _refHandle;
 }
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
 @property (weak, nonatomic) IBOutlet UITableView *feedTable;
+@property (weak, nonatomic) IBOutlet UILabel *noGuestsLabel;
 
 @property (strong, nonatomic) NSString *address;
 @property (strong, nonatomic) NSString *unitName;
@@ -66,10 +67,15 @@
                     
                     NSLog(@"FEED ARRAY: %@", _feedArray);
                     [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                    _feedTable.hidden = NO;
+                    [self hideViewAnimated:_noGuestsLabel hide:YES];
                 }
             }
         } else {
-            [self alert:@"Sorry..." withMessage:@"You don't seem to have any coming visitors."];
+
+            [self hideViewAnimated:_feedTable hide:YES];
+            [self hideViewAnimated:_noGuestsLabel hide:NO];
+            
         }
     }
                          withCancelBlock:^(NSError *error) {
@@ -105,6 +111,7 @@
                                                        [addTextField resignFirstResponder];
                                                        _ref = [_ref childByAutoId];
                                                        [_ref setValue:dict];
+                                                       _ref = [[[FIRDatabase database] reference] child:@"visitors"];
                                                    }
                                                }];
     
@@ -143,6 +150,17 @@
     [self presentViewController:alertView animated:YES completion:nil];
 }
 
+-(void)hideViewAnimated:(UIView *)view hide:(BOOL)hidden {
+        
+    [UIView transitionWithView:view
+                      duration:.5
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        view.hidden = hidden;
+                    }
+                    completion:NULL];
+}
+
 #pragma mark - Text Field Delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -157,7 +175,7 @@
 
 #pragma mark - Table View Delegate
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {    
     return 1;
 }
 
@@ -178,24 +196,38 @@
     NSString *name = [visitorDict valueForKeyPath:@"values.name"];
 //
     cell.nameLabel.text = [NSString stringWithFormat:@"%@", name];
-//    cell.visitorId = [snapshotDict valueForKeyPath:@"id"];
+    cell.visitorId = [visitorDict valueForKeyPath:@"id"];
 //    cell.statusLabel.text = [NSString stringWithFormat:@"suck it"];
-//    cell.uvc = self;
     
-//    cell.delegate = self;
-        
+    cell.delegate = self;
+    
     return cell;
 }
 
 #pragma mark - Cell Delegate
 
+- (void)cancelGuest:(UBGuestTableViewCell *)cell {
+    
+    NSIndexPath *indexPath = [_feedTable indexPathForCell:cell];
+    [_ref removeAllObservers];
+    [[_ref child:cell.visitorId] removeValue];
+    [_feedTable beginUpdates];
+    [_feedArray removeObjectAtIndex:indexPath.row];
+    if ([_feedArray count] == 1) {
+        [_feedTable deleteSections:[NSIndexSet indexSet] withRowAnimation:UITableViewRowAnimationBottom];
+    }
+    [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+    [_feedTable endUpdates];
+    [self getGuests];
+    
+}
 
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    _noGuestsLabel.hidden = YES;
     _feedArray = [[NSMutableArray alloc] init];
     
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];

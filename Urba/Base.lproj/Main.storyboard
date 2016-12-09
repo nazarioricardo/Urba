@@ -261,11 +261,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have any incoming visitors." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwg-Ba-gBQ">
+                                <rect key="frame" x="37" y="303" width="301" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="301" id="Db0-yb-xzX"/>
+                                    <constraint firstAttribute="height" constant="60" id="cLU-ez-UZO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="99" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IGj-zc-nVg">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="554" id="ET3-sd-tki"/>
+                                    <constraint firstAttribute="height" constant="510" id="ET3-sd-tki"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GuestCell" rowHeight="100" id="zC7-vI-3Lj" customClass="UBGuestTableViewCell">
@@ -340,31 +350,37 @@
                                     <outlet property="delegate" destination="GZ3-6c-jFl" id="CBi-Sk-BA4"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIc-t7-RkU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="kME-kk-Tw3"/>
-                                </constraints>
-                                <state key="normal" title="Add Guest"/>
-                                <connections>
-                                    <action selector="addGuestPressed:" destination="GZ3-6c-jFl" eventType="touchUpInside" id="bSd-yd-1ji"/>
-                                </connections>
-                            </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ex5-6X-7iT">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="BEy-6V-ak7">
+                                        <nil key="title"/>
+                                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="t1c-cb-Dlt">
+                                            <rect key="frame" x="8" y="7" width="359" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Add Guest"/>
+                                            <connections>
+                                                <action selector="addGuestPressed:" destination="GZ3-6c-jFl" eventType="touchUpInside" id="GLi-8E-exu"/>
+                                            </connections>
+                                        </button>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="IGj-zc-nVg" secondAttribute="trailing" id="5qq-C0-vai"/>
-                            <constraint firstItem="gIc-t7-RkU" firstAttribute="top" secondItem="bCw-9u-Xwn" secondAttribute="bottom" id="F3K-ls-thC"/>
-                            <constraint firstItem="gIc-t7-RkU" firstAttribute="leading" secondItem="gRH-ix-hGM" secondAttribute="leading" id="Mde-tr-ejO"/>
+                            <constraint firstItem="rwg-Ba-gBQ" firstAttribute="centerX" secondItem="gRH-ix-hGM" secondAttribute="centerX" id="DSc-rA-PVB"/>
                             <constraint firstItem="IGj-zc-nVg" firstAttribute="leading" secondItem="gRH-ix-hGM" secondAttribute="leading" id="QMn-J8-Beg"/>
-                            <constraint firstItem="IGj-zc-nVg" firstAttribute="top" secondItem="bCw-9u-Xwn" secondAttribute="bottom" id="aKH-oI-hCA"/>
-                            <constraint firstAttribute="trailing" secondItem="gIc-t7-RkU" secondAttribute="trailing" id="e75-Qb-vgb"/>
-                            <constraint firstItem="gIc-t7-RkU" firstAttribute="centerX" secondItem="gRH-ix-hGM" secondAttribute="centerX" id="lh0-hR-gq2"/>
+                            <constraint firstItem="IGj-zc-nVg" firstAttribute="top" secondItem="bCw-9u-Xwn" secondAttribute="bottom" constant="44" id="aKH-oI-hCA"/>
+                            <constraint firstItem="rwg-Ba-gBQ" firstAttribute="centerY" secondItem="gRH-ix-hGM" secondAttribute="centerY" id="aiG-ar-JqX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JMk-Mh-zdz"/>
                     <connections>
                         <outlet property="feedTable" destination="IGj-zc-nVg" id="3pJ-R6-OX4"/>
+                        <outlet property="noGuestsLabel" destination="rwg-Ba-gBQ" id="GWc-HX-74b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iM4-6C-zC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
