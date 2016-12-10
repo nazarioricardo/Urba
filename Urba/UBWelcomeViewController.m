@@ -12,14 +12,19 @@
 #import "UBSettingsViewController.h"
 #import "UBUnitRequestsViewController.h"
 #import "UBUnitSelectionViewController.h"
-#import "FIRManager.h"
 #import "ActivityView.h"
 
-@interface UBWelcomeViewController ()
+@import FirebaseAuth;
+@import Firebase;
+
+@interface UBWelcomeViewController () {
+    FIRDatabaseHandle _refHandle;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
+@property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) NSDictionary *unitDict;
 
 @end
@@ -39,48 +44,55 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [FIRManager logIn:_emailTextField.text withPassword:_passwordTextField.text withHandler:^(BOOL success, NSError *error) {
-        
-        if (error) {
-            [spinner removeSpinner];
-            [self alert:error.description];
-        } else {
-            
-            [self getUnits];
-        }
-        
+    [[FIRAuth auth] signInWithEmail:_emailTextField.text
+                           password:_passwordTextField.text
+                         completion:^(FIRUser *user, NSError *error) {
+                             
+                             if (error) {
+                                 [spinner removeSpinner];
+                                 [self alert:error.description];
+                             } else {
+                                 [spinner removeSpinner];
+                                 [self getUnits];
+                             }
     }];
 }
 
 - (void)getUnits {
     
-    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRManager getCurrentUser]];
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [FIRManager getAllValuesFromNode:@"units"
-                           orderedBy:unitRef
-                          filteredBy:[FIRManager getCurrentUserEmail]
-                  withSuccessHandler:^(NSArray *results) {
-                      
-                      if (![results count]) {
-                          
-                          NSString *storyboardName = @"Main";
-                          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-                          UBNilViewController *unvc = [storyboard instantiateViewControllerWithIdentifier:@"No House"];
-                          [self presentViewController:unvc animated:YES completion:nil];
-                          
-                      } else if ([results count] > 1){
-                          
-                          [self performSegueWithIdentifier:@"ManyUnitsSegue" sender:self];
-                      } else {
-                          
-                          _unitDict = results[0];
-                          [self performSegueWithIdentifier:@"OneUnitSegue" sender:self];
-                      }
-                  }
-                      orErrorHandler:^(NSError *error) {
-                          
-                          [self alert:error.description];
-                      }];
+    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
+    
+    _ref = [[[FIRDatabase database] reference] child:@"units"];
+    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:unitRef] queryEqualToValue:[FIRAuth auth].currentUser.email];
+    
+    _refHandle = [query observeEventType:FIRDataEventTypeValue
+                               withBlock:^(FIRDataSnapshot *snapshot) {
+                                   
+                                   if ([snapshot exists]) {
+                                       
+                                       if (snapshot.childrenCount == 1) {
+                                           
+                                           for (FIRDataSnapshot *snap in snapshot.children) {
+                                               _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id", snap.value,@"values", nil];
+                                           }
+                                           
+                                           [self performSegueWithIdentifier:@"OneUnitSegue" sender:self];
+                                       } else {
+                                           [self performSegueWithIdentifier:@"ManyUnitsSegue" sender:self];
+                                       }
+                                   } else {
+                                       NSString *storyboardName = @"Main";
+                                       UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                                       UBNilViewController *unvc = [storyboard instantiateViewControllerWithIdentifier:@"No House"];
+                                       [self presentViewController:unvc animated:YES completion:nil];
+                                   }
+                               }
+                         withCancelBlock:^(NSError *error) {
+                             [spinner removeSpinner];
+                             [self alert:error.description];
+                         }];
 }
 
 -(void)alert:(NSString *)errorMsg {
@@ -98,7 +110,6 @@
                                                }];
     [alertView addAction:ok];
     [self presentViewController:alertView animated:YES completion:nil];
-    
 }
 
 #pragma mark - Text Field Delegate
@@ -144,7 +155,6 @@
         UBUnitRequestsViewController *urvc = (UBUnitRequestsViewController *)[navTwo topViewController];
         UINavigationController *navThree = [tab.viewControllers objectAtIndex:2];
         UBSettingsViewController *usvc = (UBSettingsViewController *)[navThree topViewController];
-        
         
         [uuvc setUnitDict:_unitDict];
         [urvc setUnitDict:_unitDict];

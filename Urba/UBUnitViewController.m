@@ -257,11 +257,17 @@
     _superUnitId = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.super-unit-id"]];
     
     NSLog(@"Unit id: %@", _unitId);
-    [self getGuests];
     
     _feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self getGuests];
     self.navigationItem.title = _address;
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [_ref removeAllObservers];
 }
 
 - (void)didReceiveMemoryWarning {

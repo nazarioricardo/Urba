@@ -132,8 +132,12 @@
 
 -(void)acceptRequest:(UBRequestsTableViewCell *)cell {
     
-    _ref = [[[[[FIRDatabase database] reference] child:@"units"] child:@"users"] child: cell.fromId];
-    [_ref child:cell.fromName];
+    NSString *fromId = cell.fromId;
+    NSString *fromName = cell.fromName;
+    NSLog(@"From id: %@\nFrom Name: %@", fromId, fromName);
+    
+    FIRDatabaseReference *usersRef = [[[[[[FIRDatabase database] reference] child:@"units"] child: _unitId]child:@"users"] child: fromId];
+    [[usersRef child: @"name"] setValue: fromName];;
     
     _ref = [[[FIRDatabase database] reference] child:@"requests"];
     NSIndexPath *indexPath = [_feedTable indexPathForCell:cell];
@@ -170,7 +174,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     _noRequestsLabel.hidden = YES;
     _feedArray = [[NSMutableArray alloc] init];
     
@@ -181,11 +184,12 @@
     _unitId = [NSString stringWithFormat:@"%@", [_unitDict valueForKey:@"id"]];
     _unitName = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.name"]];
     
-    self.navigationItem.title = _address;
-    
     _feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
     [self getRequests];
+    self.navigationItem.title = _address;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -68,15 +68,18 @@
     NSDictionary *fromDict = [NSDictionary dictionaryWithObjectsAndKeys: [FIRManager getCurrentUserEmail],@"name", [FIRManager getCurrentUser], @"id", nil];
     NSDictionary *toDict;
     NSString *message;
+    NSDictionary *requestDict;
     
     if (unitUserId) {
         message = [NSString stringWithFormat:@"You've sent a verification request to the resident(s) at %@, %@",  _selectedName, _superUnitName];
+        requestDict = [NSDictionary dictionaryWithObjectsAndKeys: fromDict, @"from", unitDict, @"unit", nil];
     } else {
         toDict = [NSDictionary dictionaryWithObjectsAndKeys:_adminName,@"name",_adminId,@"id", nil];
         message = [NSString stringWithFormat:@"You've sent a verification request to a community admin for the unit %@, %@",  _selectedName, _superUnitName];
+        requestDict = [NSDictionary dictionaryWithObjectsAndKeys:toDict, @"to", fromDict, @"from", unitDict, @"unit", nil];
     }
     
-    NSDictionary *requestDict = [NSDictionary dictionaryWithObjectsAndKeys:toDict, @"to", fromDict, @"from", unitDict, @"unit", nil];
+    
     
     NSLog(@"%@", unitDict);
     
