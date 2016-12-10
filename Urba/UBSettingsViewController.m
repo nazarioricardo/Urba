@@ -8,6 +8,9 @@
 
 #import "UBSettingsViewController.h"
 
+@import FirebaseAuth;
+@import FirebaseDatabase;
+
 @interface UBSettingsViewController ()
 
 @property (strong, nonatomic) NSString *unitName;
@@ -23,7 +26,15 @@
 }
 
 - (IBAction)signOutPressed:(id)sender {
-    
+
+    NSError *signOutError;
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    if (!status) {
+        NSLog(@"Error signing out: %@", signOutError);
+        return;
+    } else {
+        [self performSegueWithIdentifier:@"SignOutSegue" sender:self];
+    }
 }
 
 - (void)viewDidLoad {

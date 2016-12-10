@@ -58,10 +58,8 @@
                                          [spinner removeSpinner];
                                          [self alert:@"Success!" withMessage:@"User created."];
                                      }
-            
         }];
     }
-    
 }
 
 -(void)alert:(NSString *)title withMessage:(NSString *)message {
