@@ -7,6 +7,7 @@
 //
 
 #import "UBSettingsViewController.h"
+#import "UBWelcomeViewController.h"
 
 @import FirebaseAuth;
 @import FirebaseDatabase;
@@ -21,20 +22,22 @@
 
 @implementation UBSettingsViewController
 
-- (IBAction)donePressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)signOutPressed:(id)sender {
+    
+    NSLog(@"Current User: %@", [FIRAuth auth].currentUser.email);
 
     NSError *signOutError;
     BOOL status = [[FIRAuth auth] signOut:&signOutError];
     if (!status) {
-        NSLog(@"Error signing out: %@", signOutError);
+        NSLog(@"Sign out error: %@", signOutError);
         return;
-    } else {
-        [self performSegueWithIdentifier:@"SignOutSegue" sender:self];
     }
+    
+    NSString *storyboardName = @"Main";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    UBWelcomeViewController *uwvc = [storyboard instantiateViewControllerWithIdentifier:@"Welcome"];
+    [self presentViewController:uwvc animated:YES completion:nil];
+
 }
 
 - (void)viewDidLoad {

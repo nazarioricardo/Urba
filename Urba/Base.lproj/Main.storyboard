@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Welcome View Controller-->
+        <!--Welcome-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="UBWelcomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Welcome" title="Welcome" id="BYZ-38-t0r" customClass="UBWelcomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -118,27 +118,25 @@
                                     <segue destination="woN-Po-N7u" kind="show" id="q1Y-sh-mCc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0z-vo-lFi">
+                                <rect key="frame" x="16" y="148" width="60" height="30"/>
+                                <state key="normal" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOutPressed:" destination="6Xa-pq-LKA" eventType="touchUpInside" id="8Ba-6q-ygR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="45D-au-j4f" firstAttribute="top" secondItem="eer-KB-UVL" secondAttribute="bottom" constant="8" id="57H-2q-d8R"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="N0z-vo-lFi" secondAttribute="leading" id="6py-nF-hrF"/>
                             <constraint firstAttribute="leadingMargin" secondItem="45D-au-j4f" secondAttribute="leading" id="IKC-9V-f6L"/>
                             <constraint firstItem="eer-KB-UVL" firstAttribute="top" secondItem="vZz-ng-ih3" secondAttribute="bottom" constant="8" id="OA0-xI-6G0"/>
+                            <constraint firstItem="N0z-vo-lFi" firstAttribute="top" secondItem="45D-au-j4f" secondAttribute="bottom" constant="8" id="PRk-tE-yAA"/>
                             <constraint firstAttribute="leadingMargin" secondItem="eer-KB-UVL" secondAttribute="leading" id="sqc-BX-6lV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="SL4-1m-qQD">
-                        <barButtonItem key="rightBarButtonItem" id="6Ti-ep-Twh">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xhh-qy-hTJ">
-                                <rect key="frame" x="299" y="7" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Sign Out"/>
-                            </button>
-                            <connections>
-                                <action selector="signOutPressed:" destination="6Xa-pq-LKA" id="RjK-KR-nfl"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="SL4-1m-qQD"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="showDetail" identifier="SignOutSegue" action="showViewController:sender:" id="gCu-vO-zFr"/>
                     </connections>
@@ -855,7 +853,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KfB-Bn-UGc"/>
         <segue reference="q1Y-sh-mCc"/>
+        <segue reference="quI-Au-dgW"/>
     </inferredMetricsTieBreakers>
 </document>
