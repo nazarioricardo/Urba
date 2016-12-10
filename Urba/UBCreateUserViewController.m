@@ -7,8 +7,9 @@
 //
 
 #import "UBCreateUserViewController.h"
-#import "FIRManager.h"
 #import "ActivityView.h"
+
+@import FirebaseAuth;
 
 @interface UBCreateUserViewController ()
 
@@ -45,16 +46,18 @@
     } else {
 
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
-    
-        [FIRManager createUser:_emailTextField.text withPassword:_passwordTextField.text withHandler:^(BOOL success, NSError *error) {
-            
-            if (error) {
-                [spinner removeSpinner];
-                [self alert:@"Error!" withMessage:error.description];
-            } else {
-                [spinner removeSpinner];
-                [self alert:@"Success!" withMessage:@"User created."];
-            }
+        
+        [[FIRAuth auth] createUserWithEmail:_emailTextField.text
+                                   password:_passwordTextField.text
+                                 completion:^(FIRUser *user, NSError *error) {
+                                     
+                                     if (error) {
+                                         [spinner removeSpinner];
+                                         [self alert:@"Error!" withMessage:error.description];
+                                     } else {
+                                         [spinner removeSpinner];
+                                         [self alert:@"Success!" withMessage:@"User created."];
+                                     }
             
         }];
     }
