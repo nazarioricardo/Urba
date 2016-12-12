@@ -137,7 +137,8 @@
     NSLog(@"From id: %@\nFrom Name: %@", fromId, fromName);
     
     FIRDatabaseReference *usersRef = [[[[[[FIRDatabase database] reference] child:@"units"] child: _unitId]child:@"users"] child: fromId];
-    [[usersRef child: @"name"] setValue: fromName];;
+    [[usersRef child: @"name"] setValue: fromName];
+    [[usersRef child:@"permissions"] setValue:@"enabled"];
     
     _ref = [[[FIRDatabase database] reference] child:@"requests"];
     NSIndexPath *indexPath = [_feedTable indexPathForCell:cell];

@@ -13,16 +13,14 @@
 
 - (IBAction)confirmPressed:(id)sender {
     
-    if([_delegate respondsToSelector:@selector(cancelGuest:)])
-    {
+    if([_delegate respondsToSelector:@selector(cancelGuest:)]) {
         [_delegate confirmGuest:self];
     }
 }
 
 - (IBAction)cancelPressed:(id)sender {
     
-    if([_delegate respondsToSelector:@selector(cancelGuest:)])
-    {
+    if([_delegate respondsToSelector:@selector(cancelGuest:)]) {
         [_delegate cancelGuest:self];
     }
 }

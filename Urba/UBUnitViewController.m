@@ -122,14 +122,12 @@
                                                                                  completion:nil];
                                                }];
     
-    [addView addTextFieldWithConfigurationHandler:^(UITextField *textField)
-     {
+    [addView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
          textField.placeholder = NSLocalizedString(@"Guest Name", @"GuestName");
      }];
     
     [addView addAction:add];
     [addView addAction:cancel];
-
     [self presentViewController:addView animated:YES completion:nil];
 }
 

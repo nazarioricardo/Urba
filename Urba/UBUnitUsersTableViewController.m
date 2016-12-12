@@ -7,25 +7,29 @@
 //
 
 #import "UBUnitUsersTableViewController.h"
+#import "UBUsersTableViewCell.h"
 #import "ActivityView.h"
 
 @import FirebaseDatabase;
 @import FirebaseAuth;
 
-@interface UBUnitUsersTableViewController () {
-    FIRDatabaseHandle _refHandle;
-}
+@interface UBUnitUsersTableViewController () <UserCellDelegate>
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FIRDatabaseReference *permissionsRef;
 @property (strong, nonatomic) NSMutableArray *userArray;
 
 @end
 
 @implementation UBUnitUsersTableViewController
 
+#pragma mark - IBActions
+
 - (IBAction)donePressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Private
 
 -(void)getUsers {
     
@@ -34,8 +38,7 @@
     NSString *currentUnitRef = [NSString stringWithFormat:@"units/%@/users", _unitId];
     
     _ref = [[[FIRDatabase database] reference] child:currentUnitRef];
-    
-    _refHandle = [_ref observeEventType:FIRDataEventTypeValue
+    [_ref observeEventType:FIRDataEventTypeValue
                                withBlock:^(FIRDataSnapshot *snapshot) {
                                    
                                    if ([snapshot exists]) {
@@ -43,11 +46,9 @@
                                        [spinner removeSpinner];
                                        for (FIRDataSnapshot *snap in snapshot.children) {
                                            
-                                           NSDictionary<NSString *, NSDictionary *> *userDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
+                                           NSDictionary<NSString *, NSMutableDictionary *> *userDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
                                            
                                            if (![_userArray containsObject:userDict] && ![[userDict valueForKeyPath:@"values.name"] isEqualToString: [FIRAuth auth].currentUser.email]) {
-                                               
-                                               NSLog(@"USER: %@", userDict);
                                                
                                                [_userArray addObject:userDict];
                                                
@@ -64,6 +65,19 @@
                              [spinner removeSpinner];
                              [self alert:@"Error!" withMessage:error.description];
                          }];
+    
+}
+
+-(void)getPermisions:(NSString *)user {
+    
+    NSString *permsRefString = [NSString stringWithFormat:@"units/%@/users/%@/permissions", _unitId, user];
+    _permissionsRef = [[[FIRDatabase database] reference] child:permsRefString];
+    [_permissionsRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        
+        
+    } withCancelBlock:^(NSError *error) {
+        
+    }];
     
 }
 
@@ -85,6 +99,8 @@
     [alertView addAction:ok];
     [self presentViewController:alertView animated:YES completion:nil];
 }
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -123,18 +139,46 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    UBUsersTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     // Configure the cell...
     // Unpack from results array
     NSDictionary<NSString *, NSDictionary *> *snapshotDict = _userArray[indexPath.row];
     NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
+    NSMutableString *permissions = [snapshotDict valueForKeyPath:@"values.permissions"];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
+    cell.userNameLabel.text = name;
+    cell.permissionsStatusLabel.text = permissions;
+    cell.userId = [snapshotDict valueForKeyPath:@"id"];
+    cell.delegate = self;
+    
+    if ([permissions isEqualToString:@"enabled"]) {
+        [cell.permissionsSwitch setOn:YES];
+    } else if ([permissions isEqualToString:@"disabled"]) {
+        [cell.permissionsSwitch setOn:NO];
+    } else {
+        cell.permissionsSwitch.hidden = YES;
+    }
     
     return cell;
 }
 
+#pragma mark - User Unit Cell Delegate
+
+-(void)toggleUserPermissions:(UBUsersTableViewCell *)cell withSwitch:(UISwitch *)toggleSwitch {
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    [_ref removeAllObservers];
+    
+    if (toggleSwitch.on) {
+        [[_ref child:cell.userId] updateChildValues:[NSDictionary dictionaryWithObjectsAndKeys:@"enabled",@"permissions", nil]];
+        cell.permissionsStatusLabel.text = @"enabled";
+    } else {
+        [[_ref child:cell.userId] updateChildValues:[NSDictionary dictionaryWithObjectsAndKeys:@"disabled",@"permissions", nil]];
+        cell.permissionsStatusLabel.text = @"disabled";
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.
