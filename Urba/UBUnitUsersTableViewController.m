@@ -1,42 +1,41 @@
-//
-//  UBSuperUnitTableViewController.m
+ //
+//  UBUnitUsersTableViewController.m
 //  Urba
 //
-//  Created by Ricardo Nazario on 10/22/16.
+//  Created by Ricardo Nazario on 12/11/16.
 //  Copyright © 2016 Ricardo Nazario. All rights reserved.
 //
 
-#import "UBSuperUnitTableViewController.h"
-#import "UBUnitViewController.h"
-#import "Constants.h"
+#import "UBUnitUsersTableViewController.h"
 #import "ActivityView.h"
 
 @import FirebaseDatabase;
+@import FirebaseAuth;
 
-@interface UBSuperUnitTableViewController () {
+@interface UBUnitUsersTableViewController () {
     FIRDatabaseHandle _refHandle;
 }
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) NSMutableArray *results;
-@property (weak, nonatomic) NSString *selectedSuper;
-@property (weak, nonatomic) NSString *selectedName;
-@property (weak, nonatomic) NSString *selectedKey;
+@property (strong, nonatomic) NSMutableArray *userArray;
 
 @end
 
-@implementation UBSuperUnitTableViewController
+@implementation UBUnitUsersTableViewController
 
-#pragma IBActions
+- (IBAction)donePressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
-- (void)getSuperUnits {
+-(void)getUsers {
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    _ref = [[[FIRDatabase database] reference] child:@"super-units"];
-    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"community-id"] queryEqualToValue:_communityId];
+    NSString *currentUnitRef = [NSString stringWithFormat:@"units/%@/users", _unitId];
     
-    _refHandle = [query observeEventType:FIRDataEventTypeValue
+    _ref = [[[FIRDatabase database] reference] child:currentUnitRef];
+    
+    _refHandle = [_ref observeEventType:FIRDataEventTypeValue
                                withBlock:^(FIRDataSnapshot *snapshot) {
                                    
                                    if ([snapshot exists]) {
@@ -44,18 +43,20 @@
                                        [spinner removeSpinner];
                                        for (FIRDataSnapshot *snap in snapshot.children) {
                                            
-                                           NSDictionary<NSString *, NSDictionary *> *superUnitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
+                                           NSDictionary<NSString *, NSDictionary *> *userDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
                                            
-                                           if (![_results containsObject:superUnitDict]) {
+                                           if (![_userArray containsObject:userDict] && ![[userDict valueForKeyPath:@"values.name"] isEqualToString: [FIRAuth auth].currentUser.email]) {
                                                
-                                               [_results addObject:superUnitDict];
+                                               NSLog(@"USER: %@", userDict);
                                                
-                                               [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                                               [_userArray addObject:userDict];
+                                               
+                                               [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_userArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
                                            }
                                        }
                                    } else {
                                        
-                                       [self alert:@"Wait a minute..." withMessage:@"There aren't any streets here! Try contacting your community administrator to get this fixed."];
+                                       [self alert:@"Wait a minute..." withMessage:@"There are no other users for this unit!"];
                                        
                                    }
                                }
@@ -63,15 +64,14 @@
                              [spinner removeSpinner];
                              [self alert:@"Error!" withMessage:error.description];
                          }];
+    
 }
 
-#pragma mark - Private 
-
--(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+-(void)alert:(NSString *)title withMessage:(NSString *)message {
     
     UIAlertController *alertView = [UIAlertController
                                     alertControllerWithTitle:NSLocalizedString(title, nil)
-                                    message:errorMsg
+                                    message:message
                                     preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
@@ -79,29 +79,55 @@
                                                handler:^(UIAlertAction * action) {
                                                    [alertView dismissViewControllerAnimated:YES
                                                                                  completion:nil];
+                                                   [self dismissViewControllerAnimated:YES
+                                                                            completion:nil];
                                                }];
     [alertView addAction:ok];
     [self presentViewController:alertView animated:YES completion:nil];
 }
 
-#pragma mark - Table View Data Source
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    _userArray = [[NSMutableArray alloc] init];
+    [self getUsers];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [_ref removeAllObservers];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_results count];
+    return [_userArray count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"superCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     // Configure the cell...
-    
     // Unpack from results array
-    NSDictionary<NSString *, NSDictionary *> *snapshotDict = _results[indexPath.row];
+    NSDictionary<NSString *, NSDictionary *> *snapshotDict = _userArray[indexPath.row];
     NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
@@ -109,20 +135,6 @@
     return cell;
 }
 
-#pragma mark - Text Field Methods
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    NSDictionary *selectedSnapshot = _results[indexPath.row];
-    
-    _selectedKey = [selectedSnapshot valueForKey:@"id"];
-    _selectedName = selectedCell.textLabel.text;
-    
-    _selectedSuper = [NSString stringWithFormat:@"%@-%@", _selectedName, _selectedKey];
- 
-    [self performSegueWithIdentifier:unitSegue sender:self];
-}
 
 /*
 // Override to support conditional editing of the table view.
@@ -158,54 +170,14 @@
 }
 */
 
-#pragma mark - Life Cycle
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    _results = [[NSMutableArray alloc] init];
-    [self getSuperUnits];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-}
-
--(void)viewDidDisappear:(BOOL)animated {
-    [_ref removeAllObservers];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
-    
-    if ([segue.identifier isEqualToString:unitSegue]) {
-        
-        UBFindUnitTableViewController *uvc = [segue destinationViewController];
-                
-        // Pass the selected object to the new view controller.
-        
-        [uvc setCommunityName:_communityName];
-        [uvc setCommunityKey:_communityId];
-        [uvc setSuperUnitName:_selectedName];
-        [uvc setSuperUnitId:_selectedKey];
-        [uvc setAdminId:_adminId];
-        [uvc setAdminName:_adminName];
-    }
+    // Pass the selected object to the new view controller.
 }
+*/
 
 @end

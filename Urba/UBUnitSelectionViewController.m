@@ -24,9 +24,8 @@
 
 #pragma mark - IBActions
 
-- (IBAction)addHomePressed:(id)sender {
-    
-    [self performSegueWithIdentifier:findHomeSegue sender:self];
+- (IBAction)cancelPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Private

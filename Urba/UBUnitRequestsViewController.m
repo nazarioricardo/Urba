@@ -192,6 +192,10 @@
     self.navigationItem.title = _address;
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [_ref removeAllObservers];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

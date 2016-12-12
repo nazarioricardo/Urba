@@ -17,6 +17,7 @@
 		8C2815EE1DF89E0E0015ECF9 /* UBRequestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2815ED1DF89E0D0015ECF9 /* UBRequestsTableViewCell.m */; };
 		8C4881E41DC56F100030B548 /* FIRManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4881E31DC56F100030B548 /* FIRManager.m */; };
 		8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */; };
+		8C4B25081DFE23D300E13D49 /* UBUnitUsersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B25071DFE23D300E13D49 /* UBUnitUsersTableViewController.m */; };
 		8C6257E71D870B0700737D73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E61D870B0700737D73 /* main.m */; };
 		8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257E91D870B0700737D73 /* AppDelegate.m */; };
 		8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6257EC1D870B0700737D73 /* UBWelcomeViewController.m */; };
@@ -78,6 +79,8 @@
 		8C4881E31DC56F100030B548 /* FIRManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRManager.m; sourceTree = "<group>"; };
 		8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindCommunityViewController.h; sourceTree = "<group>"; };
 		8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindCommunityViewController.m; sourceTree = "<group>"; };
+		8C4B25061DFE23D300E13D49 /* UBUnitUsersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnitUsersTableViewController.h; sourceTree = "<group>"; };
+		8C4B25071DFE23D300E13D49 /* UBUnitUsersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBUnitUsersTableViewController.m; sourceTree = "<group>"; };
 		8C6257E21D870B0700737D73 /* Urba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Urba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C6257E61D870B0700737D73 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8C6257E81D870B0700737D73 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -198,6 +201,7 @@
 				8C06A1A61DF20E3B00EDA13D /* UBSettingsViewController.h */,
 				8C06A1A71DF20E3B00EDA13D /* UBSettingsViewController.m */,
 				8C64A4CD1DF5F0F000016CB7 /* Find Unit */,
+				8C4B25091DFE23DB00E13D49 /* Users */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -209,6 +213,15 @@
 				8CEBF7971D9C5B5D00DAE919 /* UBUnitSelectionViewController.m */,
 			);
 			name = "Select Unit";
+			sourceTree = "<group>";
+		};
+		8C4B25091DFE23DB00E13D49 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				8C4B25061DFE23D300E13D49 /* UBUnitUsersTableViewController.h */,
+				8C4B25071DFE23D300E13D49 /* UBUnitUsersTableViewController.m */,
+			);
+			name = Users;
 			sourceTree = "<group>";
 		};
 		8C6257D91D870B0700737D73 = {
@@ -623,6 +636,7 @@
 				8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */,
 				8CB6EC061DC0131600B36FE9 /* UBFindUnitTableViewController.m in Sources */,
 				8C2650531DC3C9CB00AE3973 /* ActivityView.m in Sources */,
+				8C4B25081DFE23D300E13D49 /* UBUnitUsersTableViewController.m in Sources */,
 				8CB4CF261DE5E42A00539FB3 /* UBUnitViewController.m in Sources */,
 				8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */,
 				8C6257EA1D870B0700737D73 /* AppDelegate.m in Sources */,

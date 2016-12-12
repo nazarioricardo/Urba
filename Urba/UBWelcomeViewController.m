@@ -52,15 +52,12 @@
                                  [spinner removeSpinner];
                                  [self alert:error.description];
                              } else {
-                                 [spinner removeSpinner];
-                                 [self getUnits];
+                                 [self getUnits:spinner];
                              }
     }];
 }
 
-- (void)getUnits {
-    
-    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+- (void)getUnits:(ActivityView *)spinner {
     
     NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
     

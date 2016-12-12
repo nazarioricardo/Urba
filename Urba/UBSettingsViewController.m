@@ -7,6 +7,7 @@
 //
 
 #import "UBSettingsViewController.h"
+#import "UBUnitUsersTableViewController.h"
 #import "UBWelcomeViewController.h"
 
 @import FirebaseAuth;
@@ -40,12 +41,22 @@
 
 }
 
+- (IBAction)unitUsersPressed:(id)sender {
+    [self performSegueWithIdentifier:@"ManageUsersSegue" sender:self];
+}
+
+- (IBAction)otherUnitPressed:(id)sender {
+    [self performSegueWithIdentifier:@"ChangeUnitSegue" sender:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
     NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
+    
+    _unitId = [_unitDict valueForKey:@"id"];
     
     self.navigationItem.title = _address;
 }
@@ -55,14 +66,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
+    if ([segue.identifier isEqualToString:@"ManageUsersSegue"]) {
+        UINavigationController *nav = [segue destinationViewController];
+        UBUnitUsersTableViewController *uuvc = (UBUnitUsersTableViewController *)[nav topViewController];
+        [uuvc setUnitId:_unitId];
+    }
+    
     // Pass the selected object to the new view controller.
 }
-*/
 
 @end

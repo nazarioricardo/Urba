@@ -8,14 +8,18 @@
 
 #import "UBFindCommunityViewController.h"
 #import "UBUnitSelectionViewController.h"
-#import "FIRManager.h"
 #import "Constants.h"
 #import "ActivityView.h"
 
-@interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate>
+@import FirebaseDatabase;
+
+@interface UBFindCommunityViewController () <UITableViewDataSource, UITableViewDelegate> {
+    FIRDatabaseHandle _refHandle;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *communityTable;
 
+@property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) NSMutableArray *results;
 @property (weak, nonatomic) NSString *selectedCommunity;
 @property (weak, nonatomic) NSString *selectedName;
@@ -30,10 +34,6 @@
 #pragma mark - IBActions
 
 - (IBAction)cancelPressed:(id)sender {
-    
-    [_results removeAllObjects];
-    _results = nil;
-    [_communityTable reloadData];
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -44,24 +44,31 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [_results removeAllObjects];
-    [_communityTable reloadData];
-    
-    [FIRManager getAllValuesFromNode:@"communities"
-                            withSuccessHandler:^(NSArray *results) {
-                                
-                                _results = [NSMutableArray arrayWithArray:results];
-                                
-//                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
-                                [_communityTable reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _communityTable.numberOfSections)] withRowAnimation:UITableViewRowAnimationFade];
-
-                                [spinner removeSpinner];
-                            }
-                                orErrorHandler:^(NSError *error) {
-                                    
-                                    [spinner removeSpinner];
-                                    [self alert:@"Error!" withMessage:error.description];
-                                }];
+    _ref = [[[FIRDatabase database] reference] child:@"communities"];
+    [_ref observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        
+        if ([snapshot exists]) {
+            
+            [spinner removeSpinner];
+            for (FIRDataSnapshot *snap in snapshot.children) {
+                
+                NSDictionary<NSString *, NSDictionary *> *communityDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
+                NSLog(@"DICTIONARY: %@", communityDict);
+                
+                if (![_results containsObject:communityDict]) {
+                    
+                    [_results addObject:communityDict];
+                    [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                }
+            }
+        }
+    } withCancelBlock:^(NSError *error) {
+        
+        [spinner removeSpinner];
+        if (error) {
+            [self alert:@"Error!" withMessage:error.description];
+        }
+    }];
 }
 
 -(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
@@ -128,7 +135,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _communityTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    _results = [[NSMutableArray alloc] init];
     [self getCommunities];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [_ref removeAllObservers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -150,7 +166,7 @@
         // Pass the selected object to the new view controller.
         
         [suvc setCommunityName:_selectedName];
-        [suvc setCommunityKey:_selectedKey];
+        [suvc setCommunityId:_selectedKey];
         [suvc setAdminId:_adminId];
         [suvc setAdminName:_adminName];
     }

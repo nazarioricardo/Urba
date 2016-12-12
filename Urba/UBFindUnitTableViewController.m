@@ -8,11 +8,15 @@
 
 #import "UBFindUnitTableViewController.h"
 #import "UBUnitViewController.h"
-#import "FIRManager.h"
 #import "ActivityView.h"
 
-@interface UBFindUnitTableViewController ()
+@import FirebaseDatabase;
+@import FirebaseAuth;
 
+@interface UBFindUnitTableViewController () {
+    FIRDatabaseHandle _refHandle;
+}
+@property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) NSMutableArray *results;
 @property (weak, nonatomic) NSString *selectedSuper;
 @property (weak, nonatomic) NSString *selectedName;
@@ -28,44 +32,48 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [FIRManager getAllValuesFromNode:@"units"
-                           orderedBy:@"super-unit-id"
-                          filteredBy:_superUnitKey
-                  withSuccessHandler:^(NSArray *results) {
-                                
-                                if (![results count]) {
-                                    
-                                    [spinner removeSpinner];
-                                    [self alert:@"Wait a minute..." withMessage:@"There are no houses registered here. Contact your community administrator to get this fixed."];
-                                    
-                                } else {
-                                    
-                                    _results = [NSMutableArray arrayWithArray:results];
-                                    
-                                    //                                [_communityTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationLeft];
-                                    
-                                    [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.tableView.numberOfSections)] withRowAnimation:UITableViewRowAnimationFade];
-                                    [spinner removeSpinner];
-                                    
-                                }
-                            }
-                                orErrorHandler:^(NSError *error) {
-                                    
-                                    [spinner removeSpinner];
-                                    [self alert:@"Error!" withMessage:error.description];
-                                    [self dismissViewControllerAnimated:YES completion:nil];
-                                }];
+    _ref = [[[FIRDatabase database] reference] child:@"units"];
+    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"super-unit-id"] queryEqualToValue:_superUnitId];
+    
+    _refHandle = [query observeEventType:FIRDataEventTypeValue
+                               withBlock:^(FIRDataSnapshot *snapshot) {
+                                   
+                                   if ([snapshot exists]) {
+                                       
+                                       [spinner removeSpinner];
+                                       for (FIRDataSnapshot *snap in snapshot.children) {
+                                           
+                                           NSDictionary<NSString *, NSDictionary *> *superUnitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
+                                           
+                                           if (![_results containsObject:superUnitDict]) {
+                                               
+                                               [_results addObject:superUnitDict];
+                                               
+                                               [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_results.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                                           }
+                                       }
+                                   } else {
+                                       
+                                       [self alert:@"Wait a minute..." withMessage:@"There aren't any streets here! Try contacting your community administrator to get this fixed."];
+                                       
+                                   }
+                               }
+                         withCancelBlock:^(NSError *error) {
+                             [spinner removeSpinner];
+                             [self alert:@"Error!" withMessage:error.description];
+                         }];
 }
 
 - (void)sendRequestToUser:(NSString *)unitUser withId:(NSString *)unitUserId {
     
-    NSString *userId = [FIRManager getCurrentUser];
+    NSString *userId = [FIRAuth auth].currentUser.uid;
+    NSString *userName = [FIRAuth auth].currentUser.email;
     
     NSLog(@"Selected unit key: %@", _selectedKey);
     NSLog(@"User Id: %@", userId);
     
     NSDictionary *unitDict = [NSDictionary dictionaryWithObjectsAndKeys:_selectedName,@"name",_selectedKey,@"id", _superUnitName, @"owner", nil];
-    NSDictionary *fromDict = [NSDictionary dictionaryWithObjectsAndKeys: [FIRManager getCurrentUserEmail],@"name", [FIRManager getCurrentUser], @"id", nil];
+    NSDictionary *fromDict = [NSDictionary dictionaryWithObjectsAndKeys: userName,@"name", userId, @"id", nil];
     NSDictionary *toDict;
     NSString *message;
     NSDictionary *requestDict;
@@ -83,16 +91,18 @@
     
     NSLog(@"%@", unitDict);
     
-    [FIRManager addToChildByAutoId:@"requests" withPairs:requestDict];
-                         
+    FIRDatabaseReference *requestRef = [[[[FIRDatabase database] reference] child:@"requests"] childByAutoId];
+    [requestRef setValue:requestDict];
+    [requestRef removeAllObservers];
     [self alert:@"Success!" withMessage:message];
+    
 }
 
--(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+-(void)alert:(NSString *)title withMessage:(NSString *)message {
     
     UIAlertController *alertView = [UIAlertController
                                     alertControllerWithTitle:NSLocalizedString(title, nil)
-                                    message:errorMsg
+                                    message:message
                                     preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
@@ -166,7 +176,17 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     NSLog(@"Admin Name: %@", _adminName);
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    _results = [[NSMutableArray alloc] init];
     [self getUnits];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [_ref removeAllObservers];
 }
 
 - (void)didReceiveMemoryWarning {
