@@ -14,6 +14,7 @@
 
 -(void)cancelGuest:(UBGuestTableViewCell *)cell;
 -(void)confirmGuest:(UBGuestTableViewCell *)cell;
+-(void)listenToStatus:(UBGuestTableViewCell *)cell;
 
 @end
 

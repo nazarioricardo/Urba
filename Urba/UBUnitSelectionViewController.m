@@ -8,7 +8,6 @@
 
 #import "UBUnitSelectionViewController.h"
 #import "UBUnitViewController.h"
-#import "FIRManager.h"
 #import "Constants.h"
 #import "ActivityView.h"
 
@@ -34,29 +33,29 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRManager getCurrentUser]];
+//    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRManager getCurrentUser]];
     
-    [FIRManager getAllValuesFromNode:@"units"
-                           orderedBy:unitRef
-                          filteredBy:[FIRManager getCurrentUser]
-                  withSuccessHandler:^(NSArray *results) {
-                                
-                                _unitsArray = [NSMutableArray arrayWithArray:results];
-                                
-                                if ([results count] <= 1) {
-                                    
-                                    [spinner removeSpinner];
-                                    [self alert:@"Wait a minute..." withMessage:@"You only have one registered household! If this is wrong, try reloading the page, or make sure you don't have any unverified requests."];
-                                } else {
-                                    
-                                    [spinner removeSpinner];
-                                    [_unitsTable reloadData];
-                                }
-                            }
-                                orErrorHandler:^(NSError *error) {
-                                    [spinner removeSpinner];
-                                    [self alert:@"Error!" withMessage:error.description];
-                                }];
+//    [FIRManager getAllValuesFromNode:@"units"
+//                           orderedBy:unitRef
+//                          filteredBy:[FIRManager getCurrentUser]
+//                  withSuccessHandler:^(NSArray *results) {
+//                                
+//                                _unitsArray = [NSMutableArray arrayWithArray:results];
+//                                
+//                                if ([results count] <= 1) {
+//                                    
+//                                    [spinner removeSpinner];
+//                                    [self alert:@"Wait a minute..." withMessage:@"You only have one registered household! If this is wrong, try reloading the page, or make sure you don't have any unverified requests."];
+//                                } else {
+//                                    
+//                                    [spinner removeSpinner];
+//                                    [_unitsTable reloadData];
+//                                }
+//                            }
+//                                orErrorHandler:^(NSError *error) {
+//                                    [spinner removeSpinner];
+//                                    [self alert:@"Error!" withMessage:error.description];
+//                                }];
 }
 
 -(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {

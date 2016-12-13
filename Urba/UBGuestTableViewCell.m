@@ -28,6 +28,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    NSLog(@"CELL AWAKENED");
+    [_delegate listenToStatus:self];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

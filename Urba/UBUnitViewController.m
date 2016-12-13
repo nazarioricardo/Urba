@@ -49,29 +49,29 @@
 
 #pragma mark - Private
 
--(void)getGuests {
+-(void)initGuests {
     
     _ref = [[[FIRDatabase database] reference] child:@"visitors"];
     FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit-id"] queryEqualToValue:_unitId];
     
-    _refHandle = [query observeEventType:FIRDataEventTypeValue
+    _refHandle = [query observeEventType:FIRDataEventTypeChildAdded
                                withBlock:^(FIRDataSnapshot *snapshot) {
         
         if ([snapshot exists]) {
-            for (FIRDataSnapshot *snap in snapshot.children) {
-                
-                NSDictionary<NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
+            
+            NSLog(@"Snapshot! %@", snapshot);
+//            for (FIRDataSnapshot *snap in snapshot.children) {
+//                
+                NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key,@"id",snapshot.value,@"values", nil];
                 
                 if (![_feedArray containsObject:visitorDict]) {
                     
                     [_feedArray addObject:visitorDict];
-                    
-                    NSLog(@"FEED ARRAY: %@", _feedArray);
                     [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
                     _feedTable.hidden = NO;
                     [self hideViewAnimated:_noGuestsLabel hide:YES];
                 }
-            }
+//            }
         } else {
             [self hideViewAnimated:_feedTable hide:YES];
             [self hideViewAnimated:_noGuestsLabel hide:NO];
@@ -81,6 +81,39 @@
         
         [self alert:@"Error!" withMessage:error.description];
     }];
+}
+
+-(void)getAddedGuests {
+    
+    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit-id"] queryEqualToValue:_unitId];
+    [query observeEventType:FIRDataEventTypeChildAdded
+                          withBlock:^(FIRDataSnapshot *snapshot) {
+                              
+                              if ([snapshot exists]) {
+                                  
+                                  NSLog(@"SNAPSHOT ADDED: %@", snapshot);
+//                                  for (FIRDataSnapshot *snap in snapshot.children) {
+//                                      
+//                                      NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
+//                                      
+//                                      if (![_feedArray containsObject:visitorDict]) {
+//                                          
+//                                          [_feedArray addObject:visitorDict];
+//                                          [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+//                                          _feedTable.hidden = NO;
+//                                          [self hideViewAnimated:_noGuestsLabel hide:YES];
+//                                      }
+//                                  }
+//                              } else {
+//                                  [self hideViewAnimated:_feedTable hide:YES];
+//                                  [self hideViewAnimated:_noGuestsLabel hide:NO];
+                              }
+                          }
+                    withCancelBlock:^(NSError *error) {
+                        
+                        [self alert:@"Error!" withMessage:error.description];
+                    }];
+    
 }
 
 -(void)addGuestController {
@@ -101,9 +134,8 @@
                                                        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:addTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id",@"On the way",@"status", nil];
                                                        
                                                        [addTextField resignFirstResponder];
-                                                       _ref = [_ref childByAutoId];
-                                                       [_ref setValue:dict];
-                                                       _ref = [[[FIRDatabase database] reference] child:@"visitors"];
+                                                       [[_ref childByAutoId] setValue:dict];
+                                                       [self getAddedGuests];
                                                    }
                                                }];
     
@@ -178,35 +210,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UBGuestTableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"GuestCell" forIndexPath:indexPath];
-    
+    cell.delegate = self;
     // Unpack visitor from feed array
-    NSDictionary<NSString *, NSDictionary *> *visitorDict = _feedArray[indexPath.row];
+    NSMutableDictionary <NSString *, NSMutableDictionary *> *visitorDict = _feedArray[indexPath.row];
     
     NSLog(@"CELL VALUE: %@", visitorDict);
     NSString *name = [visitorDict valueForKeyPath:@"values.name"];
     cell.nameLabel.text = [NSString stringWithFormat:@"%@", name];
     cell.visitorId = [visitorDict valueForKeyPath:@"id"];
     cell.statusLabel.text = [visitorDict valueForKeyPath:@"values.status"];
-    [self getStatus:cell.visitorId forCell:cell];
-    cell.delegate = self;
+    [self listenToStatus:cell];
     
     return cell;
-}
-
--(void)getStatus:(NSString *)visitor forCell:(UBGuestTableViewCell *)cell {
-        
-    NSString *statusRefString = [NSString stringWithFormat:@"visitors/%@/status", visitor];
-    
-    _statusRef = [[[FIRDatabase database] reference] child:statusRefString];
-    [_statusRef observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot *snapshot) {
-        
-        cell.statusLabel.text = snapshot.value;
-        
-    } withCancelBlock:^(NSError *error) {
-        if (error) {
-            cell.statusLabel.text = @"There has been an error";
-        }
-    }];
 }
 
 #pragma mark - Cell Delegate
@@ -223,8 +238,7 @@
     }
     [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
     [_feedTable endUpdates];
-    [self getGuests];
-    
+    [self initGuests];
 }
 
 - (void)confirmGuest:(UBGuestTableViewCell *)cell {
@@ -239,7 +253,30 @@
     }
     [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
     [_feedTable endUpdates];
-    [self getGuests];
+    [self initGuests];
+}
+
+-(void)listenToStatus:(UBGuestTableViewCell *)cell {
+    
+    NSString *statusRefString = [NSString stringWithFormat:@"visitors/%@/status", cell.visitorId];
+    
+    NSLog(@"Status listener called: %@", cell.visitorId);
+    
+    [_statusRef child:statusRefString];
+    [_statusRef observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot *snapshot) {
+        
+        NSString *keyPath = [NSString stringWithFormat:@"%@.status", cell.visitorId];
+        NSString *status = [snapshot.value valueForKeyPath:keyPath];
+        
+        cell.statusLabel.text = status;
+        NSLog(@"STATUS: %@", status);
+        
+    } withCancelBlock:^(NSError *error) {
+        if (error) {
+            cell.statusLabel.text = @"There has been an error";
+        }
+    }];
+    
 }
 
 #pragma mark - Life Cycle
@@ -253,6 +290,7 @@
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
     NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
+    _statusRef = [[FIRDatabase database] reference];
     
     _unitId = [NSString stringWithFormat:@"%@", [_unitDict valueForKey:@"id"]];
     _unitName = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.name"]];
@@ -267,7 +305,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self getGuests];
+    [self initGuests];
     self.navigationItem.title = _address;
 }
 

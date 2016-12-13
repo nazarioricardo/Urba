@@ -15,7 +15,6 @@
 		8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */; };
 		8C2650531DC3C9CB00AE3973 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2650521DC3C9CB00AE3973 /* ActivityView.m */; };
 		8C2815EE1DF89E0E0015ECF9 /* UBRequestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2815ED1DF89E0D0015ECF9 /* UBRequestsTableViewCell.m */; };
-		8C4881E41DC56F100030B548 /* FIRManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4881E31DC56F100030B548 /* FIRManager.m */; };
 		8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */; };
 		8C4B25081DFE23D300E13D49 /* UBUnitUsersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B25071DFE23D300E13D49 /* UBUnitUsersTableViewController.m */; };
 		8C4B250C1DFEFA0100E13D49 /* UBUsersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B250B1DFEFA0100E13D49 /* UBUsersTableViewCell.m */; };
@@ -76,8 +75,6 @@
 		8C2650521DC3C9CB00AE3973 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		8C2815EC1DF89E0D0015ECF9 /* UBRequestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequestsTableViewCell.h; sourceTree = "<group>"; };
 		8C2815ED1DF89E0D0015ECF9 /* UBRequestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBRequestsTableViewCell.m; sourceTree = "<group>"; };
-		8C4881E21DC56F100030B548 /* FIRManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRManager.h; sourceTree = "<group>"; };
-		8C4881E31DC56F100030B548 /* FIRManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRManager.m; sourceTree = "<group>"; };
 		8C49568F1DBAB0A600CAD822 /* UBFindCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindCommunityViewController.h; sourceTree = "<group>"; };
 		8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindCommunityViewController.m; sourceTree = "<group>"; };
 		8C4B25061DFE23D300E13D49 /* UBUnitUsersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnitUsersTableViewController.h; sourceTree = "<group>"; };
@@ -265,7 +262,6 @@
 				8C2650511DC3C9CB00AE3973 /* ActivityView.h */,
 				8C2650521DC3C9CB00AE3973 /* ActivityView.m */,
 				8CA293341D879FF400931859 /* Model */,
-				8CA293381D87A04E00931859 /* Control */,
 				8C6257EE1D870B0700737D73 /* Main.storyboard */,
 				8C6257F11D870B0700737D73 /* Assets.xcassets */,
 				8C6257F31D870B0700737D73 /* LaunchScreen.storyboard */,
@@ -333,15 +329,6 @@
 				8CA2933D1D87A0A500931859 /* User.m */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		8CA293381D87A04E00931859 /* Control */ = {
-			isa = PBXGroup;
-			children = (
-				8C4881E21DC56F100030B548 /* FIRManager.h */,
-				8C4881E31DC56F100030B548 /* FIRManager.m */,
-			);
-			name = Control;
 			sourceTree = "<group>";
 		};
 		A57B709BB8FE134B1CC0A133 /* Pods */ = {
@@ -649,7 +636,6 @@
 				8C2815EE1DF89E0E0015ECF9 /* UBRequestsTableViewCell.m in Sources */,
 				8C7005991DF73A7D00ED8BDC /* UBUnitRequestsViewController.m in Sources */,
 				8C6257E71D870B0700737D73 /* main.m in Sources */,
-				8C4881E41DC56F100030B548 /* FIRManager.m in Sources */,
 				8C67E2FD1D87626D0044C9F3 /* UBCreateUserViewController.m in Sources */,
 				8CD6779C1DD0C84E005DDD31 /* Constants.m in Sources */,
 			);

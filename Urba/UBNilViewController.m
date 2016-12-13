@@ -8,7 +8,6 @@
 
 #import "UBNilViewController.h"
 #import "UBUnitSelectionViewController.h"
-#import "FIRManager.h"
 #import "ActivityView.h"
 
 @interface UBNilViewController ()
@@ -25,55 +24,55 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [FIRManager getAllValuesFromNode:@"units"
-                           orderedBy:@"user/id"
-                          filteredBy:[FIRManager getCurrentUser]
-                  withSuccessHandler:^(NSArray *results) {
-                      
-                      if (![results count]) {
-                          
-                          [FIRManager getAllValuesFromNode:@"requests"
-                                                 orderedBy:@"from/id"
-                                                filteredBy:[FIRManager getCurrentUser]
-                                        withSuccessHandler:^(NSArray *results) {
-                                            
-                                            if ([results count]) {
-                                                
-                                                _mainLabel.text = @"Waiting for verification!";
-                                                _secondLabel.text = @"In the meantime,you can contact your community's administrator to speed up your verification, and check out our website to learn about our features.";
-                                                _secondLabel.hidden = NO;
-                                                _addHomeButton.hidden = YES;
-                                                NSLog(@"You have a request pending.");
-                                                [spinner removeSpinner];
-                                            } else {
-                                                [spinner removeSpinner];
-                                            }
-                                        }
-                                            orErrorHandler:^(NSError *error) {
-                                                
-                                                NSLog(@"Error: %@", error.description);
-                                            }];
-                      } else if ([results count] >= 1) {
-                          
-                          NSString *storyboardName = @"Main";
-                          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-                          UINavigationController *navBar = [storyboard instantiateViewControllerWithIdentifier:@"UnitListNav"];
-//                          UBUnitSelectionViewController *usvc = [storyboard instantiateViewControllerWithIdentifier:@"Unit List"];
-                          [self presentViewController:navBar animated:YES completion:nil];
-                      
-                      } else {
-                          
-                          NSString *storyboardName = @"Main";
-                          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
-                          UINavigationController *navBar = [storyboard instantiateViewControllerWithIdentifier:@"UnitNav"];
-                          [self presentViewController:navBar animated:YES completion:nil];
-                          
-                      }
-                  }
-                      orErrorHandler:^(NSError *error) {
-                          
-                          NSLog(@"Error: %@", error.description);
-                      }];
+//    [FIRManager getAllValuesFromNode:@"units"
+//                           orderedBy:@"user/id"
+//                          filteredBy:[FIRManager getCurrentUser]
+//                  withSuccessHandler:^(NSArray *results) {
+//                      
+//                      if (![results count]) {
+//                          
+//                          [FIRManager getAllValuesFromNode:@"requests"
+//                                                 orderedBy:@"from/id"
+//                                                filteredBy:[FIRManager getCurrentUser]
+//                                        withSuccessHandler:^(NSArray *results) {
+//                                            
+//                                            if ([results count]) {
+//                                                
+//                                                _mainLabel.text = @"Waiting for verification!";
+//                                                _secondLabel.text = @"In the meantime,you can contact your community's administrator to speed up your verification, and check out our website to learn about our features.";
+//                                                _secondLabel.hidden = NO;
+//                                                _addHomeButton.hidden = YES;
+//                                                NSLog(@"You have a request pending.");
+//                                                [spinner removeSpinner];
+//                                            } else {
+//                                                [spinner removeSpinner];
+//                                            }
+//                                        }
+//                                            orErrorHandler:^(NSError *error) {
+//                                                
+//                                                NSLog(@"Error: %@", error.description);
+//                                            }];
+//                      } else if ([results count] >= 1) {
+//                          
+//                          NSString *storyboardName = @"Main";
+//                          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+//                          UINavigationController *navBar = [storyboard instantiateViewControllerWithIdentifier:@"UnitListNav"];
+////                          UBUnitSelectionViewController *usvc = [storyboard instantiateViewControllerWithIdentifier:@"Unit List"];
+//                          [self presentViewController:navBar animated:YES completion:nil];
+//                      
+//                      } else {
+//                          
+//                          NSString *storyboardName = @"Main";
+//                          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+//                          UINavigationController *navBar = [storyboard instantiateViewControllerWithIdentifier:@"UnitNav"];
+//                          [self presentViewController:navBar animated:YES completion:nil];
+//                          
+//                      }
+//                  }
+//                      orErrorHandler:^(NSError *error) {
+//                          
+//                          NSLog(@"Error: %@", error.description);
+//                      }];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
