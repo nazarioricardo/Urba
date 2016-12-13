@@ -12,6 +12,4 @@
 
 @property (weak, nonatomic) NSDictionary<NSString *, NSDictionary *> *unitDict;
 
--(void)removeGuest:(NSString *)visitorId;
-
 @end

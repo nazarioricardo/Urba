@@ -19,6 +19,7 @@
 }
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FIRDatabaseReference *statusRef;
 
 @property (weak, nonatomic) IBOutlet UITableView *feedTable;
 @property (weak, nonatomic) IBOutlet UILabel *noGuestsLabel;
@@ -72,23 +73,14 @@
                 }
             }
         } else {
-
             [self hideViewAnimated:_feedTable hide:YES];
             [self hideViewAnimated:_noGuestsLabel hide:NO];
-            
         }
     }
                          withCancelBlock:^(NSError *error) {
         
         [self alert:@"Error!" withMessage:error.description];
     }];
-}
-
--(void)removeGuest:(NSString *)visitorId {
-    
-    [_feedArray removeObject:visitorId];
-    [_feedTable reloadData];
-//    [FIRManager removeChild:visitorId];
 }
 
 -(void)addGuestController {
@@ -106,7 +98,7 @@
                                                    
                                                    if (![addTextField.text isEqualToString:@""]) {
                                                        
-                                                       NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:addTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id", nil];
+                                                       NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:addTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id",@"On the way",@"status", nil];
                                                        
                                                        [addTextField resignFirstResponder];
                                                        _ref = [_ref childByAutoId];
@@ -192,14 +184,29 @@
     
     NSLog(@"CELL VALUE: %@", visitorDict);
     NSString *name = [visitorDict valueForKeyPath:@"values.name"];
-//
     cell.nameLabel.text = [NSString stringWithFormat:@"%@", name];
     cell.visitorId = [visitorDict valueForKeyPath:@"id"];
-//    cell.statusLabel.text = [NSString stringWithFormat:@"suck it"];
-    
+    cell.statusLabel.text = [visitorDict valueForKeyPath:@"values.status"];
+    [self getStatus:cell.visitorId forCell:cell];
     cell.delegate = self;
     
     return cell;
+}
+
+-(void)getStatus:(NSString *)visitor forCell:(UBGuestTableViewCell *)cell {
+        
+    NSString *statusRefString = [NSString stringWithFormat:@"visitors/%@/status", visitor];
+    
+    _statusRef = [[[FIRDatabase database] reference] child:statusRefString];
+    [_statusRef observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot *snapshot) {
+        
+        cell.statusLabel.text = snapshot.value;
+        
+    } withCancelBlock:^(NSError *error) {
+        if (error) {
+            cell.statusLabel.text = @"There has been an error";
+        }
+    }];
 }
 
 #pragma mark - Cell Delegate

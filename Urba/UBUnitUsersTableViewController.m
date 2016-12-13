@@ -16,7 +16,6 @@
 @interface UBUnitUsersTableViewController () <UserCellDelegate>
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FIRDatabaseReference *permissionsRef;
 @property (strong, nonatomic) NSMutableArray *userArray;
 
 @end
@@ -65,19 +64,6 @@
                              [spinner removeSpinner];
                              [self alert:@"Error!" withMessage:error.description];
                          }];
-    
-}
-
--(void)getPermisions:(NSString *)user {
-    
-    NSString *permsRefString = [NSString stringWithFormat:@"units/%@/users/%@/permissions", _unitId, user];
-    _permissionsRef = [[[FIRDatabase database] reference] child:permsRefString];
-    [_permissionsRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
-        
-        
-    } withCancelBlock:^(NSError *error) {
-        
-    }];
     
 }
 
@@ -166,9 +152,7 @@
 #pragma mark - User Unit Cell Delegate
 
 -(void)toggleUserPermissions:(UBUsersTableViewCell *)cell withSwitch:(UISwitch *)toggleSwitch {
-    
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
+        
     [_ref removeAllObservers];
     
     if (toggleSwitch.on) {
