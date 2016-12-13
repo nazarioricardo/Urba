@@ -107,6 +107,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [_ref removeAllObservers];
+    [_permissionsRef removeAllObservers];
 }
 
 - (void)didReceiveMemoryWarning {
