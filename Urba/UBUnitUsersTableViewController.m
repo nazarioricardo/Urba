@@ -16,6 +16,7 @@
 @interface UBUnitUsersTableViewController () <UserCellDelegate>
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FIRDatabaseReference *permissionsRef;
 @property (strong, nonatomic) NSMutableArray *userArray;
 
 @end
@@ -37,27 +38,26 @@
     NSString *currentUnitRef = [NSString stringWithFormat:@"units/%@/users", _unitId];
     
     _ref = [[[FIRDatabase database] reference] child:currentUnitRef];
-    [_ref observeEventType:FIRDataEventTypeValue
+    [_ref observeEventType:FIRDataEventTypeChildAdded
                                withBlock:^(FIRDataSnapshot *snapshot) {
                                    
-                                   if ([snapshot exists]) {
-                                       
+                                   if (snapshot) {
                                        [spinner removeSpinner];
-                                       for (FIRDataSnapshot *snap in snapshot.children) {
+                                       //            for (FIRDataSnapshot *snap in snapshot.children) {
+                                       NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key,@"id",snapshot.value,@"values", nil];
+                                       
+                                       if (![_userArray containsObject:visitorDict]) {
                                            
-                                           NSDictionary<NSString *, NSMutableDictionary *> *userDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
-                                           
-                                           if (![_userArray containsObject:userDict] && ![[userDict valueForKeyPath:@"values.name"] isEqualToString: [FIRAuth auth].currentUser.email]) {
-                                               
-                                               [_userArray addObject:userDict];
-                                               
-                                               [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_userArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
-                                           }
+                                           [_userArray addObject:visitorDict];
+                                           [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_userArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                                           self.tableView.hidden = NO;
+//                                           [self hideViewAnimated:_noGuestsLabel hide:YES];
                                        }
+                                       
+                                       //            }
                                    } else {
-                                       
-                                       [self alert:@"Wait a minute..." withMessage:@"There are no other users for this unit!"];
-                                       
+//                                       [self hideViewAnimated:_feedTable hide:YES];
+//                                       [self hideViewAnimated:_noGuestsLabel hide:NO];
                                    }
                                }
                          withCancelBlock:^(NSError *error) {
@@ -98,6 +98,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _userArray = [[NSMutableArray alloc] init];
+    _permissionsRef = [[FIRDatabase database] reference];
     [self getUsers];
 }
 
@@ -127,7 +128,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UBUsersTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    cell.delegate = self;
+
     // Unpack from results array
     NSDictionary<NSString *, NSDictionary *> *snapshotDict = _userArray[indexPath.row];
     NSString *name = [snapshotDict valueForKeyPath:@"values.name"];
@@ -136,31 +138,38 @@
     cell.userNameLabel.text = name;
     cell.permissionsStatusLabel.text = permissions;
     cell.userId = [snapshotDict valueForKeyPath:@"id"];
-    cell.delegate = self;
     
-    if ([permissions isEqualToString:@"enabled"]) {
-        [cell.permissionsSwitch setOn:YES];
-    } else if ([permissions isEqualToString:@"disabled"]) {
-        [cell.permissionsSwitch setOn:NO];
-    } else {
+    
+    if ([cell.permissionsStatusLabel.text isEqualToString:@"head"]) {
         cell.permissionsSwitch.hidden = YES;
     }
     
+    if ([cell.permissionsStatusLabel.text isEqualToString:@"enabled"]) {
+        [cell.permissionsSwitch setOn:YES];
+    } else {
+        [cell.permissionsSwitch setOn:NO];
+    }
+
     return cell;
 }
 
 #pragma mark - User Unit Cell Delegate
 
 -(void)toggleUserPermissions:(UBUsersTableViewCell *)cell withSwitch:(UISwitch *)toggleSwitch {
-        
-    [_ref removeAllObservers];
     
-    if (toggleSwitch.on) {
-        [[_ref child:cell.userId] updateChildValues:[NSDictionary dictionaryWithObjectsAndKeys:@"enabled",@"permissions", nil]];
+//    NSString *permissionsRefString = [NSString stringWithFormat:@"%@/permissions", cell.userId];
+//    [_permissionsRef child:permissionsRefString];
+    
+    NSString *permissionsRefString = [NSString stringWithFormat:@"units/%@/users/%@/permissions", _unitId, cell.userId];
+//    [_permissionsRef child:permissionsRefString];
+    
+    if ([toggleSwitch isOn]) {
+        [_permissionsRef updateChildValues:[NSDictionary dictionaryWithObjectsAndKeys:@"enabled",permissionsRefString, nil]];
         cell.permissionsStatusLabel.text = @"enabled";
     } else {
-        [[_ref child:cell.userId] updateChildValues:[NSDictionary dictionaryWithObjectsAndKeys:@"disabled",@"permissions", nil]];
+        [_permissionsRef updateChildValues:[NSDictionary dictionaryWithObjectsAndKeys:@"disabled",permissionsRefString, nil]];
         cell.permissionsStatusLabel.text = @"disabled";
+
     }
 }
 

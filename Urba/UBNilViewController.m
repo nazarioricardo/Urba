@@ -22,7 +22,7 @@
 
 - (void)getUnits {
     
-    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+//    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
 //    [FIRManager getAllValuesFromNode:@"units"
 //                           orderedBy:@"user/id"

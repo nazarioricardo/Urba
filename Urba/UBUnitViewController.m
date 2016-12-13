@@ -49,7 +49,7 @@
 
 #pragma mark - Private
 
--(void)initGuests {
+-(void)getGuests {
     
     _ref = [[[FIRDatabase database] reference] child:@"visitors"];
     FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit-id"] queryEqualToValue:_unitId];
@@ -57,22 +57,23 @@
     _refHandle = [query observeEventType:FIRDataEventTypeChildAdded
                                withBlock:^(FIRDataSnapshot *snapshot) {
         
-        if ([snapshot exists]) {
+        if (snapshot) {
             
             NSLog(@"Snapshot! %@", snapshot);
 //            for (FIRDataSnapshot *snap in snapshot.children) {
-//                
-                NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key,@"id",snapshot.value,@"values", nil];
+            NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key,@"id",snapshot.value,@"values", nil];
+            
+            if (![_feedArray containsObject:visitorDict]) {
                 
-                if (![_feedArray containsObject:visitorDict]) {
-                    
-                    [_feedArray addObject:visitorDict];
-                    [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
-                    _feedTable.hidden = NO;
-                    [self hideViewAnimated:_noGuestsLabel hide:YES];
-                }
+                [_feedArray addObject:visitorDict];
+                [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                _feedTable.hidden = NO;
+                [self hideViewAnimated:_noGuestsLabel hide:YES];
+            }
+            
 //            }
         } else {
+            NSLog(@"NO SNAPS");
             [self hideViewAnimated:_feedTable hide:YES];
             [self hideViewAnimated:_noGuestsLabel hide:NO];
         }
@@ -81,39 +82,6 @@
         
         [self alert:@"Error!" withMessage:error.description];
     }];
-}
-
--(void)getAddedGuests {
-    
-    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit-id"] queryEqualToValue:_unitId];
-    [query observeEventType:FIRDataEventTypeChildAdded
-                          withBlock:^(FIRDataSnapshot *snapshot) {
-                              
-                              if ([snapshot exists]) {
-                                  
-                                  NSLog(@"SNAPSHOT ADDED: %@", snapshot);
-//                                  for (FIRDataSnapshot *snap in snapshot.children) {
-//                                      
-//                                      NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
-//                                      
-//                                      if (![_feedArray containsObject:visitorDict]) {
-//                                          
-//                                          [_feedArray addObject:visitorDict];
-//                                          [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
-//                                          _feedTable.hidden = NO;
-//                                          [self hideViewAnimated:_noGuestsLabel hide:YES];
-//                                      }
-//                                  }
-//                              } else {
-//                                  [self hideViewAnimated:_feedTable hide:YES];
-//                                  [self hideViewAnimated:_noGuestsLabel hide:NO];
-                              }
-                          }
-                    withCancelBlock:^(NSError *error) {
-                        
-                        [self alert:@"Error!" withMessage:error.description];
-                    }];
-    
 }
 
 -(void)addGuestController {
@@ -135,7 +103,6 @@
                                                        
                                                        [addTextField resignFirstResponder];
                                                        [[_ref childByAutoId] setValue:dict];
-                                                       [self getAddedGuests];
                                                    }
                                                }];
     
@@ -238,7 +205,7 @@
     }
     [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
     [_feedTable endUpdates];
-    [self initGuests];
+    [self getGuests];
 }
 
 - (void)confirmGuest:(UBGuestTableViewCell *)cell {
@@ -253,15 +220,13 @@
     }
     [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
     [_feedTable endUpdates];
-    [self initGuests];
+    [self getGuests];
 }
 
 -(void)listenToStatus:(UBGuestTableViewCell *)cell {
     
     NSString *statusRefString = [NSString stringWithFormat:@"visitors/%@/status", cell.visitorId];
-    
-    NSLog(@"Status listener called: %@", cell.visitorId);
-    
+        
     [_statusRef child:statusRefString];
     [_statusRef observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot *snapshot) {
         
@@ -305,7 +270,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self initGuests];
+    [self getGuests];
     self.navigationItem.title = _address;
 }
 

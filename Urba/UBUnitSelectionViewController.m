@@ -31,7 +31,7 @@
 
 - (void)getUnits {
     
-    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+//    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
 //    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRManager getCurrentUser]];
     

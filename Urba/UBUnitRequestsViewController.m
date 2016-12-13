@@ -36,31 +36,24 @@
     _ref = [[[FIRDatabase database] reference] child:@"requests"];
     FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit/id"] queryEqualToValue:_unitId];
     
-    _refHandle = [query observeEventType:FIRDataEventTypeValue
+    _refHandle = [query observeEventType:FIRDataEventTypeChildAdded
                                withBlock:^(FIRDataSnapshot *snapshot) {
                                    
                                    if ([snapshot exists]) {
-                                       for (FIRDataSnapshot *snap in snapshot.children) {
+                                       
+                                       NSLog(@"Snapshot! %@", snapshot);
+                                       NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key,@"id",snapshot.value,@"values", nil];
+                                       
+                                       if (![_feedArray containsObject:visitorDict]) {
                                            
-                                           NSLog(@"Snap: %@", snap);
-                                           
-                                           NSDictionary<NSString *, NSDictionary *> *requestDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
-                                           
-                                           if (![_feedArray containsObject:requestDict]) {
-                                               
-                                               [_feedArray addObject:requestDict];
-                                               
-                                               NSLog(@"DICTIONARY: %@", requestDict);
-                                               [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
-                                               _feedTable.hidden = NO;
-                                               [self hideViewAnimated:_noRequestsLabel hide:YES];
-                                           }
+                                           [_feedArray addObject:visitorDict];
+                                           [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                                           _feedTable.hidden = NO;
+                                           [self hideViewAnimated:_noRequestsLabel hide:YES];
                                        }
                                    } else {
-                                       
                                        [self hideViewAnimated:_feedTable hide:YES];
                                        [self hideViewAnimated:_noRequestsLabel hide:NO];
-                                       
                                    }
                                }
                          withCancelBlock:^(NSError *error) {

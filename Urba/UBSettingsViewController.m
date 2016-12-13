@@ -33,7 +33,6 @@
         NSLog(@"Sign out error: %@", signOutError);
         return;
     }
-    
     NSString *storyboardName = @"Main";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
     UBWelcomeViewController *uwvc = [storyboard instantiateViewControllerWithIdentifier:@"Welcome"];
