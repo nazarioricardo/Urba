@@ -33,8 +33,6 @@
 @property (strong, nonatomic) NSString *superUnitId;
 
 @property (strong, nonatomic) NSMutableArray *feedArray;
-@property (strong, nonatomic) NSMutableArray *requestsArray;
-
 
 @end
 
