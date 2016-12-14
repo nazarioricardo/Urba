@@ -54,34 +54,43 @@
     _ref = [[[FIRDatabase database] reference] child:@"visitors"];
     FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit-id"] queryEqualToValue:_unitId];
     
-    _refHandle = [query observeEventType:FIRDataEventTypeChildAdded
+    [query observeEventType:FIRDataEventTypeChildAdded
                                withBlock:^(FIRDataSnapshot *snapshot) {
         
-        if (snapshot) {
-            
-            NSLog(@"Snapshot! %@", snapshot);
-//            for (FIRDataSnapshot *snap in snapshot.children) {
-            NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key,@"id",snapshot.value,@"values", nil];
-            
-            if (![_feedArray containsObject:visitorDict]) {
-                
-                [_feedArray addObject:visitorDict];
-                [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
-                _feedTable.hidden = NO;
-                [self hideViewAnimated:_noGuestsLabel hide:YES];
-            }
-            
-//            }
-        } else {
-            NSLog(@"NO SNAPS");
-            [self hideViewAnimated:_feedTable hide:YES];
-            [self hideViewAnimated:_noGuestsLabel hide:NO];
-        }
-    }
+                                   if ([snapshot exists]) {
+                                       
+                                       if (![_feedArray containsObject:snapshot]) {
+                                           
+                                           [_feedArray addObject:snapshot];
+                                           [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                                       }
+                                   }
+                               }
                          withCancelBlock:^(NSError *error) {
-        
-        [self alert:@"Error!" withMessage:error.description];
+                             [self alert:@"Error!" withMessage:error.description];
     }];
+    
+    [query observeEventType:FIRDataEventTypeChildRemoved
+                  withBlock:^(FIRDataSnapshot *snapshot) {
+                    
+                      NSMutableArray *deleteArray = [[NSMutableArray alloc] init];
+                      
+                      for (FIRDataSnapshot *snap in _feedArray) {
+                          if ([snapshot.key isEqualToString:snap.key]) {
+                              
+                              [deleteArray addObject:[NSNumber numberWithInteger:[_feedArray indexOfObject:snap] ]];
+                          }
+                      }
+                      
+                      [_feedTable beginUpdates];
+                      for (NSNumber *num in deleteArray) {
+                          
+                          [_feedArray removeObjectAtIndex:[num integerValue]];
+                          
+                          [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[num integerValue] inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                          }
+                      [_feedTable endUpdates];
+                  }];
 }
 
 -(void)addGuestController {
@@ -102,6 +111,7 @@
                                                        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:addTextField.text, @"name", _unitName, @"unit", _unitId, @"unit-id", _community, @"community", _communityId, @"community-id",_superUnit,@"super-unit",_superUnitId,@"super-unit-id",@"On the way",@"status", nil];
                                                        
                                                        [addTextField resignFirstResponder];
+                                                       
                                                        [[_ref childByAutoId] setValue:dict];
                                                    }
                                                }];
@@ -140,14 +150,25 @@
 }
 
 -(void)hideViewAnimated:(UIView *)view hide:(BOOL)hidden {
-        
+    
     [UIView transitionWithView:view
                       duration:.5
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
-                        view.hidden = hidden;
-                    }
-                    completion:NULL];
+        view.hidden = hidden;
+    }
+                    completion:nil];
+}
+
+-(void)toggleLabelAndTable {
+    
+    if (![_feedTable isHidden]) {
+        [self hideViewAnimated:_feedTable hide:YES];
+        [self hideViewAnimated:_noGuestsLabel hide:NO];
+    } else {
+        [self hideViewAnimated:_feedTable hide:NO];
+        [self hideViewAnimated:_noGuestsLabel hide:YES];
+    }
 }
 
 #pragma mark - Text Field Delegate
@@ -179,7 +200,8 @@
     UBGuestTableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"GuestCell" forIndexPath:indexPath];
     cell.delegate = self;
     // Unpack visitor from feed array
-    NSMutableDictionary <NSString *, NSMutableDictionary *> *visitorDict = _feedArray[indexPath.row];
+    FIRDataSnapshot *snapshot = _feedArray[indexPath.row];
+    NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key,@"id",snapshot.value,@"values", nil];
     
     NSLog(@"CELL VALUE: %@", visitorDict);
     NSString *name = [visitorDict valueForKeyPath:@"values.name"];
@@ -195,32 +217,12 @@
 
 - (void)cancelGuest:(UBGuestTableViewCell *)cell {
     
-    NSIndexPath *indexPath = [_feedTable indexPathForCell:cell];
-    [_ref removeAllObservers];
     [[_ref child:cell.visitorId] removeValue];
-    [_feedTable beginUpdates];
-    [_feedArray removeObjectAtIndex:indexPath.row];
-    if ([_feedArray count] == 1) {
-        [_feedTable deleteSections:[NSIndexSet indexSet] withRowAnimation:UITableViewRowAnimationBottom];
-    }
-    [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-    [_feedTable endUpdates];
-    [self getGuests];
 }
 
 - (void)confirmGuest:(UBGuestTableViewCell *)cell {
     
-    NSIndexPath *indexPath = [_feedTable indexPathForCell:cell];
-    [_ref removeAllObservers];
     [[_ref child:cell.visitorId] removeValue];
-    [_feedTable beginUpdates];
-    [_feedArray removeObjectAtIndex:indexPath.row];
-    if ([_feedArray count] == 1) {
-        [_feedTable deleteSections:[NSIndexSet indexSet] withRowAnimation:UITableViewRowAnimationBottom];
-    }
-    [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-    [_feedTable endUpdates];
-    [self getGuests];
 }
 
 -(void)listenToStatus:(UBGuestTableViewCell *)cell {
@@ -234,7 +236,6 @@
         NSString *status = [snapshot.value valueForKeyPath:keyPath];
         
         cell.statusLabel.text = status;
-        NSLog(@"STATUS: %@", status);
         
     } withCancelBlock:^(NSError *error) {
         if (error) {
@@ -249,7 +250,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _noGuestsLabel.hidden = YES;
     _feedArray = [[NSMutableArray alloc] init];
     
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
