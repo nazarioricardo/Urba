@@ -61,8 +61,15 @@
                                        
                                        if (![_feedArray containsObject:snapshot]) {
                                            
-                                           [_feedArray addObject:snapshot];
-                                           [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                                           if (![_feedArray count]) {
+                                               [_feedArray addObject:snapshot];
+                                               [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationNone];
+                                               [self hideViewAnimated:_noGuestsLabel hide:YES];
+                                               [self hideViewAnimated:_feedTable hide:NO];
+                                           } else {
+                                               [_feedArray addObject:snapshot];
+                                               [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                                           }
                                        }
                                    }
                                }
@@ -85,10 +92,16 @@
                       [_feedTable beginUpdates];
                       for (NSNumber *num in deleteArray) {
                           
-                          [_feedArray removeObjectAtIndex:[num integerValue]];
-                          
-                          [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[num integerValue] inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                          if ([_feedArray count] == 1) {
+                              [_feedArray removeObjectAtIndex:[num integerValue]];
+                              [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[num integerValue] inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                              [self hideViewAnimated:_feedTable hide:YES];
+                              [self hideViewAnimated:_noGuestsLabel hide:NO];
+                          } else {
+                              [_feedArray removeObjectAtIndex:[num integerValue]];
+                              [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[num integerValue] inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
                           }
+                      }
                       [_feedTable endUpdates];
                   }];
 }
@@ -272,6 +285,10 @@
 -(void)viewWillAppear:(BOOL)animated {
     [self getGuests];
     self.navigationItem.title = _address;
+    if (![_feedArray count]) {
+        _noGuestsLabel.hidden = NO;
+        _feedTable.hidden = YES;
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
