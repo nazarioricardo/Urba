@@ -56,7 +56,10 @@
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
     
     _unitId = [_unitDict valueForKey:@"id"];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    // BUG: If accepting a user request before loading this view, the address remains null.
     self.navigationItem.title = _address;
 }
 

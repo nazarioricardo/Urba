@@ -44,8 +44,8 @@
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
-    [[FIRAuth auth] signInWithEmail:@"nazarioricardo@gmail.com"
-                           password:@"iamricky"
+    [[FIRAuth auth] signInWithEmail:_emailTextField.text
+                           password:_passwordTextField.text
                          completion:^(FIRUser *user, NSError *error) {
                              
                              if (error) {
