@@ -62,7 +62,6 @@
                     NSLog(@"SNAPSHOT EXISTS: %@", snapshot);
                     
                     _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key, @"id", snapshot.value, @"values", nil];
-                                        
                     [self performSegueWithIdentifier:@"VerifiedSegue" sender:self];
                 }
             }];

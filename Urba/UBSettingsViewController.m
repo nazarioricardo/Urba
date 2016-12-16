@@ -9,12 +9,16 @@
 #import "UBSettingsViewController.h"
 #import "UBUnitUsersTableViewController.h"
 #import "UBUnitSelectionViewController.h"
+#import "UBNilViewController.h"
 #import "UBWelcomeViewController.h"
+#import "ActivityView.h"
 
 @import FirebaseAuth;
 @import FirebaseDatabase;
 
 @interface UBSettingsViewController ()
+
+@property (strong, nonatomic) FIRDatabaseReference *unitRef;
 
 @property (strong, nonatomic) NSString *unitName;
 @property (strong, nonatomic) NSString *unitId;
@@ -49,6 +53,64 @@
     [self performSegueWithIdentifier:@"ChangeUnitSegue" sender:self];
 }
 
+- (void)getUnit {
+    
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+    
+    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
+    
+    _unitRef = [[[FIRDatabase database] reference] child:@"units"];
+    FIRDatabaseQuery *query = [[_unitRef queryOrderedByChild:unitRef] queryEqualToValue:[FIRAuth auth].currentUser.email];
+    
+    [query observeEventType:FIRDataEventTypeValue
+                  withBlock:^(FIRDataSnapshot *snapshot) {
+                      
+                      if ([snapshot exists]) {
+                          
+                          NSLog(@"Got snap %@", snapshot);
+                          
+                          if (snapshot.childrenCount == 1) {
+                              
+                              for (FIRDataSnapshot *snap in snapshot.children) {
+                                  _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id", snap.value,@"values", nil];
+                              }
+                              
+                              NSString *name = [_unitDict valueForKeyPath:@"values.name"];
+                              NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
+                              _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
+                              self.navigationItem.title = _address;
+                              [spinner removeSpinner];
+                          }
+                      } else {
+                          NSString *storyboardName = @"Main";
+                          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                          UBNilViewController *unvc = [storyboard instantiateViewControllerWithIdentifier:@"No House"];
+                          [self presentViewController:unvc animated:YES completion:nil];
+                      }
+                  }
+            withCancelBlock:^(NSError *error) {
+                [spinner removeSpinner];
+                [self alert:@"Error!" withMessage:error.description];
+            }];
+}
+
+-(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
+    
+    UIAlertController *alertView = [UIAlertController
+                                    alertControllerWithTitle:NSLocalizedString(title, nil)
+                                    message:errorMsg
+                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Okay"
+                                                 style:UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction * action) {
+                                                   [alertView dismissViewControllerAnimated:YES
+                                                                                 completion:nil];
+                                               }];
+    [alertView addAction:ok];
+    [self presentViewController:alertView animated:YES completion:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -57,6 +119,10 @@
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
     
     _unitId = [_unitDict valueForKey:@"id"];
+    
+    if (!_unitDict) {
+        [self getUnit];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
