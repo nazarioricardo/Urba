@@ -11,4 +11,6 @@
 
 @interface UBUnitSelectionViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic) BOOL justLogged;
+
 @end

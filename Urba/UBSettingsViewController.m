@@ -8,6 +8,7 @@
 
 #import "UBSettingsViewController.h"
 #import "UBUnitUsersTableViewController.h"
+#import "UBUnitSelectionViewController.h"
 #import "UBWelcomeViewController.h"
 
 @import FirebaseAuth;
@@ -80,7 +81,13 @@
         [uuvc setUnitId:_unitId];
     }
     
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"ChangeUnitSegue"]) {
+        UINavigationController *nav = [segue destinationViewController];
+        UBUnitSelectionViewController *usvc = (UBUnitSelectionViewController *)[nav topViewController];
+        [usvc setJustLogged:NO];
+    }
+
+    
 }
 
 @end

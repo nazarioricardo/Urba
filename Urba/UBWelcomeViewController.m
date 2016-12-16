@@ -131,10 +131,8 @@
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-//    [self logIn];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -156,6 +154,12 @@
         [uuvc setUnitDict:_unitDict];
         [urvc setUnitDict:_unitDict];
         [usvc setUnitDict:_unitDict];
+    }
+    
+    if ([segue.identifier isEqualToString:@"ManuUnitsSegue"]) {
+        UINavigationController *nav = [segue destinationViewController];
+        UBUnitSelectionViewController *usvc = (UBUnitSelectionViewController *)[nav topViewController];
+        [usvc setJustLogged:YES];
     }
 }
 

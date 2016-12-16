@@ -167,8 +167,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No households found!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eT-JB-hpD">
-                                <rect key="frame" x="103" y="289" width="169" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No households found!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eT-JB-hpD">
+                                <rect key="frame" x="43" y="135" width="286" height="175"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="286" id="95r-l4-Krm"/>
+                                    <constraint firstAttribute="height" constant="175" id="dyG-fM-1EC"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -180,7 +184,7 @@
                                     <segue destination="MAv-S1-ddc" kind="show" id="quI-Au-dgW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zM-G7-SEN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zM-G7-SEN">
                                 <rect key="frame" x="43" y="356" width="286" height="146"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="146" id="4Yh-M4-ocH"/>
@@ -198,18 +202,19 @@
                             <constraint firstItem="t0c-za-wMs" firstAttribute="centerX" secondItem="QcM-Id-6Xu" secondAttribute="centerX" id="8XL-NH-icu"/>
                             <constraint firstItem="5zM-G7-SEN" firstAttribute="centerX" secondItem="QcM-Id-6Xu" secondAttribute="centerX" constant="-1.5" id="QIC-wt-13u"/>
                             <constraint firstItem="t0c-za-wMs" firstAttribute="centerY" secondItem="QcM-Id-6Xu" secondAttribute="centerY" id="SIZ-A2-5l1"/>
-                            <constraint firstItem="6eT-JB-hpD" firstAttribute="centerX" secondItem="QcM-Id-6Xu" secondAttribute="centerX" id="shl-xq-h7E"/>
+                            <constraint firstItem="6eT-JB-hpD" firstAttribute="centerX" secondItem="QcM-Id-6Xu" secondAttribute="centerX" constant="-1.5" id="shl-xq-h7E"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addHomeButton" destination="t0c-za-wMs" id="sj0-D2-5ya"/>
                         <outlet property="mainLabel" destination="6eT-JB-hpD" id="WWh-OK-X8A"/>
                         <outlet property="secondLabel" destination="5zM-G7-SEN" id="aSS-ds-jSb"/>
+                        <segue destination="OZo-Cb-x30" kind="show" identifier="VerifiedSegue" id="tNv-II-1RT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fas-EM-Ocd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="489" y="1145"/>
+            <point key="canvasLocation" x="488.80000000000001" y="1144.6776611694154"/>
         </scene>
         <!--Unit Selection View Controller-->
         <scene sceneID="Wpy-6b-1CX">
@@ -913,7 +918,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="cJt-av-h8Z">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="OZo-Cb-x30" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="OZo-Cb-x30" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="YVW-1O-4aO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="OcU-iD-0hX">
@@ -991,7 +996,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KfB-Bn-UGc"/>
+        <segue reference="quI-Au-dgW"/>
+        <segue reference="tNv-II-1RT"/>
         <segue reference="8CR-g9-yKQ"/>
     </inferredMetricsTieBreakers>
 </document>

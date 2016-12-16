@@ -11,7 +11,12 @@
 #import "Constants.h"
 #import "ActivityView.h"
 
+@import FirebaseDatabase;
+@import FirebaseAuth;
+
 @interface UBUnitSelectionViewController ()
+
+@property (strong, nonatomic) FIRDatabaseReference *ref;
 
 @property (weak, nonatomic) IBOutlet UITableView *unitsTable;
 @property (strong, nonatomic) NSMutableArray *unitsArray;
@@ -31,31 +36,33 @@
 
 - (void)getUnits {
     
-//    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+
+    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
     
-//    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRManager getCurrentUser]];
+    _ref = [[[FIRDatabase database] reference] child:@"units"];
+    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:unitRef] queryEqualToValue:[FIRAuth auth].currentUser.uid];
     
-//    [FIRManager getAllValuesFromNode:@"units"
-//                           orderedBy:unitRef
-//                          filteredBy:[FIRManager getCurrentUser]
-//                  withSuccessHandler:^(NSArray *results) {
-//                                
-//                                _unitsArray = [NSMutableArray arrayWithArray:results];
-//                                
-//                                if ([results count] <= 1) {
-//                                    
-//                                    [spinner removeSpinner];
-//                                    [self alert:@"Wait a minute..." withMessage:@"You only have one registered household! If this is wrong, try reloading the page, or make sure you don't have any unverified requests."];
-//                                } else {
-//                                    
-//                                    [spinner removeSpinner];
-//                                    [_unitsTable reloadData];
-//                                }
-//                            }
-//                                orErrorHandler:^(NSError *error) {
-//                                    [spinner removeSpinner];
-//                                    [self alert:@"Error!" withMessage:error.description];
-//                                }];
+    [query observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+       
+        if ([snapshot exists]) {
+            for (FIRDataSnapshot *snap in snapshot.children) {
+                
+                NSDictionary<NSString *, NSDictionary *> *unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
+                
+                if (![_unitsArray containsObject:unitDict]) {
+                    
+                    [_unitsArray addObject:unitDict];
+                    [_unitsTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_unitsArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                }
+            }
+        } else {
+            [self alert:@"Wait a minute..." withMessage:@"You only have one registered household! If this is wrong, try reloading the page, or make sure you don't have any unverified requests."];
+        }
+    } withCancelBlock:^(NSError *error) {
+        [spinner removeSpinner];
+        [self alert:@"Error!" withMessage:error.description];
+    }];
 }
 
 -(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
@@ -112,13 +119,20 @@
 #pragma mark - Life Cycle
 
 -(void)viewWillAppear:(BOOL)animated {
+    _unitsArray = [[NSMutableArray alloc] init];
     [self getUnits];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    if (_justLogged) {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [_ref removeAllObservers];
 }
 
 - (void)didReceiveMemoryWarning {

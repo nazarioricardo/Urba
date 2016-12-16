@@ -263,6 +263,8 @@
     // Do any additional setup after loading the view.
     _feedArray = [[NSMutableArray alloc] init];
     
+    NSLog(@"UNIT DICT:%@", _unitDict);
+    
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
     NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
