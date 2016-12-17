@@ -7,7 +7,7 @@
 //
 
 #import "UBUnitSelectionViewController.h"
-#import "UBUnitViewController.h"
+#import "UBTabViewController.h"
 #import "Constants.h"
 #import "ActivityView.h"
 
@@ -37,32 +37,35 @@
 - (void)getUnits {
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
-
+    
     NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
     
     _ref = [[[FIRDatabase database] reference] child:@"units"];
-    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:unitRef] queryEqualToValue:[FIRAuth auth].currentUser.uid];
+    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:unitRef] queryEqualToValue:[FIRAuth auth].currentUser.email];
     
-    [query observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
-       
-        if ([snapshot exists]) {
-            for (FIRDataSnapshot *snap in snapshot.children) {
-                
-                NSDictionary<NSString *, NSDictionary *> *unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
-                
-                if (![_unitsArray containsObject:unitDict]) {
-                    
-                    [_unitsArray addObject:unitDict];
-                    [_unitsTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_unitsArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
-                }
-            }
-        } else {
-            [self alert:@"Wait a minute..." withMessage:@"You only have one registered household! If this is wrong, try reloading the page, or make sure you don't have any unverified requests."];
-        }
-    } withCancelBlock:^(NSError *error) {
-        [spinner removeSpinner];
-        [self alert:@"Error!" withMessage:error.description];
-    }];
+    [query observeEventType:FIRDataEventTypeValue
+                               withBlock:^(FIRDataSnapshot *snapshot) {
+                                   
+                                   if ([snapshot exists]) {
+                                       
+                                       [spinner removeSpinner];
+                                       for (FIRDataSnapshot *snap in snapshot.children) {
+                                           
+                                           NSDictionary<NSString *, NSDictionary *> *superUnitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id",snap.value,@"values", nil];
+                                           
+                                           if (![_unitsArray containsObject:superUnitDict]) {
+                                               
+                                               [_unitsArray addObject:superUnitDict];
+                                               
+                                               [_unitsTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_unitsArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
+                                           }
+                                       }
+                                   }
+                               }
+                         withCancelBlock:^(NSError *error) {
+                             [spinner removeSpinner];
+                             [self alert:@"Error!" withMessage:error.description];
+                         }];
 }
 
 -(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
@@ -113,7 +116,11 @@
     
     _unitDict = _unitsArray[indexPath.row];
     
-    [self performSegueWithIdentifier:unitManageSegue sender:self];
+    NSString *storyboardName = @"Main";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    UBTabViewController *tvc = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
+    [tvc setUnitDict:_unitDict];
+    [self presentViewController:tvc animated:YES completion:nil];
 }
 
 #pragma mark - Life Cycle
@@ -143,15 +150,10 @@
 
 #pragma mark - Navigation
 
+/*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:unitManageSegue]) {
-        
-        UINavigationController *nvc = [segue destinationViewController];
-        UBUnitViewController *uuvc = (UBUnitViewController *)[nvc topViewController];
-        [uuvc setUnitDict:_unitDict];
-    }
 }
-
+*/
 @end
