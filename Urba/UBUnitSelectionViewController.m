@@ -28,10 +28,6 @@
 
 #pragma mark - IBActions
 
-- (IBAction)cancelPressed:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark - Private
 
 - (void)getUnits {

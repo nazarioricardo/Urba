@@ -255,18 +255,7 @@
                             <constraint firstItem="USP-pZ-S7R" firstAttribute="top" secondItem="x3Y-MP-V6H" secondAttribute="top" id="eoT-9S-DjW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sNf-7e-ndc">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="fzm-72-d1S">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rM2-ie-UXU">
-                                <rect key="frame" x="16" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancel"/>
-                            </button>
-                            <connections>
-                                <action selector="cancelPressed:" destination="woN-Po-N7u" id="96Q-gQ-4zA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="sNf-7e-ndc"/>
                     <connections>
                         <outlet property="unitsTable" destination="USP-pZ-S7R" id="NTV-bV-1Lh"/>
                         <segue destination="OZo-Cb-x30" kind="showDetail" identifier="UnitSelectedSegue" action="showViewController:sender:" id="Dcz-3s-irL"/>
@@ -789,7 +778,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nUh-iA-FFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1236" y="1145"/>
+            <point key="canvasLocation" x="1236" y="1146"/>
         </scene>
         <!--Home-->
         <scene sceneID="ugp-gW-Iwj">
@@ -999,6 +988,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="Dcz-3s-irL"/>
         <segue reference="8CR-g9-yKQ"/>
-        <segue reference="quI-Au-dgW"/>
+        <segue reference="KfB-Bn-UGc"/>
     </inferredMetricsTieBreakers>
 </document>
