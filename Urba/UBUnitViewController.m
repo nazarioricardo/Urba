@@ -108,32 +108,28 @@
 
 - (void)getUnit {
     
+    NSLog(@"Getting Unit!");
+    
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
     NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
     
     _unitRef = [[[FIRDatabase database] reference] child:@"units"];
     FIRDatabaseQuery *query = [[_unitRef queryOrderedByChild:unitRef] queryEqualToValue:[FIRAuth auth].currentUser.email];
-    
-    [query observeEventType:FIRDataEventTypeValue
+    [query observeEventType:FIRDataEventTypeChildAdded
                                withBlock:^(FIRDataSnapshot *snapshot) {
+                                   
+                                   NSLog(@"Event listener fired");
                                    
                                    if ([snapshot exists]) {
                                        
                                        NSLog(@"Got snap %@", snapshot);
-                                       
-                                       if (snapshot.childrenCount == 1) {
-                                           
-                                           for (FIRDataSnapshot *snap in snapshot.children) {
-                                               _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id", snap.value,@"values", nil];
-                                           }
-                                           
-                                           NSString *name = [_unitDict valueForKeyPath:@"values.name"];
-                                           NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
-                                           _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
-                                           self.navigationItem.title = _address;
-                                           [spinner removeSpinner];
-                                       }
+                                       _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key,@"id", snapshot.value,@"values", nil];
+                                       NSString *name = [_unitDict valueForKeyPath:@"values.name"];
+                                       NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
+                                       _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
+                                       self.navigationItem.title = _address;
+                                       [spinner removeSpinner];
                                    } else {
                                        NSString *storyboardName = @"Main";
                                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];

@@ -100,6 +100,8 @@
 
 - (void)getUnit {
     
+    NSLog(@"GETTING UNIT");
+    
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
     NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
@@ -107,8 +109,10 @@
     _unitRef = [[[FIRDatabase database] reference] child:@"units"];
     FIRDatabaseQuery *query = [[_unitRef queryOrderedByChild:unitRef] queryEqualToValue:[FIRAuth auth].currentUser.email];
     
-    [query observeEventType:FIRDataEventTypeValue
+    [query observeSingleEventOfType:FIRDataEventTypeValue
                   withBlock:^(FIRDataSnapshot *snapshot) {
+                      
+                      NSLog(@"Event Fired");
                       
                       if ([snapshot exists]) {
                           
