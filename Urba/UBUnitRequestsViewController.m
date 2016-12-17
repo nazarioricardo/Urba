@@ -102,7 +102,7 @@
     
     NSLog(@"GETTING UNIT");
     
-    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+//    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
     NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
     
@@ -128,7 +128,7 @@
                               NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
                               _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
                               self.navigationItem.title = _address;
-                              [spinner removeSpinner];
+//                              [spinner removeSpinner];
                           }
                       } else {
                           NSString *storyboardName = @"Main";
@@ -138,7 +138,7 @@
                       }
                   }
             withCancelBlock:^(NSError *error) {
-                [spinner removeSpinner];
+//                [spinner removeSpinner];
                 [self alert:@"Error!" withMessage:error.description];
             }];
 }
@@ -239,10 +239,6 @@
     _unitName = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.name"]];
     
     _feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-    if (!_unitDict) {
-        [self getUnit];
-    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -251,6 +247,10 @@
     if (![_feedArray count]) {
         _noRequestsLabel.hidden = NO;
         _feedTable.hidden = YES;
+    }
+    
+    if (!_unitDict) {
+        [self getUnit];
     }
 }
 

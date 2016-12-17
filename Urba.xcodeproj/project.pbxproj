@@ -13,6 +13,7 @@
 		8C06A1A81DF20E3B00EDA13D /* UBSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C06A1A71DF20E3B00EDA13D /* UBSettingsViewController.m */; };
 		8C15BD7D1DB827D000274DEA /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */; };
 		8C19DF0B1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */; };
+		8C2598861E04C41300CAB18C /* UBTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2598851E04C41300CAB18C /* UBTabViewController.m */; };
 		8C2650531DC3C9CB00AE3973 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2650521DC3C9CB00AE3973 /* ActivityView.m */; };
 		8C2815EE1DF89E0E0015ECF9 /* UBRequestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2815ED1DF89E0D0015ECF9 /* UBRequestsTableViewCell.m */; };
 		8C4956911DBAB0A600CAD822 /* UBFindCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4956901DBAB0A600CAD822 /* UBFindCommunityViewController.m */; };
@@ -70,6 +71,8 @@
 		8C15BD7C1DB827D000274DEA /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		8C19DF091DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBSuperUnitTableViewController.h; sourceTree = "<group>"; };
 		8C19DF0A1DBBEEBC00DC2CE8 /* UBSuperUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBSuperUnitTableViewController.m; sourceTree = "<group>"; };
+		8C2598841E04C41300CAB18C /* UBTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBTabViewController.h; sourceTree = "<group>"; };
+		8C2598851E04C41300CAB18C /* UBTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBTabViewController.m; sourceTree = "<group>"; };
 		8C2650511DC3C9CB00AE3973 /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
 		8C2650521DC3C9CB00AE3973 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		8C2815EC1DF89E0D0015ECF9 /* UBRequestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBRequestsTableViewCell.h; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 		8C2700981D9C317700BACCDE /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
+				8C2598841E04C41300CAB18C /* UBTabViewController.h */,
+				8C2598851E04C41300CAB18C /* UBTabViewController.m */,
 				8C70059A1DF755F400ED8BDC /* Guests */,
 				8C2815EA1DF89DB70015ECF9 /* Requests */,
 				8C2815EB1DF89DDB0015ECF9 /* Home */,
@@ -606,6 +611,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C2598861E04C41300CAB18C /* UBTabViewController.m in Sources */,
 				8CEBF7981D9C5B5D00DAE919 /* UBUnitSelectionViewController.m in Sources */,
 				8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */,
 				8C70059D1DF7560D00ED8BDC /* UBGuestTableViewCell.m in Sources */,

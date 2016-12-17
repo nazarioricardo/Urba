@@ -7,10 +7,8 @@
 //
 
 #import "UBWelcomeViewController.h"
+#import "UBTabViewController.h"
 #import "UBNilViewController.h"
-#import "UBUnitViewController.h"
-#import "UBSettingsViewController.h"
-#import "UBUnitRequestsViewController.h"
 #import "UBUnitSelectionViewController.h"
 #import "ActivityView.h"
 
@@ -143,20 +141,11 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"OneUnitSegue"]) {
-        UITabBarController *tab = [segue destinationViewController];
-        UINavigationController *navOne = [tab.viewControllers objectAtIndex:0];
-        UBUnitViewController *uuvc = (UBUnitViewController *)[navOne topViewController];
-        UINavigationController *navTwo = [tab.viewControllers objectAtIndex:1];
-        UBUnitRequestsViewController *urvc = (UBUnitRequestsViewController *)[navTwo topViewController];
-        UINavigationController *navThree = [tab.viewControllers objectAtIndex:2];
-        UBSettingsViewController *usvc = (UBSettingsViewController *)[navThree topViewController];
-        
-        [uuvc setUnitDict:_unitDict];
-        [urvc setUnitDict:_unitDict];
-        [usvc setUnitDict:_unitDict];
+        UBTabViewController *tab = [segue destinationViewController];
+        [tab setUnitDict:_unitDict];
     }
     
-    if ([segue.identifier isEqualToString:@"ManuUnitsSegue"]) {
+    if ([segue.identifier isEqualToString:@"ManyUnitsSegue"]) {
         UINavigationController *nav = [segue destinationViewController];
         UBUnitSelectionViewController *usvc = (UBUnitSelectionViewController *)[nav topViewController];
         [usvc setJustLogged:YES];

@@ -915,10 +915,10 @@
             </objects>
             <point key="canvasLocation" x="3584.8000000000002" y="1145.577211394303"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab View Controller-->
         <scene sceneID="cJt-av-h8Z">
             <objects>
-                <tabBarController storyboardIdentifier="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="OZo-Cb-x30" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="OZo-Cb-x30" customClass="UBTabViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="YVW-1O-4aO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="OcU-iD-0hX">
