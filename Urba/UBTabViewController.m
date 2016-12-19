@@ -26,7 +26,6 @@
     UBUnitRequestsViewController *rvc = (UBUnitRequestsViewController *)[navTwo topViewController];
     UINavigationController *navThree = [[self viewControllers] objectAtIndex:2];
     UBSettingsViewController *svc = (UBSettingsViewController *)[navThree topViewController];
-    
     [uvc setUnitDict:_unitDict];
     [rvc setUnitDict:_unitDict];
     [svc setUnitDict:_unitDict];

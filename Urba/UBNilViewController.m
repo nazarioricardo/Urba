@@ -40,28 +40,11 @@
             NSLog(@"REQUEST EXISTS: %@", snapshot);
             
             _mainLabel.text = @"Waiting for verification! When verified, you will be redirected to the proper screen";
-            _secondLabel.text = @"In the meantime,you can contact your community's administrator, or a resident in your household to speed up your verification, and check out our website to learn about our features.";
+            _secondLabel.text = @"In the meantime, you can contact your community's administrator, or a resident in your household to speed up your verification.";
             _secondLabel.hidden = NO;
             _addHomeButton.hidden = YES;
             [self requestRemoved];
 //            [spinner removeSpinner];
-        } else {
-            
-            NSLog(@"REQUEST DOESN'T EXIST");
-            
-            _unitRef = [[[FIRDatabase database] reference] child:@"units"];
-            FIRDatabaseQuery *query = [[_unitRef queryOrderedByChild:@"users"] queryEqualToValue:[FIRAuth auth].currentUser.uid];
-            [query observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
-                
-                NSLog(@"CHECKING IF USER IS ADDED TO HOUSEHOLD");
-                if ([snapshot exists]) {
-                    
-                    NSLog(@"SNAPSHOT EXISTS: %@", snapshot);
-                    
-                    _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key, @"id", snapshot.value, @"values", nil];
-                    [self performSegueWithIdentifier:@"VerifiedSegue" sender:self];
-                }
-            }];
         }
     } withCancelBlock:^(NSError *error) {
         [self alert:error.description];
@@ -79,7 +62,7 @@
         FIRDatabaseQuery *query = [[_unitRef queryOrderedByChild:unitRefString] queryEqualToValue:[FIRAuth auth].currentUser.email];
         
         NSLog(@"Query: %@", query);
-        [query observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+        [query observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
             
             NSLog(@"CHECKING IF YOU HAVE BEEN ADDED TO A HOUSE");
             
@@ -87,11 +70,13 @@
                 
                 NSLog(@"SNAP: %@", snapshot);
                 
-                _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key, @"id", snapshot.value, @"values", nil];
+                for (FIRDataSnapshot *snap in snapshot.children) {
+                    _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key, @"id", snap.value, @"values", nil];
+                    [self performSegueWithIdentifier:@"VerifiedSegue" sender:self];
+                }
                 
                 NSLog(@"UNIT DICT: %@", _unitDict);
                 
-                [self performSegueWithIdentifier:@"VerifiedSegue" sender:self];
             } else {
                 _mainLabel.text = @"Sorry! You have failed to be verified.";
                 _secondLabel.text = @"If you are certain you chose the right address, contact your community administrator to find out why you weren't verified";

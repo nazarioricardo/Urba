@@ -44,6 +44,7 @@
 - (IBAction)addGuestPressed:(id)sender {
     
     [self addGuestController];
+    [self getGuests];
 }
 
 #pragma mark - Private
