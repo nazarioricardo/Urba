@@ -37,7 +37,6 @@
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary  dictionaryWithObjectsAndKeys: [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [[UITabBar appearance] setUnselectedItemTintColor:[UIColor grayColor]];
 
-
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     

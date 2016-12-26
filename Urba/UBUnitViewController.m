@@ -293,7 +293,7 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
-    [_ref removeAllObservers];
+//    [_ref removeAllObservers];
 }
 
 - (void)didReceiveMemoryWarning {

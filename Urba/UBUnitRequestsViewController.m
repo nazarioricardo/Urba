@@ -193,10 +193,10 @@
     _unitName = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.name"]];
     
     _feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self getRequests];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self getRequests];
     self.navigationItem.title = _address;
     if (![_feedArray count]) {
         _noRequestsLabel.hidden = NO;
@@ -205,7 +205,7 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
-    [_ref removeAllObservers];
+//    [_ref removeAllObservers];
 }
 
 - (void)didReceiveMemoryWarning {
