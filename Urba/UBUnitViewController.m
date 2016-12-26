@@ -44,7 +44,6 @@
 - (IBAction)addGuestPressed:(id)sender {
     
     [self addGuestController];
-    [self getGuests];
 }
 
 #pragma mark - Private
@@ -280,12 +279,12 @@
     _superUnitId = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.super-unit-id"]];
     
     NSLog(@"Unit id: %@", _unitId);
+    [self getGuests];
     
     _feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self getGuests];
     self.navigationItem.title = _address;
     if (![_feedArray count]) {
         _noGuestsLabel.hidden = NO;
