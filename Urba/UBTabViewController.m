@@ -20,6 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:_unitDict forKey:@"currentUnit"];
+    
     UINavigationController *navOne = [[self viewControllers] objectAtIndex:0];
     UBUnitViewController *uvc = (UBUnitViewController *)[navOne topViewController];
     UINavigationController *navTwo = [[self viewControllers] objectAtIndex:1];

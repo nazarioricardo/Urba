@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "UBTabViewController.h"
 
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 @import UserNotifications;
@@ -131,6 +132,25 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Add observer for InstanceID token refresh callback.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tokenRefreshNotification:)
                                                  name:kFIRInstanceIDTokenRefreshNotification object:nil];
+    
+    [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *auth, FIRUser *user) {
+        
+        if (user) {
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            
+            NSDictionary *unitDict = [defaults objectForKey:@"currentUnit"];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UBTabViewController *tabView = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
+            [tabView setUnitDict:unitDict];
+            [self.window makeKeyAndVisible];
+            [self.window.rootViewController presentViewController:tabView animated:YES completion:NULL];
+        }
+    }];
+    
+    
+    
     return YES;
 }
 
