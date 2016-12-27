@@ -94,19 +94,17 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
+    
     if ([segue.identifier isEqualToString:@"ManageUsersSegue"]) {
         UINavigationController *nav = [segue destinationViewController];
         UBUnitUsersTableViewController *uuvc = (UBUnitUsersTableViewController *)[nav topViewController];
         [uuvc setUnitId:_unitId];
     }
-    
     if ([segue.identifier isEqualToString:@"ChangeUnitSegue"]) {
         UINavigationController *nav = [segue destinationViewController];
         UBUnitSelectionViewController *usvc = (UBUnitSelectionViewController *)[nav topViewController];
         [usvc setJustLogged:NO];
     }
-
-    
 }
 
 @end

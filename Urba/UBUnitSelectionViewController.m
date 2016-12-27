@@ -19,6 +19,7 @@
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
 @property (weak, nonatomic) IBOutlet UITableView *unitsTable;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) NSMutableArray *unitsArray;
 @property (weak, nonatomic) NSDictionary <NSString *, NSDictionary *> *unitDict;
 
@@ -27,6 +28,10 @@
 @implementation UBUnitSelectionViewController
 
 #pragma mark - IBActions
+
+- (IBAction)cancelPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - Private
 

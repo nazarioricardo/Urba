@@ -255,8 +255,15 @@
                             <constraint firstItem="USP-pZ-S7R" firstAttribute="top" secondItem="x3Y-MP-V6H" secondAttribute="top" id="eoT-9S-DjW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sNf-7e-ndc"/>
+                    <navigationItem key="navigationItem" id="sNf-7e-ndc">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XJ7-QP-5L6">
+                            <connections>
+                                <action selector="cancelPressed:" destination="woN-Po-N7u" id="tjQ-p1-yC6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="XJ7-QP-5L6" id="Lk3-E1-0wh"/>
                         <outlet property="unitsTable" destination="USP-pZ-S7R" id="NTV-bV-1Lh"/>
                         <segue destination="OZo-Cb-x30" kind="showDetail" identifier="UnitSelectedSegue" action="showViewController:sender:" id="Dcz-3s-irL"/>
                     </connections>

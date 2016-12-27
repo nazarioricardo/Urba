@@ -72,7 +72,6 @@
                                            for (FIRDataSnapshot *snap in snapshot.children) {
                                                _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id", snap.value,@"values", nil];
                                            }
-                                           
                                            [self performSegueWithIdentifier:@"OneUnitSegue" sender:self];
                                        } else {
                                            [self performSegueWithIdentifier:@"ManyUnitsSegue" sender:self];
