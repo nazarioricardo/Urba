@@ -34,6 +34,7 @@
 		8C7485FF1DDE2010002CD1EE /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7485FE1DDE2010002CD1EE /* AdSupport.framework */; };
 		8CB4CF261DE5E42A00539FB3 /* UBUnitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4CF251DE5E42A00539FB3 /* UBUnitViewController.m */; };
 		8CB6EC061DC0131600B36FE9 /* UBFindUnitTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */; };
+		8CD0A2341E133D5C006386B7 /* UBNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD0A2331E133D5C006386B7 /* UBNavViewController.m */; };
 		8CD6779C1DD0C84E005DDD31 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD6779B1DD0C84E005DDD31 /* Constants.m */; };
 		8CEBF7981D9C5B5D00DAE919 /* UBUnitSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CEBF7971D9C5B5D00DAE919 /* UBUnitSelectionViewController.m */; };
 		94D1A61122041418569FB89C /* libPods-Urba.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC50DA3B76C2262B3C721FD5 /* libPods-Urba.a */; };
@@ -112,6 +113,8 @@
 		8CB60B5D1DDCC1AE00B68E02 /* Urba.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Urba.entitlements; sourceTree = "<group>"; };
 		8CB6EC041DC0131600B36FE9 /* UBFindUnitTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBFindUnitTableViewController.h; sourceTree = "<group>"; };
 		8CB6EC051DC0131600B36FE9 /* UBFindUnitTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBFindUnitTableViewController.m; sourceTree = "<group>"; };
+		8CD0A2321E133D5C006386B7 /* UBNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBNavViewController.h; sourceTree = "<group>"; };
+		8CD0A2331E133D5C006386B7 /* UBNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBNavViewController.m; sourceTree = "<group>"; };
 		8CD6779A1DD0C84E005DDD31 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		8CD6779B1DD0C84E005DDD31 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		8CEBF7961D9C5B5D00DAE919 /* UBUnitSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBUnitSelectionViewController.h; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 			children = (
 				8C2598841E04C41300CAB18C /* UBTabViewController.h */,
 				8C2598851E04C41300CAB18C /* UBTabViewController.m */,
+				8CD0A2321E133D5C006386B7 /* UBNavViewController.h */,
+				8CD0A2331E133D5C006386B7 /* UBNavViewController.m */,
 				8C70059A1DF755F400ED8BDC /* Guests */,
 				8C2815EA1DF89DB70015ECF9 /* Requests */,
 				8C2815EB1DF89DDB0015ECF9 /* Home */,
@@ -614,6 +619,7 @@
 				8C2598861E04C41300CAB18C /* UBTabViewController.m in Sources */,
 				8CEBF7981D9C5B5D00DAE919 /* UBUnitSelectionViewController.m in Sources */,
 				8C6257ED1D870B0700737D73 /* UBWelcomeViewController.m in Sources */,
+				8CD0A2341E133D5C006386B7 /* UBNavViewController.m in Sources */,
 				8C70059D1DF7560D00ED8BDC /* UBGuestTableViewCell.m in Sources */,
 				8C06A1A51DF201E200EDA13D /* UBNilViewController.m in Sources */,
 				8C4B250C1DFEFA0100E13D49 /* UBUsersTableViewCell.m in Sources */,

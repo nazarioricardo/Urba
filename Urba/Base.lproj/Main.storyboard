@@ -650,10 +650,10 @@
             </objects>
             <point key="canvasLocation" x="-183" y="1145"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav View Controller-->
         <scene sceneID="U3k-hn-faF">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MAv-S1-ddc" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MAv-S1-ddc" customClass="UBNavViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hDa-4h-Uer">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -773,7 +773,7 @@
         <!--Home-->
         <scene sceneID="KlL-rG-4kc">
             <objects>
-                <navigationController storyboardIdentifier="UnitListNav" automaticallyAdjustsScrollViewInsets="NO" id="Nik-CU-tq8" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="UnitListNav" automaticallyAdjustsScrollViewInsets="NO" id="Nik-CU-tq8" customClass="UBNavViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="tabbar_unselected" selectedImage="tabbar_selected" id="Hsm-rW-X7i"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uuT-8i-wzQ">
@@ -792,7 +792,7 @@
         <!--Home-->
         <scene sceneID="ugp-gW-Iwj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gap-Qd-hFn" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gap-Qd-hFn" customClass="UBNavViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="tabbar_unselected" selectedImage="tabbar_selected" id="Mj6-KP-X4W"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XZL-ci-oBb">
@@ -938,7 +938,7 @@
         <!--Guests-->
         <scene sceneID="anZ-zb-5Vq">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8EX-Eq-IUT" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8EX-Eq-IUT" customClass="UBNavViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Guests" image="tabbar_unselected" selectedImage="tabbar_selected" id="FVU-mc-PoJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tjO-X5-BeC">
@@ -957,7 +957,7 @@
         <!--Knocks-->
         <scene sceneID="5VA-yy-TrQ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ug6-re-XeP" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ug6-re-XeP" customClass="UBNavViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Knocks" image="tabbar_unselected" selectedImage="tabbar_selected" id="ckh-Io-Vn4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eQA-z3-Er4">
@@ -973,10 +973,10 @@
             </objects>
             <point key="canvasLocation" x="2790" y="1145"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav View Controller-->
         <scene sceneID="x3y-rS-cjI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="py1-S2-HJA" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="py1-S2-HJA" customClass="UBNavViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kz6-j5-kTT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

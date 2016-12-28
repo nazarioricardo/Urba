@@ -114,9 +114,7 @@
 #pragma mark - Table View Delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     _unitDict = _unitsArray[indexPath.row];
-    
     NSString *storyboardName = @"Main";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
     UBTabViewController *tvc = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
