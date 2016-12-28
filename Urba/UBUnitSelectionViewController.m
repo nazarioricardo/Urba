@@ -132,9 +132,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Checking if user just logged, therefore doesn't have option to dismiss modal view controller
     if (_justLogged) {
         self.navigationItem.leftBarButtonItem = nil;
     }
+    
+    // TODO: Add posibility to sign out
 }
 
 -(void)viewDidDisappear:(BOOL)animated {

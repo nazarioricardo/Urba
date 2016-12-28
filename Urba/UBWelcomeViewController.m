@@ -50,11 +50,13 @@
                                  [spinner removeSpinner];
                                  [self alert:error.description];
                              } else {
+                                 // Check to see if user already exists in a unit
                                  [self getUnits:spinner];
                              }
     }];
 }
 
+// Check for units with logging user
 - (void)getUnits:(ActivityView *)spinner {
     
     NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
@@ -65,8 +67,10 @@
     _refHandle = [query observeEventType:FIRDataEventTypeValue
                                withBlock:^(FIRDataSnapshot *snapshot) {
                                    
+                                   // If logging user exits in one unit or more...
                                    if ([snapshot exists]) {
                                        
+                                       // If logging user is only in one unit, go straight to main view
                                        if (snapshot.childrenCount == 1) {
                                            
                                            for (FIRDataSnapshot *snap in snapshot.children) {
@@ -74,9 +78,12 @@
                                            }
                                            [self performSegueWithIdentifier:@"OneUnitSegue" sender:self];
                                        } else {
+                                           // If logging user exists in many units, go to unit selection view
                                            [self performSegueWithIdentifier:@"ManyUnitsSegue" sender:self];
                                        }
                                    } else {
+                                       
+                                       // If logging user does not exist in any units, go to onboarding view
                                        NSString *storyboardName = @"Main";
                                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
                                        UBNilViewController *unvc = [storyboard instantiateViewControllerWithIdentifier:@"No House"];
@@ -89,6 +96,7 @@
                          }];
 }
 
+// Simple alert view
 -(void)alert:(NSString *)errorMsg {
     
     UIAlertController *alertView = [UIAlertController
@@ -110,6 +118,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
+    // On pushing return, move from one text field to next, and attempt to log in when pushing return on final text field
     if (textField == _emailTextField) {
         [textField resignFirstResponder];
         [_passwordTextField becomeFirstResponder];
@@ -122,6 +131,7 @@
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // Resign keyboard when touching outside keyboard
     [self.view endEditing:YES];
 }
 
@@ -130,8 +140,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"Current user: %@", [FIRAuth auth].currentUser.email);
-
 }
 
 - (void)didReceiveMemoryWarning {

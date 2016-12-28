@@ -35,18 +35,25 @@
 
 #pragma mark - Private
 
+
+// This function manages the requests feed
 -(void)getRequests {
     
     _ref = [[[FIRDatabase database] reference] child:@"requests"];
     FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit/id"] queryEqualToValue:_unitId];
     
+    // Listen to existing or added requests
     _refHandle = [query observeEventType:FIRDataEventTypeChildAdded
                                withBlock:^(FIRDataSnapshot *snapshot) {
                                    
                                    if ([snapshot exists]) {
                                        
+                                       // Check if snapshot exists in feed array
                                        if (![_feedArray containsObject:snapshot]) {
                                            if (![_feedArray count]) {
+                                               
+                                               // If feed array has current count of 0, add objects then show feed table
+                                               
                                                [_feedArray addObject:snapshot];
                                                [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationNone];
                                                [self hideViewAnimated:_noRequestsLabel hide:YES];
@@ -57,6 +64,8 @@
                                            }
                                        }
                                    } else {
+                                       
+                                       // Didn't find any requests
                                        [self hideViewAnimated:_feedTable hide:YES];
                                        [self hideViewAnimated:_noRequestsLabel hide:NO];
                                    }
@@ -66,13 +75,15 @@
                              [self alert:@"Error!" withMessage:error.description];
                          }];
     
+    // Listen for removed requests
     [query observeEventType:FIRDataEventTypeChildRemoved
                   withBlock:^(FIRDataSnapshot *snapshot) {
                       
-                      
-                      NSLog(@"DELETED SNAP: %@",snapshot.key);
+                      // Array of deleted indexes
                       NSMutableArray *deleteArray = [[NSMutableArray alloc] init];
                       
+                      
+                      // Find index of deleted items and add to array
                       for (FIRDataSnapshot *snap in _feedArray) {
                           if ([snapshot.key isEqualToString:snap.key]) {
                               
@@ -81,6 +92,8 @@
                       }
                       
                       [_feedTable beginUpdates];
+                      
+                      // Iterate array of deleted indexes and remove items from feed array
                       for (NSNumber *num in deleteArray) {
                           
                           if ([_feedArray count] == 1) {
@@ -97,6 +110,7 @@
                   }];
 }
 
+// Template for alert message, to allow for success or error alert
 -(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
     
     UIAlertController *alertView = [UIAlertController
@@ -183,8 +197,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _noRequestsLabel.hidden = YES;
-    _feedArray = [[NSMutableArray alloc] init];
+    _feedArray = [[NSMutableArray alloc] init];    
     
+    // Unpack info from unit dict
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
     NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];

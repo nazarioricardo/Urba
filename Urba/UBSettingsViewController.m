@@ -28,14 +28,14 @@
 
 - (IBAction)signOutPressed:(id)sender {
     
-    NSLog(@"Current User: %@", [FIRAuth auth].currentUser.email);
-
     NSError *signOutError;
     BOOL status = [[FIRAuth auth] signOut:&signOutError];
     if (!status) {
         NSLog(@"Sign out error: %@", signOutError);
         return;
     }
+    
+    // After sign out, go to log in screen
     NSString *storyboardName = @"Main";
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
     UBWelcomeViewController *uwvc = [storyboard instantiateViewControllerWithIdentifier:@"Welcome"];
@@ -51,6 +51,7 @@
     [self performSegueWithIdentifier:@"ChangeUnitSegue" sender:self];
 }
 
+// Alert template
 -(void)alert:(NSString *)title withMessage:(NSString *)errorMsg {
     
     UIAlertController *alertView = [UIAlertController
@@ -71,6 +72,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+   
+    // Unpack info from unit dict
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
     NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];

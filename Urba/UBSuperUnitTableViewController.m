@@ -29,6 +29,7 @@
 
 #pragma IBActions
 
+// Get super-units/streets from current community
 - (void)getSuperUnits {
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];

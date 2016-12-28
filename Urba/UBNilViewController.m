@@ -31,8 +31,6 @@
 
 - (void)checkForRequests {
     
-//    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
-    
     [_requestQuery observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
         
         if ([snapshot exists]) {
@@ -44,40 +42,34 @@
             _secondLabel.hidden = NO;
             _addHomeButton.hidden = YES;
             [self requestRemoved];
-//            [spinner removeSpinner];
         }
     } withCancelBlock:^(NSError *error) {
         [self alert:error.description];
     }];
 }
 
+// Check if verification was accepted or rejected by checking if user exists in a unit.
 -(void)requestRemoved {
     
     [_requestQuery observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot *snapshot) {
         
-        NSLog(@"REQUEST HAS BEEN REMOVED");
-    
         NSString *unitRefString = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
         _unitRef = [[[FIRDatabase database] reference] child:@"units"];
         FIRDatabaseQuery *query = [[_unitRef queryOrderedByChild:unitRefString] queryEqualToValue:[FIRAuth auth].currentUser.email];
         
-        NSLog(@"Query: %@", query);
         [query observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
             
-            NSLog(@"CHECKING IF YOU HAVE BEEN ADDED TO A HOUSE");
-            
+            // Check if unit exists in unit
             if ([snapshot exists]) {
-                
-                NSLog(@"SNAP: %@", snapshot);
-                
+            
+                // If YES move to main view
                 for (FIRDataSnapshot *snap in snapshot.children) {
                     _unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key, @"id", snap.value, @"values", nil];
                     [self performSegueWithIdentifier:@"VerifiedSegue" sender:self];
                 }
-                
-                NSLog(@"UNIT DICT: %@", _unitDict);
-                
             } else {
+                
+                // If NO stay in current
                 _mainLabel.text = @"Sorry! You have failed to be verified.";
                 _secondLabel.text = @"If you are certain you chose the right address, contact your community administrator to find out why you weren't verified";
                 _secondLabel.hidden = NO;
@@ -87,6 +79,7 @@
     }];
 }
 
+// Simple alert view
 -(void)alert:(NSString *)errorMsg {
     
     UIAlertController *alertView = [UIAlertController

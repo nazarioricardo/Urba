@@ -21,9 +21,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    // Add a default unit for next time this user opens app
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:_unitDict forKey:@"currentUnit"];
     
+    // Set unitDict value for all child VCs of tab view
     UINavigationController *navOne = [[self viewControllers] objectAtIndex:0];
     UBUnitViewController *uvc = (UBUnitViewController *)[navOne topViewController];
     UINavigationController *navTwo = [[self viewControllers] objectAtIndex:1];
@@ -34,9 +37,12 @@
     [rvc setUnitDict:_unitDict];
     [svc setUnitDict:_unitDict];
     
+    
+    // Unselected Tab Bar item color
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary  dictionaryWithObjectsAndKeys: [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [[UITabBar appearance] setUnselectedItemTintColor:[UIColor grayColor]];
 
+    // Selected Tab Bar item color
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,nil] forState:UIControlStateSelected];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
 }

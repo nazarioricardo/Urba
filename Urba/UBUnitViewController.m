@@ -43,29 +43,42 @@
 
 - (IBAction)addGuestPressed:(id)sender {
     
+    // Present Alert View with text field to add guest
     [self addGuestController];
 }
 
 #pragma mark - Private
 
+// This function controls the feed
 -(void)getGuests {
     
     _ref = [[[FIRDatabase database] reference] child:@"visitors"];
     FIRDatabaseQuery *query = [[_ref queryOrderedByChild:@"unit-id"] queryEqualToValue:_unitId];
     
+    // Check for existing or added guests
     [query observeEventType:FIRDataEventTypeChildAdded
                                withBlock:^(FIRDataSnapshot *snapshot) {
         
                                    if ([snapshot exists]) {
                                        
+                                       // Make sure snapshot isn't already in feed array
                                        if (![_feedArray containsObject:snapshot]) {
                                            
+                                           // Check feed array is currently empty
                                            if (![_feedArray count]) {
+                                               
+                                               // Add snap to feed array
                                                [_feedArray addObject:snapshot];
+                                               
+                                               // Add snap to feed table
                                                [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationNone];
+                                               
+                                               // Show feed table
                                                [self hideViewAnimated:_noGuestsLabel hide:YES];
                                                [self hideViewAnimated:_feedTable hide:NO];
                                            } else {
+                                               
+                                               // Else, feedtable is already present
                                                [_feedArray addObject:snapshot];
                                                [_feedTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_feedArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationTop];
                                            }
@@ -76,11 +89,14 @@
                              [self alert:@"Error!" withMessage:error.description];
     }];
     
+    // Check for removed guests
     [query observeEventType:FIRDataEventTypeChildRemoved
                   withBlock:^(FIRDataSnapshot *snapshot) {
-                    
+                      
+                      // Array of indexes to remove
                       NSMutableArray *deleteArray = [[NSMutableArray alloc] init];
                       
+                      // Find index of deleted items and add to array
                       for (FIRDataSnapshot *snap in _feedArray) {
                           if ([snapshot.key isEqualToString:snap.key]) {
                               
@@ -89,9 +105,13 @@
                       }
                       
                       [_feedTable beginUpdates];
+                      
+                      // Iterate through indexes and remove items at indexes
                       for (NSNumber *num in deleteArray) {
                           
                           if ([_feedArray count] == 1) {
+                              
+                              // On last item to delete, hide feed table
                               [_feedArray removeObjectAtIndex:[num integerValue]];
                               [_feedTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[num integerValue] inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
                               [self hideViewAnimated:_feedTable hide:YES];
@@ -105,6 +125,7 @@
                   }];
 }
 
+// Alert view with text field to add guest
 -(void)addGuestController {
     
     UIAlertController *addView = [UIAlertController
@@ -124,6 +145,7 @@
                                                        
                                                        [addTextField resignFirstResponder];
                                                        
+                                                       // Add to database
                                                        [[_ref childByAutoId] setValue:dict];
                                                    }
                                                }];
@@ -211,7 +233,7 @@
     
     UBGuestTableViewCell *cell = [_feedTable dequeueReusableCellWithIdentifier:@"GuestCell" forIndexPath:indexPath];
     cell.delegate = self;
-    // Unpack visitor from feed array
+    // Unpack visitor snapshot from feed array
     FIRDataSnapshot *snapshot = _feedArray[indexPath.row];
     NSDictionary <NSString *, NSDictionary *> *visitorDict = [NSDictionary dictionaryWithObjectsAndKeys:snapshot.key,@"id",snapshot.value,@"values", nil];
     
@@ -226,7 +248,9 @@
 }
 
 #pragma mark - Cell Delegate
+// Custom cell delegate declared in UBGuestTableViewCell
 
+// Only need to remove guests from database, RemoveListener in getGuests handles removing the guest from the feed
 - (void)cancelGuest:(UBGuestTableViewCell *)cell {
     
     [[_ref child:cell.visitorId] removeValue];
@@ -237,6 +261,7 @@
     [[_ref child:cell.visitorId] removeValue];
 }
 
+// Listen to current guest status
 -(void)listenToStatus:(UBGuestTableViewCell *)cell {
     
     NSString *statusRefString = [NSString stringWithFormat:@"visitors/%@/status", cell.visitorId];
@@ -263,13 +288,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _feedArray = [[NSMutableArray alloc] init];
+    _statusRef = [[FIRDatabase database] reference];
     
-    NSLog(@"UNIT DICT:%@", _unitDict);
-    
+    // Get values from unit dictionary
     NSString *name = [_unitDict valueForKeyPath:@"values.name"];
     NSString *superUnit = [_unitDict valueForKeyPath:@"values.super-unit"];
     _address = [NSString stringWithFormat:@"%@ %@", name, superUnit];
-    _statusRef = [[FIRDatabase database] reference];
     
     _unitId = [NSString stringWithFormat:@"%@", [_unitDict valueForKey:@"id"]];
     _unitName = [NSString stringWithFormat:@"%@", [_unitDict valueForKeyPath:@"values.name"]];
@@ -281,11 +305,13 @@
     NSLog(@"Unit id: %@", _unitId);
     [self getGuests];
     
+    // This makes it so that there are no extraneous empty cells
     _feedTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationItem.title = _address;
+    
     if (![_feedArray count]) {
         _noGuestsLabel.hidden = NO;
         _feedTable.hidden = YES;

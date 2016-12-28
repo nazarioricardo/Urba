@@ -62,6 +62,7 @@
     }
 }
 
+// Simple alert view
 -(void)alert:(NSString *)title withMessage:(NSString *)message {
     
     UIAlertController *alertView = [UIAlertController

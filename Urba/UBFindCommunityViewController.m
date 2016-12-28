@@ -40,6 +40,7 @@
 
 #pragma mark - Private
 
+// Get list of existing communities
 - (void)getCommunities {
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];

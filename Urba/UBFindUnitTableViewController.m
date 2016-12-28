@@ -28,6 +28,7 @@
 
 #pragma mark - Private
 
+// Get units from current super-unit
 - (void)getUnits {
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
