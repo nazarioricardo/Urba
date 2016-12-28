@@ -74,7 +74,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     UIColor *urbaGreen = [UIColor colorWithRed:0.0/255.0 green:190.0/255.0 blue:58.0/255.0 alpha:1];
     
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
-    [[UINavigationBar appearance] setTranslucent:YES];
+    [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setBarTintColor:urbaGreen];
     [[UINavigationBar appearance] setClipsToBounds:YES];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
