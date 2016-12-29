@@ -18,6 +18,8 @@
 
 @interface UBSettingsViewController ()
 
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+
 @property (strong, nonatomic) NSString *unitName;
 @property (strong, nonatomic) NSString *unitId;
 @property (strong, nonatomic) NSString *address;
@@ -49,6 +51,70 @@
 
 - (IBAction)otherUnitPressed:(id)sender {
     [self performSegueWithIdentifier:@"ChangeUnitSegue" sender:self];
+}
+
+- (IBAction)deleteUserPressed:(id)sender {
+    
+    [self deleteUserFromUnits];
+    
+}
+
+#pragma mark - Private
+
+- (void)deleteUserFromUnits {
+    
+    ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
+    
+    NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
+    
+    _ref = [[[FIRDatabase database] reference] child:@"units"];
+    FIRDatabaseQuery *query = [[_ref queryOrderedByChild:unitRef] queryEqualToValue:[FIRAuth auth].currentUser.email];
+    
+    [query observeEventType:FIRDataEventTypeValue
+                  withBlock:^(FIRDataSnapshot *snapshot) {
+                      
+                      if ([snapshot exists]) {
+                          
+                          [spinner removeSpinner];
+                          for (FIRDataSnapshot *unit in snapshot.children) {
+                              
+                              NSDictionary<NSString *, NSDictionary *> *unitDict = [NSDictionary dictionaryWithObjectsAndKeys:unit.key,@"id",unit.value,@"values", nil];
+                              
+                              NSString *userId = [FIRAuth auth].currentUser.uid;
+                              NSString *keyPath = [NSString stringWithFormat:@"values.users.%@.permissions", userId];
+                              
+                              NSString *permissions = [unitDict valueForKeyPath:keyPath];
+                              
+                              if ([permissions isEqualToString:@"head"]) {
+                                  [[[_ref child:unit.key] child:@"users"] removeValue];
+                                  NSString *unit = [unitDict valueForKeyPath:@"values.name"];
+                                  NSLog(@"Deleting from UNIT: %@", unit);
+                              } else {
+                                  [[[[_ref child:unit.key] child:@"users"] child:[FIRAuth auth].currentUser.uid] removeValue];
+                              }
+                          }
+                      }
+                      
+                  FIRUser *currentUser = [FIRAuth auth].currentUser;
+                  
+                  [currentUser deleteWithCompletion:^(NSError *error) {
+                      
+                      if (error) {
+                          [self alert:@"Error!" withMessage:error.description];
+                      } else {
+                          
+                          // After sign out, go to log in screen
+                          NSString *storyboardName = @"Main";
+                          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                          UBWelcomeViewController *uwvc = [storyboard instantiateViewControllerWithIdentifier:@"Welcome"];
+                          [self presentViewController:uwvc animated:YES completion:nil];
+                      }
+                  }];
+                  }
+            withCancelBlock:^(NSError *error) {
+                [spinner removeSpinner];
+                [self alert:@"Error!" withMessage:error.description];
+            }];
 }
 
 // Alert template

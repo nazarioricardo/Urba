@@ -7,6 +7,7 @@
 //
 
 #import "UBNilViewController.h"
+#import "UBWelcomeViewController.h"
 #import "UBTabViewController.h"
 #import "ActivityView.h"
 
@@ -28,6 +29,22 @@
 @end
 
 @implementation UBNilViewController
+
+- (IBAction)signOutPressed:(id)sender {
+    
+    NSError *signOutError;
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    if (!status) {
+        NSLog(@"Sign out error: %@", signOutError);
+        return;
+    }
+    
+    // After sign out, go to log in screen
+    NSString *storyboardName = @"Main";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    UBWelcomeViewController *uwvc = [storyboard instantiateViewControllerWithIdentifier:@"Welcome"];
+    [self presentViewController:uwvc animated:YES completion:nil];
+}
 
 - (void)checkForRequests {
     
