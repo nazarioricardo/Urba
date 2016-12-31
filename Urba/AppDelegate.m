@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "UBWelcomeViewController.h"
 #import "UBTabViewController.h"
+#import "UBNilViewController.h"
+#import "ActivityView.h"
 
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 @import UserNotifications;
@@ -140,16 +143,52 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *auth, FIRUser *user) {
         
+        [ActivityView loadSpinnerIntoView:self.window.rootViewController.view];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
         if (user) {
             
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSDictionary *unitDict = [defaults objectForKey:@"currentUnit"];
+            NSString *unitRef = [NSString stringWithFormat:@"users/%@/name", [FIRAuth auth].currentUser.uid];
             
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UBTabViewController *tabView = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
-            [tabView setUnitDict:unitDict];
-            [self.window makeKeyAndVisible];
-            [self.window.rootViewController presentViewController:tabView animated:YES completion:NULL];
+            FIRDatabaseReference *ref = [[[FIRDatabase database] reference] child:@"units"];
+            FIRDatabaseQuery *query = [[ref queryOrderedByChild:unitRef] queryEqualToValue:[FIRAuth auth].currentUser.email];
+            
+            [query observeEventType:FIRDataEventTypeValue
+                          withBlock:^(FIRDataSnapshot *snapshot) {
+                              
+                              // If logging user exits in one unit or more...
+                              if ([snapshot exists]) {
+                                  
+                                  // Go to home view (NSUserDefaults has the current unit)
+                                  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                  NSDictionary *unitDict = [defaults objectForKey:@"currentUnit"];
+                                  
+                                  UBTabViewController *tabView = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
+                                  if (snapshot.childrenCount == 1) {
+                                      for (FIRDataSnapshot *snap in snapshot.children) {
+                                          unitDict = [NSDictionary dictionaryWithObjectsAndKeys:snap.key,@"id", snap.value, @"values", nil];
+                                      }
+                                      [tabView setUnitDict:unitDict];
+                                  } else {
+                                      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                      unitDict = [defaults objectForKey:@"currentUnit"];
+                                  }
+                                  [tabView setUnitDict:unitDict];
+                                  [self.window makeKeyAndVisible];
+                                  [self.window.rootViewController presentViewController:tabView animated:YES completion:nil];
+                                  
+                              } else {
+                                  
+                                  // If logging user does not exist in any units, go to onboarding view
+                                  UBNilViewController *unvc = [storyboard instantiateViewControllerWithIdentifier:@"No House"];
+                                  [self.window.rootViewController presentViewController:unvc animated:YES completion:nil];
+                              }
+                          }];
+        } else {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:nil forKey:@"currentUnit"];
+            UBWelcomeViewController *wvc = [storyboard instantiateInitialViewController];
+            [self.window.rootViewController presentViewController:wvc animated:YES completion:nil];
         }
     }];
     

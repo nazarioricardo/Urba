@@ -30,6 +30,9 @@
 
 - (IBAction)signOutPressed:(id)sender {
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:@"currentUnit"];
+    
     NSError *signOutError;
     BOOL status = [[FIRAuth auth] signOut:&signOutError];
     if (!status) {
@@ -62,6 +65,9 @@
 #pragma mark - Private
 
 - (void)deleteUserFromUnits {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:@"currentUnit"];
     
     ActivityView *spinner = [ActivityView loadSpinnerIntoView:self.view];
     
