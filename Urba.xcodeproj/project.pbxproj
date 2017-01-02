@@ -185,7 +185,7 @@
 				8CD0A2331E133D5C006386B7 /* UBNavViewController.m */,
 				8C70059A1DF755F400ED8BDC /* Guests */,
 				8C2815EA1DF89DB70015ECF9 /* Requests */,
-				8C2815EB1DF89DDB0015ECF9 /* Home */,
+				8C2815EB1DF89DDB0015ECF9 /* Settings */,
 				8C4956981DBAB0CC00CAD822 /* Select Unit */,
 			);
 			name = "Main Views";
@@ -202,7 +202,7 @@
 			name = Requests;
 			sourceTree = "<group>";
 		};
-		8C2815EB1DF89DDB0015ECF9 /* Home */ = {
+		8C2815EB1DF89DDB0015ECF9 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				8C06A1A61DF20E3B00EDA13D /* UBSettingsViewController.h */,
@@ -210,7 +210,7 @@
 				8C64A4CD1DF5F0F000016CB7 /* Find Unit */,
 				8C4B25091DFE23DB00E13D49 /* Users */,
 			);
-			name = Home;
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		8C4956981DBAB0CC00CAD822 /* Select Unit */ = {

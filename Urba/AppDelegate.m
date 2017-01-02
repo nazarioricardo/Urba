@@ -86,10 +86,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[UITabBar appearance] setBarTintColor:urbaGreen];
     [[UITabBar appearance] setClipsToBounds:YES];
     
-    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, 20)];
-    view.backgroundColor = urbaGreen;
-    [self.window.rootViewController.view addSubview:view];
-    
     // Register for remote notifications
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         // iOS 7.1 or earlier. Disable the deprecation warnings.
